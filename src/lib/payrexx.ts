@@ -1,5 +1,6 @@
 import "server-only";
 import { createHmac } from "node:crypto";
+import { envSet } from "./env";
 
 /* Payrexx REST-API (https://developers.payrexx.com)
    Authentifizierung: ApiSignature = Base64(HMAC-SHA256(http_build_query(params), API-Secret)) */
@@ -32,12 +33,12 @@ export function sign(query: string, secret: string) {
   return createHmac("sha256", secret).update(query).digest("base64");
 }
 
-export const isConfigured = () => Boolean(process.env.PAYREXX_INSTANCE && process.env.PAYREXX_API_SECRET);
+export const isConfigured = () => envSet("PAYREXX_INSTANCE", "PAYREXX_API_SECRET");
 
 async function call<T>(method: "GET" | "POST" | "DELETE", path: string, params: Params = {}): Promise<T> {
   const instance = process.env.PAYREXX_INSTANCE;
   const secret = process.env.PAYREXX_API_SECRET;
-  if (!instance || !secret) throw new Error("Payrexx ist nicht konfiguriert (PAYREXX_INSTANCE / PAYREXX_API_SECRET)");
+  if (!instance || !secret || !isConfigured()) throw new Error("Payrexx ist nicht konfiguriert (PAYREXX_INSTANCE / PAYREXX_API_SECRET)");
   const base = (process.env.PAYREXX_API_BASE ?? "https://api.payrexx.com/v1.0").replace(/\/$/, "");
   const query = httpBuildQuery(params);
   const signed = (query ? query + "&" : "") + "ApiSignature=" + phpEncode(sign(query, secret));

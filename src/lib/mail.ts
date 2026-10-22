@@ -1,10 +1,11 @@
 import "server-only";
 import nodemailer, { type Transporter } from "nodemailer";
 import { appUrl } from "./format";
+import { envSet } from "./env";
 
 let transport: Transporter | null = null;
 function getTransport() {
-  if (!process.env.SMTP_HOST) return null;
+  if (!envSet("SMTP_HOST", "SMTP_USER", "SMTP_PASS")) return null;
   if (!transport) {
     const port = Number(process.env.SMTP_PORT ?? 465);
     transport = nodemailer.createTransport({
@@ -59,6 +60,6 @@ export async function sendMail(opts: {
 
 export async function notifyAdmin(subject: string, paragraphs: string[], url?: string) {
   const to = process.env.ADMIN_NOTIFY_EMAIL;
-  if (!to) return;
+  if (!to || !envSet("ADMIN_NOTIFY_EMAIL")) return;
   await sendMail({ to, subject: `[SwissOwners] ${subject}`, heading: subject, paragraphs, cta: url ? { label: "Öffnen", url } : undefined });
 }
