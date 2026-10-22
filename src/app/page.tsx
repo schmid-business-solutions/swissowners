@@ -37,7 +37,7 @@ export default async function HomePage() {
 
       <section className="soft" style={{ paddingBlock: 28 }}>
         <div className="wrap trust">
-          <div><Shield /><span><b>Geprüfte Inserate</b><span className="small muted">Abgleich mit dem Handelsregister vor der Freischaltung</span></span></div>
+          <div><Shield /><span><b>Geprüfte Angebote</b><span className="small muted">Abgleich mit dem Handelsregister vor der Freischaltung</span></span></div>
           <div><Lock size={26} color="var(--red)" /><span><b>Diskret und anonym</b><span className="small muted">Firmenname erst nach Vertraulichkeitserklärung</span></span></div>
           <div><Tag /><span><b>Fixe Gebühren</b><span className="small muted">Keine Provision auf Ihren Deal</span></span></div>
           <div><Home /><span><b>Startups und KMU</b><span className="small muted">An einem Ort, aus allen Branchen und Kantonen</span></span></div>
@@ -48,7 +48,7 @@ export default async function HomePage() {
         <section className="prem-sec">
           <div className="wrap stack" style={{ gap: 24 }}>
             <div className="row" style={{ justifyContent: "space-between", alignItems: "flex-end", gap: 12 }}>
-              <div className="stack" style={{ gap: 6 }}><p className="eyebrow"><Star />Premium</p><h2 className="h2">Top-Inserate</h2></div>
+              <div className="stack" style={{ gap: 6 }}><p className="eyebrow"><Star />Premium</p><h2 className="h2">Top-Angebote</h2></div>
               <Link className="link" href="/preise">Ihr Inserat hier platzieren <Arrow /></Link>
             </div>
             <div className="prem-grid">{prem.map((l) => <PremCard key={l.id} l={l} />)}</div>
@@ -59,14 +59,14 @@ export default async function HomePage() {
       <section>
         <div className="wrap stack" style={{ gap: 28 }}>
           <div className="row" style={{ justifyContent: "space-between", gap: 12 }}>
-            <h2 className="h2">Neueste Inserate</h2>
-            {total > 0 && <Link className="link" href="/inserate">Alle {total} Inserate ansehen <Arrow /></Link>}
+            <h2 className="h2">Neueste Angebote</h2>
+            {total > 0 && <Link className="link" href="/inserate">Alle {total} Angebote ansehen <Arrow /></Link>}
           </div>
           {latest.length > 0 ? (
             <div className="list-rows">{latest.map((l) => <RowCard key={l.id} l={l} />)}</div>
           ) : (
             <div className="empty">
-              <h3 className="h3">Die ersten Inserate werden gerade geprüft</h3>
+              <h3 className="h3">Die ersten Angebote werden gerade geprüft</h3>
               <p className="muted">Seien Sie unter den Ersten: {left > 0 ? `Inserate sind bis ${date(until)} 60 Tage kostenlos.` : "Inserieren Sie jetzt."}</p>
               <Link className="btn btn-red" href="/inserat-aufgeben">Inserat aufgeben</Link>
             </div>
@@ -92,9 +92,9 @@ export default async function HomePage() {
             </div>
             <div className="entry" style={{ borderTop: "4px solid #9A9A95" }}>
               <h3 className="h3">Beteiligung suchen</h3>
-              <p className="muted" style={{ flex: 1 }}>Durchsuchen Sie alle Inserate kostenlos und merken Sie sich interessante Angebote.</p>
+              <p className="muted" style={{ flex: 1 }}>Durchsuchen Sie alle Angebote kostenlos und merken Sie sich die interessantesten.</p>
               <p className="small" style={{ fontWeight: 600 }}>Für Investoren kostenlos</p>
-              <Link className="btn btn-line" href="/inserate" style={{ alignSelf: "flex-start" }}>Inserate durchsuchen</Link>
+              <Link className="btn btn-line" href="/inserate" style={{ alignSelf: "flex-start" }}>Angebote durchsuchen</Link>
             </div>
           </div>
         </div>
