@@ -409,3 +409,14 @@ footer .ft-lead{font-size:21px}
 .mnav-item:hover .mnav-t{color:var(--red)}
 .link:hover{text-decoration:underline;text-underline-offset:3px}
 @media (prefers-reduced-motion:reduce){.logo:hover .logo-mark{transform:none}}
+
+/* ===== Logo Variante A: rundes Zeichen, fette rote Wortmarke ===== */
+.logo{gap:7px}
+.logo-mark{border-radius:50%;width:36px;height:36px}
+.logo-text{color:var(--red);font-weight:800;letter-spacing:-0.025em}
+.logo-text i{font-weight:600}
+.logo:hover .logo-mark{transform:scale(1.08)}
+.ft-brand{display:flex;align-items:center;gap:7px}
+.ft-brand .logo-mark{width:30px;height:30px}
+.ft-brand-text{font-weight:800;color:#FFFFFF;font-size:20px;letter-spacing:-0.025em}
+.ft-brand-text i{font-style:normal;font-weight:600}

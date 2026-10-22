@@ -22,7 +22,7 @@ export default function Header({ userName, isAdmin, newRequests }: { userName: s
       <header className="top">
         <div className="wrap">
           <Link className="logo" href="/" aria-label="SwissOwners Startseite">
-            <span className="logo-mark"><Cross /></span>
+            <span className="logo-mark"><Cross size={21} /></span>
             <span className="logo-text">Swiss<i>Owners</i></span>
           </Link>
           <nav className="main" aria-label="Hauptnavigation">
