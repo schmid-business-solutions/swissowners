@@ -38,7 +38,7 @@ export default function Footer() {
         </div>
         <p className="ft-note">Die Inserenten sind für ihre Angaben sowie für Prospektpflichten, Vinkulierungen und Vorkaufsrechte verantwortlich. SwissOwners ist eine reine Inserateplattform, vermittelt keine Geschäfte, erbringt keine Finanzdienstleistungen und ist nicht am Abschluss beteiligt. Beteiligungen an nicht kotierten Firmen bieten Chancen, bergen aber auch Risiken bis zum Totalverlust. Prüfen Sie Unterlagen sorgfältig und ziehen Sie bei Bedarf eine Fachperson bei.</p>
         <p className="ft-legal">
-          © {new Date().getFullYear()} SCHMID Business Solutions, Steffisburg · UID CHE-199.237.91 ·{" "}
+          © {new Date().getFullYear()} SCHMID Business Solutions ·{" "}
           <Link href="/impressum" style={{ color: "inherit" }}>Impressum</Link> ·{" "}
           <Link href="/datenschutz" style={{ color: "inherit" }}>Datenschutz</Link> ·{" "}
           <Link href="/agb" style={{ color: "inherit" }}>AGB</Link>
