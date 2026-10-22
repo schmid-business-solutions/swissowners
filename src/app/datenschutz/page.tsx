@@ -13,6 +13,7 @@ export default function PrivacyPage() {
         <li><b>Angebote:</b> Angaben zur Gesellschaft, Firmenname und UID, Beschreibung, Preisangaben, Aufrufzahlen.</li>
         <li><b>Anfragen:</b> Nachricht, Zeitpunkt und IP-Adresse der digitalen Vertraulichkeitserklärung, Name der unterzeichnenden Person.</li>
         <li><b>Zahlungen:</b> Betrag, Paket, Zeitpunkt und Referenzen des Zahlungsdienstleisters. Karten- und TWINT-Daten erhalten wir nicht.</li>
+        <li><b>Anmeldung mit Google oder LinkedIn:</b> Wenn Sie diese Anmeldeart wählen, erhalten wir vom jeweiligen Anbieter Ihren Namen, Ihre E-Mail-Adresse und eine Kennnummer Ihres Kontos. Weitere Daten (z. B. Kontakte oder Beiträge) erhalten wir nicht. Für die Bearbeitung beim Anbieter gelten dessen Datenschutzbestimmungen (Google LLC bzw. LinkedIn Ireland Unlimited Company).</li>
         <li><b>Technik:</b> Server-Protokolle (IP-Adresse, Zeitpunkt, aufgerufene Seite) und ein technisch notwendiges Sitzungs-Cookie für die Anmeldung. Wir verwenden keine Tracking- oder Werbe-Cookies.</li>
       </ul>
 

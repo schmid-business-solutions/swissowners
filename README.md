@@ -76,6 +76,23 @@ Ohne Payrexx-Konfiguration funktioniert das Startangebot trotzdem; bezahlte Pake
 ### 8. Ersten Admin anlegen
 `ADMIN_EMAILS` enthält deine Adresse → mit dieser Adresse registrieren. Alternativ: `npm run make-admin -- adresse@example.ch`.
 
+## Anmeldung mit Google und LinkedIn
+
+Die Buttons erscheinen auf Login und Registrierung, sobald ID und Secret des Anbieters gesetzt sind. Wer sich so anmeldet, bekommt ein Konto mit bestätigter E-Mail-Adresse; existiert die Adresse schon, wird das Konto verknüpft.
+
+**Google** (console.cloud.google.com)
+1. Projekt anlegen → **Google Auth Platform** (bzw. APIs & Dienste → OAuth-Zustimmungsbildschirm): App-Name «SwissOwners», Support-E-Mail, Zielgruppe **Extern**, Domain swissowners.ch, Links zu /datenschutz und /agb. App **veröffentlichen** (nicht im Testmodus lassen).
+2. **Clients → Client erstellen → Webanwendung**. Autorisierter Weiterleitungs-URI: `https://swissowners.ch/api/auth/google/callback`
+3. Client-ID und Client-Secret als `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` eintragen.
+
+**LinkedIn** (linkedin.com/developers/apps)
+1. **Create app**: Name «SwissOwners», verknüpfte **LinkedIn-Unternehmensseite** (Pflicht), Logo, Datenschutz-URL.
+2. Reiter **Products** → «**Sign In with LinkedIn using OpenID Connect**» anfordern (wird sofort freigeschaltet).
+3. Reiter **Auth** → Authorized redirect URL: `https://swissowners.ch/api/auth/linkedin/callback`
+4. Client ID und Primary Client Secret als `LINKEDIN_CLIENT_ID` / `LINKEDIN_CLIENT_SECRET` eintragen.
+
+Danach in Hostinger **Restart**.
+
 ## Vor dem Livegang
 
 - [ ] Impressum: Postadresse ergänzen (bei Online-Verkauf von Paketen nötig, Art. 3 Abs. 1 lit. s UWG)

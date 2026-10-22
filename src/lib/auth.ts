@@ -71,8 +71,7 @@ export async function requireAdmin(): Promise<User> {
   return u;
 }
 
-export const isAdminEmail = (email: string) =>
-  (process.env.ADMIN_EMAILS ?? "").split(",").map((e) => e.trim().toLowerCase()).filter(Boolean).includes(email.toLowerCase());
+export { isAdminEmail } from "./env";
 
 /* Einmal-Links für E-Mail-Bestätigung und Passwort-Reset */
 export async function createAuthToken(userId: number, type: "verify" | "reset") {

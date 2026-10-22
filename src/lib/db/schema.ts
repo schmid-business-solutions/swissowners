@@ -8,7 +8,7 @@ const now = () => datetime("created_at").notNull().default(sql`CURRENT_TIMESTAMP
 export const users = mysqlTable("users", {
   id: int("id").autoincrement().primaryKey(),
   email: varchar("email", { length: 255 }).notNull(),
-  passwordHash: varchar("password_hash", { length: 255 }).notNull(),
+  passwordHash: varchar("password_hash", { length: 255 }), // null bei reiner Anmeldung über Google/LinkedIn
   firstName: varchar("first_name", { length: 100 }).notNull(),
   lastName: varchar("last_name", { length: 100 }).notNull(),
   phone: varchar("phone", { length: 40 }),
@@ -23,6 +23,16 @@ export const sessions = mysqlTable("sessions", {
   expiresAt: datetime("expires_at").notNull(),
   createdAt: now(),
 }, (t) => [index("sessions_user_idx").on(t.userId)]);
+
+/* Verknüpfte Anmeldungen über Google oder LinkedIn (OpenID Connect) */
+export const oauthAccounts = mysqlTable("oauth_accounts", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  provider: mysqlEnum("provider", ["google", "linkedin"]).notNull(),
+  providerUserId: varchar("provider_user_id", { length: 255 }).notNull(),
+  email: varchar("email", { length: 255 }),
+  createdAt: now(),
+}, (t) => [uniqueIndex("oauth_provider_user_uq").on(t.provider, t.providerUserId), index("oauth_user_idx").on(t.userId)]);
 
 export const authTokens = mysqlTable("auth_tokens", {
   id: int("id").autoincrement().primaryKey(),

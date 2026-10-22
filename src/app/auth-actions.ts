@@ -61,7 +61,10 @@ export async function login(_: FormState, fd: FormData): Promise<FormState> {
     return { error: "Zu viele Anmeldeversuche. Bitte in 15 Minuten erneut versuchen." };
   }
   const [u] = await db.select().from(schema.users).where(eq(schema.users.email, email)).limit(1);
-  if (!u || !(await verifyPassword(password, u.passwordHash))) return { error: "E-Mail oder Passwort ist falsch." };
+  if (u && !u.passwordHash) {
+    return { error: "Dieses Konto nutzt die Anmeldung mit Google oder LinkedIn. Bitte wählen Sie oben den entsprechenden Button – oder legen Sie über «Passwort vergessen?» ein Passwort fest." };
+  }
+  if (!u || !u.passwordHash || !(await verifyPassword(password, u.passwordHash))) return { error: "E-Mail oder Passwort ist falsch." };
   if (u.role !== "admin" && isAdminEmail(u.email)) {
     await db.update(schema.users).set({ role: "admin" }).where(eq(schema.users.id, u.id));
   }
