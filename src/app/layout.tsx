@@ -8,6 +8,7 @@ import "@fontsource/hanken-grotesk/latin-800.css";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import HeaderPreview, { HEADER_PREVIEW_SCRIPT } from "@/components/HeaderPreview";
 import { getUser } from "@/lib/auth";
 import { db, schema } from "@/lib/db";
 import { appUrl } from "@/lib/format";
@@ -35,11 +36,15 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const user = await getUser().catch(() => null);
   const unread = user ? await unreadRequests(user.id).catch(() => 0) : 0;
   return (
-    <html lang="de-CH">
+    <html lang="de-CH" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: HEADER_PREVIEW_SCRIPT }} />
+      </head>
       <body>
         <Header userName={user ? `${user.firstName} ${user.lastName}` : null} isAdmin={user?.role === "admin"} newRequests={unread} />
         <main className="app">{children}</main>
         <Footer />
+        <HeaderPreview />
       </body>
     </html>
   );
