@@ -14,9 +14,9 @@ import { appUrl } from "@/lib/format";
 
 export const metadata: Metadata = {
   metadataBase: new URL(appUrl()),
-  title: { default: "anteo.swiss – Anteile an Schweizer KMU und Startups", template: "%s · anteo.swiss" },
+  title: { default: "SwissOwners – Anteile an Schweizer KMU und Startups", template: "%s · SwissOwners" },
   description: "Der Inseratemarkt für nicht kotierte Firmenanteile in der Schweiz. Anteile verkaufen, Kapital suchen, Beteiligungen finden – direkt verhandeln, ohne Provision.",
-  openGraph: { siteName: "anteo.swiss", locale: "de_CH", type: "website" },
+  openGraph: { siteName: "SwissOwners", locale: "de_CH", type: "website" },
   icons: { icon: "/favicon.svg" },
 };
 

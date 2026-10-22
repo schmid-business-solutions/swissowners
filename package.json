@@ -1,8 +1,8 @@
 {
-  "name": "anteo",
+  "name": "swissowners",
   "version": "0.1.0",
   "private": true,
-  "description": "anteo.swiss – Inseratemarkt für Anteile an Schweizer KMU und Startups",
+  "description": "SwissOwners – Inseratemarkt für Anteile an Schweizer KMU und Startups",
   "engines": {
     "node": ">=20.9"
   },

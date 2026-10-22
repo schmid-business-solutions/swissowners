@@ -1,8 +1,8 @@
-# anteo.swiss – Inseratemarkt für Firmenanteile
+# SwissOwners – Inseratemarkt für Firmenanteile
 
-Inseratemarkt für Anteile an nicht kotierten Schweizer KMU und Startups. Betreiberin: SCHMID Business Solutions, Steffisburg (UID CHE-199.237.91). «anteo» ist Arbeitsname.
+Inseratemarkt für Anteile an nicht kotierten Schweizer KMU und Startups. Betreiberin: SCHMID Business Solutions, Steffisburg (UID CHE-199.237.91). Domain: swissowners.ch.
 
-Der ursprüngliche Klick-Prototyp liegt weiterhin als `index.html` im Repo (GitHub Page). Die Applikation ignoriert diese Datei.
+Der ursprüngliche Klick-Prototyp (Arbeitsname anteo) ist nicht Teil dieses Repos; er liegt weiterhin unter github.com/schmid-business/anteo.
 
 ## Funktionen (MVP)
 
@@ -41,10 +41,10 @@ hPanel → **Datenbanken → MySQL-Datenbanken** → neue Datenbank und Benutzer
 `mysql://BENUTZER:PASSWORT@HOST:3306/DATENBANK` (HOST ist meist `localhost`; sonst steht der Hostname im hPanel).
 
 ### 2. E-Mail-Postfach anlegen
-hPanel → **E-Mails** → Postfach `noreply@anteo.swiss` erstellen. SMTP: `smtp.hostinger.com`, Port 465.
+hPanel → **E-Mails** → Postfach `noreply@swissowners.ch` erstellen. SMTP: `smtp.hostinger.com`, Port 465.
 
 ### 3. Web-App aus GitHub erstellen
-hPanel → **Websites → Website erstellen → Web App → Import Git Repository** → Repo `schmid-business/anteo`, Branch `main` wählen.
+hPanel → **Websites → Website erstellen → Web App → Import Git Repository** → Repo `schmid-business-solutions/swissowners`, Branch `main` wählen.
 - Framework: Next.js (wird erkannt) · Node.js 22 oder 24
 - Build: `npm run build` · Start: `npm start`
 - Danach löst jeder Push auf `main` automatisch ein neues Deployment aus.
@@ -53,22 +53,22 @@ hPanel → **Websites → Website erstellen → Web App → Import Git Repositor
 Website-Dashboard → **Environment Variables** → alle Werte aus `.env.example` eintragen, dann neu deployen oder **Restart**.
 
 ### 5. Domain verbinden
-- Die Domain muss im hPanel als eigene Website angelegt sein (nicht als Unterordner).
-- **.swiss** kann nur über einen akkreditierten Registrar registriert werden und verlangt einen objektiven Bezug zum Namen (Firmenname oder eingetragene Marke). Beim Registrar die Nameserver auf Hostinger setzen (Werte im hPanel unter Domains) oder einen A-Record auf die angezeigte Server-IP.
-- Zusätzlich die .ch-Variante sichern und per Weiterleitung auf die Hauptdomain zeigen lassen.
-- SSL-Zertifikat im hPanel aktivieren und `APP_URL` auf die finale Domain setzen.
+- **swissowners.ch** ist registriert. Die Domain im hPanel als eigene Website anlegen (nicht als Unterordner) und die Web App darauf deployen.
+- Liegt die Domain bei einem anderen Registrar: dort die Nameserver auf Hostinger setzen (Werte im hPanel unter Domains) oder einen A-Record auf die angezeigte Server-IP.
+- Empfehlung: zusätzlich **firmenanteile.ch** als Such-Domain sichern und per 301-Weiterleitung auf swissowners.ch zeigen lassen.
+- SSL-Zertifikat im hPanel aktivieren und `APP_URL=https://swissowners.ch` setzen.
 
 ### 6. Täglichen Abrechnungslauf einrichten
 hPanel → **Erweitert → Cron Jobs** → täglich (z. B. 06:00):
 ```
-curl -fsS "https://anteo.swiss/api/cron?key=DEIN_CRON_SECRET" > /dev/null
+curl -fsS "https://swissowners.ch/api/cron?key=DEIN_CRON_SECRET" > /dev/null
 ```
 Der Lauf verschickt Erinnerungen, beendet abgelaufene Inserate, belastet Verlängerungen und räumt auf.
 
 ### 7. Payrexx einrichten
 1. Payrexx-Instanz für SCHMID Business Solutions; Zahlungsmittel aktivieren (TWINT, Karten, PostFinance). **Für die automatische Verlängerung braucht es einen PSP, der Tokenisierung unterstützt.**
 2. Payrexx Admin → **API** → API-Secret kopieren → `PAYREXX_INSTANCE`, `PAYREXX_API_SECRET`.
-3. Payrexx Admin → **Webhooks** → URL `https://anteo.swiss/api/payrexx/webhook` (JSON).
+3. Payrexx Admin → **Webhooks** → URL `https://swissowners.ch/api/payrexx/webhook` (JSON).
 4. Im Testmodus durchspielen: Paket bestellen → Rückleitung → Inserat «In Prüfung»; im Admin freischalten; mit `period_end` in der Vergangenheit den Cron aufrufen → Verlängerung muss belastet werden.
 
 Ohne Payrexx-Konfiguration funktioniert das Startangebot trotzdem; bezahlte Pakete zeigen dann einen Hinweis.
@@ -82,7 +82,7 @@ Ohne Payrexx-Konfiguration funktioniert das Startangebot trotzdem; bezahlte Pake
 - [ ] Datenschutz: Hosting-Region von Hostinger eintragen
 - [ ] AGB und Datenschutz final formulieren
 - [ ] Payrexx-Tokenisierung im Testmodus verifizieren (siehe oben)
-- [ ] Marke «anteo» (bzw. finaler Name) beim IGE anmelden, Domain registrieren
+- [ ] Wortmarke «SwissOwners» beim IGE prüfen und anmelden (Klassen 35, 36, 42)
 
 ## Nicht im MVP (nächste Schritte)
 

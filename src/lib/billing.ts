@@ -41,12 +41,12 @@ function priceFor(plan: PaidPlan, kind: PaymentKind) {
 /** Legt eine offene Zahlung an und erstellt die Payrexx-Zahlungsseite. Gibt den Link zurück. */
 export async function startPayment(listing: Listing, user: User, plan: PaidPlan, kind: PaymentKind): Promise<string> {
   const amount = priceFor(plan, kind);
-  const reference = `ANT-${listing.id}-${randomBytes(4).toString("hex")}`;
+  const reference = `SWO-${listing.id}-${randomBytes(4).toString("hex")}`;
   const [ins] = await db.insert(schema.payments).values({
     reference, listingId: listing.id, userId: user.id, kind, plan, amountRappen: amount * 100,
   }).$returningId();
   const base = appUrl();
-  const purpose = `anteo.swiss ${listingNo(listing.id)} · Paket ${PLANS[plan].name}` +
+  const purpose = `SwissOwners ${listingNo(listing.id)} · Paket ${PLANS[plan].name}` +
     (kind === "initial" || kind === "upgrade" ? ` · ${FIRST_PERIOD_DAYS} Tage` : ` · ${RENEWAL_DAYS} Tage`);
   const gw = await px.createGateway({
     amountRappen: amount * 100,
@@ -154,7 +154,7 @@ export async function approveListing(listingId: number) {
     subject: `Ihr Inserat ist online: ${listingNo(listing.id)}`,
     heading: "Ihr Inserat ist online",
     paragraphs: [
-      `«${listing.title}» ist geprüft und ab sofort auf anteo.swiss sichtbar.`,
+      `«${listing.title}» ist geprüft und ab sofort auf SwissOwners sichtbar.`,
       listing.plan === "start"
         ? `Ihr Startangebot läuft kostenlos bis ${date(end)}. Wir erinnern Sie ${REMIND_START_DAYS} Tage vorher; danach wählen Sie ein Paket oder das Inserat endet automatisch.`
         : `Die erste Laufzeit dauert bis ${date(end)}. Danach verlängert sich das Paket automatisch um ${RENEWAL_DAYS} Tage, bis Sie kündigen oder pausieren.`,
@@ -281,14 +281,14 @@ export async function runDaily() {
       // Automatische Verlängerung
       const plan = listing.plan as PaidPlan;
       const amount = PLANS[plan].renewal * 100;
-      const reference = `ANT-${listing.id}-R${randomBytes(3).toString("hex")}`;
+      const reference = `SWO-${listing.id}-R${randomBytes(3).toString("hex")}`;
       const [ins] = await db.insert(schema.payments).values({
         reference, listingId: listing.id, userId: owner.id, kind: "renewal", plan, amountRappen: amount,
       }).$returningId();
       let ok = false;
       if (sub.payrexxTokenTxId && px.isConfigured()) {
         try {
-          const tx = await px.chargeToken(sub.payrexxTokenTxId, amount, `anteo.swiss ${no} · Verlängerung ${RENEWAL_DAYS} Tage`, reference);
+          const tx = await px.chargeToken(sub.payrexxTokenTxId, amount, `SwissOwners ${no} · Verlängerung ${RENEWAL_DAYS} Tage`, reference);
           ok = tx.status === "confirmed" || tx.status === "authorized" || tx.status === "waiting";
           await db.update(schema.payments).set({ payrexxTxId: tx.id }).where(eq(schema.payments.id, ins.id));
         } catch (err) {

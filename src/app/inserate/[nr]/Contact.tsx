@@ -72,7 +72,7 @@ export default function Contact({ listingId, no, mode, userName, userPhone, save
                   <p>1. Ich verpflichte mich, alle Informationen zu diesem Inserat, insbesondere den Namen der Firma und erhaltene Unterlagen, vertraulich zu behandeln und ausschliesslich zur Prüfung eines Erwerbs oder einer Beteiligung zu verwenden.</p>
                   <p>2. Ich gebe keine Informationen an Dritte weiter, ausgenommen an meine Berater, die ebenfalls zur Verschwiegenheit verpflichtet sind.</p>
                   <p>3. Ich nehme mit der Firma, ihren Mitarbeitenden, Kunden oder Lieferanten keinen direkten Kontakt auf, ohne vorgängige Zustimmung des Inserenten.</p>
-                  <p>4. Die Pflicht gilt zwei Jahre ab heute. Es gilt Schweizer Recht. Die Erklärung gilt gegenüber dem Inserenten; anteo.swiss ist nicht Vertragspartei.</p>
+                  <p>4. Die Pflicht gilt zwei Jahre ab heute. Es gilt Schweizer Recht. Die Erklärung gilt gegenüber dem Inserenten; SwissOwners ist nicht Vertragspartei.</p>
                 </div>
                 <label className="check"><input type="checkbox" checked={nda} onChange={(e) => setNda(e.target.checked)} /><span>Ich habe die Vertraulichkeitserklärung gelesen und unterzeichne sie digital als <b>{userName}</b>.</span></label>
                 <button className="btn btn-red btn-block" disabled={!nda} onClick={() => setStep(1)}>Weiter</button>

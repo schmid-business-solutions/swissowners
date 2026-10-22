@@ -4,7 +4,7 @@ import * as schema from "./schema";
 
 declare global {
   // eslint-disable-next-line no-var
-  var __anteoPool: mysql.Pool | undefined;
+  var __swoPool: mysql.Pool | undefined;
 }
 
 function createPool() {
@@ -13,8 +13,8 @@ function createPool() {
   return mysql.createPool({ uri: url, connectionLimit: 5, timezone: "Z", charset: "utf8mb4" });
 }
 
-export const pool = globalThis.__anteoPool ?? createPool();
-if (process.env.NODE_ENV !== "production") globalThis.__anteoPool = pool;
+export const pool = globalThis.__swoPool ?? createPool();
+if (process.env.NODE_ENV !== "production") globalThis.__swoPool = pool;
 
 export const db: MySql2Database<typeof schema> = drizzle(pool, { schema, mode: "default" });
 export { schema };

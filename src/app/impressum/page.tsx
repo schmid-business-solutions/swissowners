@@ -5,8 +5,8 @@ export default function ImprintPage() {
     <section><div className="wrap"><article className="legal">
       <h1 className="h2">Impressum</h1>
       <p><b>SCHMID Business Solutions</b><br />[Strasse und Nr. ergänzen]<br />3612 Steffisburg<br />Schweiz</p>
-      <p>UID: CHE-199.237.91<br />E-Mail: <a href="mailto:info@anteo.swiss">info@anteo.swiss</a></p>
-      <p>anteo.swiss ist eine Inserateplattform. Für den Inhalt der Inserate sind ausschliesslich die Inserierenden verantwortlich.</p>
+      <p>UID: CHE-199.237.91<br />E-Mail: <a href="mailto:info@swissowners.ch">info@swissowners.ch</a></p>
+      <p>SwissOwners ist eine Inserateplattform. Für den Inhalt der Inserate sind ausschliesslich die Inserierenden verantwortlich.</p>
     </article></div></section>
   );
 }

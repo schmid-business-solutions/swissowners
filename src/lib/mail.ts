@@ -19,7 +19,7 @@ function getTransport() {
 
 const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]!);
 
-/** Schlichtes E-Mail-Layout im anteo-Stil. paragraphs: Text-Absätze (werden escaped). */
+/** Schlichtes E-Mail-Layout im SwissOwners-Stil. paragraphs: Text-Absätze (werden escaped). */
 function layout(heading: string, paragraphs: string[], cta?: { label: string; url: string }) {
   const body = paragraphs.map((p) => `<p style="margin:0 0 14px;line-height:1.5">${esc(p).replace(/\n/g, "<br>")}</p>`).join("");
   const button = cta
@@ -27,7 +27,7 @@ function layout(heading: string, paragraphs: string[], cta?: { label: string; ur
     : "";
   return `<!doctype html><html><body style="margin:0;background:#F4F4F2;font-family:Helvetica,Arial,sans-serif;color:#1B1B1B">
 <div style="max-width:560px;margin:0 auto;background:#fff;border-top:4px solid #D8000F">
-<div style="padding:20px 26px;border-bottom:1px solid #DCDCD8;font-weight:800;font-size:20px">anteo<span style="color:#D8000F">.swiss</span></div>
+<div style="padding:20px 26px;border-bottom:1px solid #DCDCD8;font-weight:800;font-size:20px">Swiss<span style="color:#D8000F">Owners</span></div>
 <div style="padding:26px"><h1 style="font-size:20px;margin:0 0 16px">${esc(heading)}</h1>${body}${button}</div>
 <div style="padding:16px 26px;background:#1B1B1B;color:#B8B8B3;font-size:12px">SCHMID Business Solutions, Steffisburg · UID CHE-199.237.91<br><a href="${appUrl()}" style="color:#fff">${appUrl().replace(/^https?:\/\//, "")}</a></div>
 </div></body></html>`;
@@ -60,5 +60,5 @@ export async function sendMail(opts: {
 export async function notifyAdmin(subject: string, paragraphs: string[], url?: string) {
   const to = process.env.ADMIN_NOTIFY_EMAIL;
   if (!to) return;
-  await sendMail({ to, subject: `[anteo] ${subject}`, heading: subject, paragraphs, cta: url ? { label: "Öffnen", url } : undefined });
+  await sendMail({ to, subject: `[SwissOwners] ${subject}`, heading: subject, paragraphs, cta: url ? { label: "Öffnen", url } : undefined });
 }

@@ -3,7 +3,7 @@ import { timingSafeEqual } from "node:crypto";
 import { runDaily } from "@/lib/billing";
 
 /* Täglicher Abrechnungslauf. In Hostinger hPanel unter «Cron Jobs» täglich aufrufen:
-   curl -fsS "https://anteo.swiss/api/cron?key=CRON_SECRET" */
+   curl -fsS "https://swissowners.ch/api/cron?key=CRON_SECRET" */
 export const dynamic = "force-dynamic";
 
 function authorized(req: Request) {

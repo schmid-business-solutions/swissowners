@@ -99,7 +99,7 @@ export default async function DetailPage({ params }: { params: Promise<{ nr: str
                 </div>
               )}
             </div>
-            <div className="notice neutral"><Info /><span className="small"><b>Vor einem Kauf prüfen:</b> {l.vinkuliert === "ja" ? "Die Anteile sind vinkuliert – die Gesellschaft muss der Übertragung zustimmen. " : ""}{l.vorkauf === "ja" ? "Bestehende Gesellschafter haben ein Vorkaufsrecht. " : ""}{l.legalForm === "GmbH" ? "Die Abtretung braucht die Zustimmung der Gesellschafterversammlung. " : ""}Die Angaben stammen vom Inserenten. anteo.swiss ist nicht am Abschluss beteiligt.</span></div>
+            <div className="notice neutral"><Info /><span className="small"><b>Vor einem Kauf prüfen:</b> {l.vinkuliert === "ja" ? "Die Anteile sind vinkuliert – die Gesellschaft muss der Übertragung zustimmen. " : ""}{l.vorkauf === "ja" ? "Bestehende Gesellschafter haben ein Vorkaufsrecht. " : ""}{l.legalForm === "GmbH" ? "Die Abtretung braucht die Zustimmung der Gesellschafterversammlung. " : ""}Die Angaben stammen vom Inserenten. SwissOwners ist nicht am Abschluss beteiligt.</span></div>
           </div>
           <aside className="detail-side" aria-label="Kontakt">
             <div className="stack" style={{ gap: 4 }}>

@@ -5,7 +5,7 @@ export default function PrivacyPage() {
     <section><div className="wrap"><article className="legal">
       <p className="eyebrow">Stand: Entwurf Oktober 2026</p>
       <h1 className="h2">Datenschutzerklärung</h1>
-      <p>Diese Erklärung beschreibt, wie SCHMID Business Solutions, Steffisburg (UID CHE-199.237.91), als Verantwortliche Personendaten im Zusammenhang mit anteo.swiss bearbeitet. Es gilt das Schweizer Datenschutzgesetz (DSG).</p>
+      <p>Diese Erklärung beschreibt, wie SCHMID Business Solutions, Steffisburg (UID CHE-199.237.91), als Verantwortliche Personendaten im Zusammenhang mit SwissOwners bearbeitet. Es gilt das Schweizer Datenschutzgesetz (DSG).</p>
 
       <h2>1. Welche Daten wir bearbeiten</h2>
       <ul>
@@ -30,7 +30,7 @@ export default function PrivacyPage() {
       <p>Kontodaten bewahren wir auf, solange das Konto besteht. Buchhaltungsrelevante Daten bewahren wir 10 Jahre auf. Server-Protokolle löschen wir nach spätestens 90 Tagen.</p>
 
       <h2>5. Ihre Rechte</h2>
-      <p>Sie können Auskunft, Berichtigung, Löschung und Herausgabe Ihrer Daten verlangen sowie der Bearbeitung widersprechen. Kontakt: <a href="mailto:datenschutz@anteo.swiss">datenschutz@anteo.swiss</a>. Sie können sich zudem beim Eidgenössischen Datenschutz- und Öffentlichkeitsbeauftragten (EDÖB) beschweren.</p>
+      <p>Sie können Auskunft, Berichtigung, Löschung und Herausgabe Ihrer Daten verlangen sowie der Bearbeitung widersprechen. Kontakt: <a href="mailto:datenschutz@swissowners.ch">datenschutz@swissowners.ch</a>. Sie können sich zudem beim Eidgenössischen Datenschutz- und Öffentlichkeitsbeauftragten (EDÖB) beschweren.</p>
 
       <h2>6. Datensicherheit</h2>
       <p>Die Übertragung erfolgt verschlüsselt (HTTPS). Passwörter speichern wir ausschliesslich als kryptografischen Hash.</p>

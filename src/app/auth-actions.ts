@@ -24,7 +24,7 @@ async function sendVerification(userId: number, email: string, firstName: string
   await sendMail({
     to: email,
     subject: "Bitte bestätigen Sie Ihre E-Mail-Adresse",
-    heading: `Willkommen bei anteo.swiss, ${firstName}`,
+    heading: `Willkommen bei SwissOwners, ${firstName}`,
     paragraphs: ["Bitte bestätigen Sie Ihre E-Mail-Adresse. Der Link ist 72 Stunden gültig.", "Falls Sie sich nicht registriert haben, ignorieren Sie diese E-Mail."],
     cta: { label: "E-Mail bestätigen", url: `${appUrl()}/bestaetigen?token=${token}` },
   });

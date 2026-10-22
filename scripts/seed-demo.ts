@@ -25,13 +25,13 @@ const DEMO: D[] = [
 (async () => {
   await runMigrations();
   const conn = await mysql.createConnection({ uri: process.env.DATABASE_URL!, timezone: "Z" });
-  const email = "demo@anteo.swiss";
+  const email = "demo@swissowners.ch";
   const [rows] = await conn.query("SELECT id FROM users WHERE email=?", [email]);
   let uid = (rows as { id: number }[])[0]?.id;
   if (!uid) {
     const [r] = await conn.execute(
       "INSERT INTO users (email,password_hash,first_name,last_name,email_verified_at) VALUES (?,?,?,?,UTC_TIMESTAMP())",
-      [email, await bcrypt.hash("demo-anteo-2026", 12), "Demo", "Inserent"],
+      [email, await bcrypt.hash("demo-swissowners-2026", 12), "Demo", "Inserent"],
     );
     uid = (r as { insertId: number }).insertId;
   }
@@ -45,6 +45,6 @@ const DEMO: D[] = [
     const lid = (r as { insertId: number }).insertId;
     await conn.execute("INSERT INTO subscriptions (listing_id,plan,status,period_end) VALUES (?,?,'active',UTC_TIMESTAMP() + INTERVAL ? DAY)", [lid, plan, 60 - days]);
   }
-  console.log(`${DEMO.length} Demo-Inserate angelegt. Login: ${email} / demo-anteo-2026`);
+  console.log(`${DEMO.length} Demo-Inserate angelegt. Login: ${email} / demo-swissowners-2026`);
   await conn.end();
 })().catch((e) => { console.error(e); process.exit(1); });

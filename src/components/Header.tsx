@@ -21,9 +21,9 @@ export default function Header({ userName, isAdmin, newRequests }: { userName: s
     <>
       <header className="top">
         <div className="wrap">
-          <Link className="logo" href="/" aria-label="anteo.swiss Startseite">
+          <Link className="logo" href="/" aria-label="SwissOwners Startseite">
             <span className="logo-mark"><Cross /></span>
-            <span className="logo-text">anteo<i>.swiss</i></span>
+            <span className="logo-text">Swiss<i>Owners</i></span>
           </Link>
           <nav className="main" aria-label="Hauptnavigation">
             {nav.map(([href, label]) => (

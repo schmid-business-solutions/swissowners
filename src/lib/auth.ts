@@ -9,7 +9,7 @@ import { db, schema } from "./db";
 import type { User } from "./db/schema";
 import { addDays } from "./format";
 
-const COOKIE = "anteo_session";
+const COOKIE = "swo_session";
 const SESSION_DAYS = 30;
 
 export const sha256 = (s: string) => createHash("sha256").update(s).digest("hex");

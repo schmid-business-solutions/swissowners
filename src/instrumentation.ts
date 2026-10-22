@@ -3,14 +3,14 @@
 export async function register() {
   if (process.env.NEXT_RUNTIME !== "nodejs") return;
   if (!process.env.DATABASE_URL) {
-    console.warn("[anteo] DATABASE_URL fehlt – Migrationen übersprungen");
+    console.warn("[SwissOwners] DATABASE_URL fehlt – Migrationen übersprungen");
     return;
   }
   try {
     const { runMigrations } = await import("./lib/db/migrate");
     await runMigrations();
-    console.log("[anteo] Datenbank-Migrationen aktuell");
+    console.log("[SwissOwners] Datenbank-Migrationen aktuell");
   } catch (err) {
-    console.error("[anteo] Migration fehlgeschlagen", err);
+    console.error("[SwissOwners] Migration fehlgeschlagen", err);
   }
 }

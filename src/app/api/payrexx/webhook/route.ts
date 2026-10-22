@@ -3,7 +3,7 @@ import { eq } from "drizzle-orm";
 import { confirmPayment } from "@/lib/billing";
 import { db, schema } from "@/lib/db";
 
-/* Payrexx-Webhook (in Payrexx unter Webhooks eintragen: https://anteo.swiss/api/payrexx/webhook, Typ JSON oder Normal).
+/* Payrexx-Webhook (in Payrexx unter Webhooks eintragen: https://swissowners.ch/api/payrexx/webhook, Typ JSON oder Normal).
    Dem Inhalt wird nicht vertraut: Wir lesen nur die Referenz und fragen den Status selbst bei der Payrexx-API ab. */
 export async function POST(req: Request) {
   let body: Record<string, unknown> = {};
@@ -21,7 +21,7 @@ export async function POST(req: Request) {
   }
   const tx = (body.transaction ?? {}) as { referenceId?: string; invoice?: { referenceId?: string } };
   const ref = String(tx.referenceId || tx.invoice?.referenceId || "");
-  if (!/^ANT-\d+-[a-f0-9R]+$/i.test(ref)) return NextResponse.json({ ok: true, ignored: true });
+  if (!/^SWO-\d+-[a-f0-9R]+$/i.test(ref)) return NextResponse.json({ ok: true, ignored: true });
   const [p] = await db.select().from(schema.payments).where(eq(schema.payments.reference, ref)).limit(1);
   if (!p) return NextResponse.json({ ok: true, ignored: true });
   if (p.kind === "renewal") return NextResponse.json({ ok: true }); // Verlängerungen werden direkt im Abrechnungslauf verbucht
