@@ -93,6 +93,8 @@ Die Buttons erscheinen auf Login und Registrierung, sobald ID und Secret des Anb
 
 Danach in Hostinger **Restart**.
 
+**Offizielle Logos auf den Buttons:** Die Buttons sind farblich nach den Vorgaben von Google (weiss, grauer Rand) und LinkedIn (LinkedIn-Blau) gestaltet. Die Logos selbst aus den offiziellen Branding-Paketen herunterladen und als `public/brand/google.svg` bzw. `public/brand/linkedin.svg` (oder `.png`) ablegen – sie erscheinen dann automatisch links im Button.
+
 ## Vor dem Livegang
 
 - [ ] Impressum: Postadresse ergänzen (bei Online-Verkauf von Paketen nötig, Art. 3 Abs. 1 lit. s UWG)

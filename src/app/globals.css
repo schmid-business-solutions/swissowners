@@ -421,12 +421,6 @@ footer .ft-lead{font-size:21px}
 .ft-brand-text{font-weight:800;color:#FFFFFF;font-size:20px;letter-spacing:-0.025em}
 .ft-brand-text i{font-style:normal;font-weight:600}
 
-/* ===== Anmeldung mit Google / LinkedIn ===== */
-.btn-social{background:var(--bg);border:1px solid #B9B9B4;color:var(--ink);font-weight:700;position:relative}
-.btn-social:hover{border-color:var(--ink);background:var(--bg-soft)}
-.btn-social::before{content:"";width:10px;height:10px;border-radius:50%;flex:none}
-.social-google::before{background:#4285F4}
-.social-linkedin::before{background:#0A66C2}
 .or-sep{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:14px;margin-top:4px}
 .or-sep::before,.or-sep::after{content:"";flex:1;height:1px;background:var(--line)}
 
@@ -466,3 +460,17 @@ html[data-header="rot"] .dot{background:#FFFFFF}
 .hp-bar button{border:1px solid rgba(255,255,255,.35);background:none;color:#FFFFFF;border-radius:999px;padding:6px 12px;font:inherit;cursor:pointer}
 .hp-bar button[aria-pressed="true"]{background:#FFFFFF;color:#111111;border-color:#FFFFFF}
 .hp-bar .hp-x{border:0;font-size:20px;line-height:1;padding:4px 8px}
+
+/* ===== Anmelde-Buttons im Erscheinungsbild von Google und LinkedIn ===== */
+.sso-btn{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;min-height:50px;padding:0 16px;border-radius:999px;text-decoration:none;font-family:Roboto,Arial,"Helvetica Neue",sans-serif;font-size:16px;font-weight:500;letter-spacing:.25px;cursor:pointer;position:relative;transition:background-color .18s ease,box-shadow .18s ease,border-color .18s ease}
+.sso-logo{display:grid;place-items:center;width:24px;height:24px;flex:none}
+.sso-logo img{display:block;width:20px;height:20px;object-fit:contain}
+/* Google: heller Button mit grauem Rand (Google-Richtlinien «Light») */
+.sso-google{background:#FFFFFF;color:#1F1F1F;border:1px solid #747775}
+.sso-google:hover{background:#F8F9FA;box-shadow:0 1px 2px rgba(60,64,67,.30),0 1px 3px 1px rgba(60,64,67,.15)}
+.sso-google:active{background:#F1F3F4}
+/* LinkedIn: LinkedIn-Blau mit weisser Schrift */
+.sso-linkedin{background:#0A66C2;color:#FFFFFF;border:1px solid #0A66C2;font-weight:600}
+.sso-linkedin:hover{background:#004182;border-color:#004182}
+.sso-linkedin .sso-logo{background:#FFFFFF;border-radius:3px;width:24px;height:24px}
+.sso-btn:focus-visible{outline:3px solid var(--red);outline-offset:2px}
