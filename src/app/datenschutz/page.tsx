@@ -23,14 +23,14 @@ export default function PrivacyPage() {
       <ul>
         <li><b>An Inserierende:</b> Wenn Sie eine Anfrage senden, geben wir Name, E-Mail-Adresse, Telefonnummer (falls angegeben) und Nachricht an die inserierende Person weiter.</li>
         <li><b>An Interessierte:</b> Firmenname und UID eines Inserats werden erst nach unterzeichneter Vertraulichkeitserklärung angezeigt. Ihre persönlichen Kontaktdaten als Inserent werden nicht angezeigt.</li>
-        <li><b>Dienstleister:</b> Hosting und E-Mail-Versand (Hostinger International Ltd., Rechenzentrum in [Region ergänzen]), Zahlungsabwicklung (Payrexx AG, Schweiz). Sie bearbeiten Daten nur in unserem Auftrag.</li>
+        <li><b>Dienstleister:</b> Hosting (Hostinger International Ltd., Rechenzentrum in [Region ergänzen]), E-Mail-Versand (Google, Gmail; Datenbearbeitung auch ausserhalb der Schweiz, z. B. in den USA), Zahlungsabwicklung (Payrexx AG, Schweiz). Sie bearbeiten Daten nur in unserem Auftrag.</li>
       </ul>
 
       <h2>4. Aufbewahrung</h2>
       <p>Kontodaten bewahren wir auf, solange das Konto besteht. Buchhaltungsrelevante Daten bewahren wir 10 Jahre auf. Server-Protokolle löschen wir nach spätestens 90 Tagen.</p>
 
       <h2>5. Ihre Rechte</h2>
-      <p>Sie können Auskunft, Berichtigung, Löschung und Herausgabe Ihrer Daten verlangen sowie der Bearbeitung widersprechen. Kontakt: <a href="mailto:datenschutz@swissowners.ch">datenschutz@swissowners.ch</a>. Sie können sich zudem beim Eidgenössischen Datenschutz- und Öffentlichkeitsbeauftragten (EDÖB) beschweren.</p>
+      <p>Sie können Auskunft, Berichtigung, Löschung und Herausgabe Ihrer Daten verlangen sowie der Bearbeitung widersprechen. Kontakt: <a href="mailto:schmidmobile@gmail.com">schmidmobile@gmail.com</a>. Sie können sich zudem beim Eidgenössischen Datenschutz- und Öffentlichkeitsbeauftragten (EDÖB) beschweren.</p>
 
       <h2>6. Datensicherheit</h2>
       <p>Die Übertragung erfolgt verschlüsselt (HTTPS). Passwörter speichern wir ausschliesslich als kryptografischen Hash.</p>
