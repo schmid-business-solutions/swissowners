@@ -474,3 +474,11 @@ html[data-header="rot"] .dot{background:#FFFFFF}
 .sso-linkedin:hover{background:#004182;border-color:#004182}
 .sso-linkedin .sso-logo{background:#FFFFFF;border-radius:3px;width:24px;height:24px}
 .sso-btn:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+
+/* ===== Header: gleiche Grösse für alle Varianten (Weiss, Schwarz, Rot) ===== */
+header.top .wrap{max-width:1520px;padding-block:22px}
+header.top .logo-text{font-size:26px}
+header.top .logo-mark{width:42px;height:42px}
+header.top .logo-mark svg{width:24px;height:24px}
+header.top .navlink{font-size:17px;padding:8px 0}
+@media (max-width:820px){header.top .wrap{padding-block:14px}header.top .logo-text{font-size:22px}header.top .logo-mark{width:36px;height:36px}header.top .logo-mark svg{width:21px;height:21px}}
