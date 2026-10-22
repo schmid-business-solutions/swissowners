@@ -27,8 +27,8 @@ export default async function HomePage() {
               </Link>
             )}
             <p className="eyebrow">Der Inseratemarkt für nicht kotierte Firmenanteile</p>
-            <h1 className="h1">Anteile an Schweizer KMU und Startups. Inserieren, finden, direkt verhandeln.</h1>
-            <p className="lead">Verkaufen Sie Ihre Beteiligung, suchen Sie Kapital für Ihre Firma oder finden Sie Ihre nächste Investition. Preis und Vertrag regeln Käufer und Verkäufer selbst.</p>
+            <h1 className="h1">Firmenanteile kaufen und verkaufen.</h1>
+            <p className="lead">Anteile an Schweizer KMU und Startups inserieren, finden und direkt verhandeln – ohne Provision.</p>
             <HomeSearch />
             <p className="small muted">Anonym inserieren · Firmenname erst nach digitaler Vertraulichkeitserklärung · keine Provision</p>
           </div>

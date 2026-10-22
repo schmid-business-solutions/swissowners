@@ -366,3 +366,31 @@ details.more summary{cursor:pointer;font-weight:700;color:var(--red)}
 .mnav-item{text-decoration:none}
 .tablink{border-bottom:3px solid transparent;padding:12px 14px;font-weight:700;color:var(--muted);text-decoration:none}
 .tablink[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--red)}
+
+/* ===== Typografie: grösser und luftiger (Okt. 2026) ===== */
+body{font-size:17px;line-height:1.55}
+.logo-text{font-size:23px}
+.navlink{font-size:16.5px}
+.btn{font-size:16px;min-height:50px;padding:0 22px}
+.eyebrow{font-size:14px}
+.h1{font-size:clamp(38px,5.4vw,72px);line-height:1.04;letter-spacing:-0.03em}
+.hero-c .h1{font-size:clamp(40px,5.6vw,76px)}
+.h2{font-size:clamp(30px,3.4vw,46px)}
+.h3{font-size:22px}
+.lead{font-size:clamp(19px,1.6vw,22px);line-height:1.5}
+.small{font-size:15px}
+.field{font-size:14px}
+.field input,.field select,.field textarea{font-size:17px;height:52px}
+.field textarea{height:auto}
+.tab,.stab{font-size:16px}
+.fact-l{font-size:13px}
+.fact-v{font-size:16px}
+.lc-title{font-size:23px}
+.lc-desc{font-size:16px}
+.lc-big{font-size:27px}
+.pc-title{font-size:25px}
+.pc-desc{font-size:16px}
+.trust b{font-size:18px}
+footer p{font-size:14.5px}
+footer .ft-lead{font-size:21px}
+@media (max-width:820px){.h1{letter-spacing:-0.02em}.lc-title{font-size:20px}.lc-big{font-size:23px}}

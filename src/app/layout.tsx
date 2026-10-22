@@ -14,7 +14,7 @@ import { appUrl } from "@/lib/format";
 
 export const metadata: Metadata = {
   metadataBase: new URL(appUrl()),
-  title: { default: "SwissOwners – Anteile an Schweizer KMU und Startups", template: "%s · SwissOwners" },
+  title: { default: "SwissOwners – Firmenanteile Schweiz", template: "%s · SwissOwners" },
   description: "Der Inseratemarkt für nicht kotierte Firmenanteile in der Schweiz. Anteile verkaufen, Kapital suchen, Beteiligungen finden – direkt verhandeln, ohne Provision.",
   openGraph: { siteName: "SwissOwners", locale: "de_CH", type: "website" },
   icons: { icon: "/favicon.svg" },
