@@ -11,7 +11,7 @@ export default function Footer() {
               <span className="logo-mark" style={{ width: 28, height: 28 }}><Cross size={16} /></span>
               <span style={{ fontWeight: 800, color: "#FFFFFF", fontSize: 18 }}>SwissOwners</span>
             </div>
-            <p className="ft-lead">Der Inserate-Marktplatz für Firmenanteile in der Schweiz.</p>
+            <p className="ft-lead">Der Marktplatz für Firmenanteile in der Schweiz.</p>
             <p>Auf SwissOwners inserieren Aktionärinnen, Gesellschafter und Firmen ihre Anteile an KMU und Startups. Investorinnen und Investoren finden passende Beteiligungen aus allen Branchen und Kantonen.</p>
             <p>Jedes Inserat wird vor der Freischaltung geprüft. Den Firmennamen sehen Interessenten erst nach einer digitalen Vertraulichkeitserklärung. Preis, Vertrag und Übertragung vereinbaren Käufer und Verkäufer direkt miteinander – zu fixen Inseratepreisen und ohne Provision.</p>
           </div>

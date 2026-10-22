@@ -26,7 +26,7 @@ export default async function HomePage() {
                 <Arrow />
               </Link>
             )}
-            <p className="eyebrow">Der Inseratemarkt für nicht kotierte Firmenanteile</p>
+            <p className="eyebrow">Der Marktplatz für nicht kotierte Firmenanteile</p>
             <h1 className="h1">Firmenanteile kaufen und verkaufen.</h1>
             <p className="lead">Anteile an Schweizer KMU und Startups inserieren, finden und direkt verhandeln – ohne Provision.</p>
             <HomeSearch />
