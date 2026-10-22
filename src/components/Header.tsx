@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { Cross, Menu, User } from "./Icons";
 
 const NAV: [string, string, string][] = [
-  ["/inserate", "Anteile finden", "Alle Inserate durchsuchen"],
+  ["/inserate", "Anteile finden", "Alle Angebote durchsuchen"],
   ["/inserat-aufgeben", "Inserat aufgeben", "Anteile verkaufen oder Kapital suchen"],
   ["/#ablauf", "So funktioniert's", "In vier Schritten zum Abschluss"],
 ];
@@ -14,7 +14,7 @@ export default function Header({ userName, isAdmin, newRequests }: { userName: s
   const path = usePathname();
   const [open, setOpen] = useState(false);
   useEffect(() => setOpen(false), [path]);
-  const nav = isAdmin ? [...NAV, ["/admin", "Admin", "Inserate prüfen und freischalten"] as [string, string, string]] : NAV;
+  const nav = isAdmin ? [...NAV, ["/admin", "Admin", "Angebote prüfen und freischalten"] as [string, string, string]] : NAV;
   const current = (href: string) => (href !== "/#ablauf" && path.startsWith(href) ? "page" : undefined);
 
   return (
@@ -53,7 +53,7 @@ export default function Header({ userName, isAdmin, newRequests }: { userName: s
             ))}
             <Link href={userName ? "/konto" : "/login"} className="mnav-item">
               <span className="mnav-txt"><span className="mnav-t">{userName ? "Mein Bereich" : "Anmelden"}</span>
-                <span className="mnav-s">{userName ? "Inserate, Anfragen, Merkliste" : "Oder kostenlos registrieren"}</span></span>
+                <span className="mnav-s">{userName ? "Angebote, Anfragen, Merkliste" : "Oder kostenlos registrieren"}</span></span>
             </Link>
             <Link href="/inserat-aufgeben" className="btn btn-red btn-block mnav-cta">Inserat aufgeben</Link>
           </div>

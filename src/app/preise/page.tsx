@@ -19,7 +19,7 @@ export default async function PricingPage() {
           <p className="lead">Erste Laufzeit 60 Tage ab Freischaltung, danach automatische Verlängerung um jeweils 30 Tage. Jederzeit kündbar oder pausierbar. Für Interessierte ist SwissOwners kostenlos.</p>
         </div>
         {left > 0 && (
-          <div className="notice"><Check size={22} /><span><b>Startangebot:</b> Die ersten {slots} Inserate laufen 60 Tage kostenlos mit allen Leistungen von Plus – noch {left} Plätze, längstens bis {date(until)}. Kein Zahlungsmittel nötig.</span></div>
+          <div className="notice"><Check size={22} /><span><b>Startangebot:</b> Die ersten {slots} Angebote laufen 60 Tage kostenlos mit allen Leistungen von Plus – noch {left} Plätze, längstens bis {date(until)}. Kein Zahlungsmittel nötig.</span></div>
         )}
         <div className="choice-grid">
           {PAID_PLANS.map((p) => (

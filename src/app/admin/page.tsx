@@ -31,7 +31,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
     <section style={{ paddingBlock: 36 }}>
       <div className="wrap stack" style={{ gap: 22 }}>
         <h1 className="h2">Admin</h1>
-        {ok && <p className="flash ok">{ok === "freigeschaltet" ? "Inserat freigeschaltet, Inserent informiert." : "Inserat abgelehnt, Inserent informiert."}</p>}
+        {ok && <p className="flash ok">{ok === "freigeschaltet" ? "Angebot freigeschaltet, Inserent informiert." : "Angebot abgelehnt, Inserent informiert."}</p>}
         <div className="admin-grid">
           <div className="statbox"><span className="small muted">Zur Prüfung</span><b>{c.in_review ?? 0}</b></div>
           <div className="statbox"><span className="small muted">Online</span><b>{c.online ?? 0}</b></div>
@@ -47,7 +47,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
           <table>
             <thead><tr><th>Nr.</th><th>Titel</th><th>Firma</th><th>Inserent</th><th>Paket</th><th>Geändert</th></tr></thead>
             <tbody>
-              {rows.length === 0 && <tr><td colSpan={6} className="muted">Keine Inserate in diesem Status.</td></tr>}
+              {rows.length === 0 && <tr><td colSpan={6} className="muted">Keine Angebote in diesem Status.</td></tr>}
               {rows.map(({ l, owner }) => (
                 <tr key={l.id}>
                   <td><Link href={`/admin/inserate/${l.id}`}>{listingNo(l.id)}</Link></td>

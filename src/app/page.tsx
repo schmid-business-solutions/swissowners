@@ -22,7 +22,7 @@ export default async function HomePage() {
             {left > 0 && (
               <Link className="start-ribbon" href="/inserat-aufgeben">
                 <span className="sr-tag">Startangebot</span>
-                <span>Die ersten {slots} Inserate 60 Tage gratis · noch <b>{left} Plätze</b></span>
+                <span>Die ersten {slots} Angebote 60 Tage gratis · noch <b>{left} Plätze</b></span>
                 <Arrow />
               </Link>
             )}
@@ -49,7 +49,7 @@ export default async function HomePage() {
           <div className="wrap stack" style={{ gap: 24 }}>
             <div className="row" style={{ justifyContent: "space-between", alignItems: "flex-end", gap: 12 }}>
               <div className="stack" style={{ gap: 6 }}><p className="eyebrow"><Star />Premium</p><h2 className="h2">Top-Angebote</h2></div>
-              <Link className="link" href="/preise">Ihr Inserat hier platzieren <Arrow /></Link>
+              <Link className="link" href="/preise">Ihr Angebot hier platzieren <Arrow /></Link>
             </div>
             <div className="prem-grid">{prem.map((l) => <PremCard key={l.id} l={l} />)}</div>
           </div>
@@ -67,7 +67,7 @@ export default async function HomePage() {
           ) : (
             <div className="empty">
               <h3 className="h3">Die ersten Angebote werden gerade geprüft</h3>
-              <p className="muted">Seien Sie unter den Ersten: {left > 0 ? `Inserate sind bis ${date(until)} 60 Tage kostenlos.` : "Inserieren Sie jetzt."}</p>
+              <p className="muted">Seien Sie unter den Ersten: {left > 0 ? `Angebote sind bis ${date(until)} 60 Tage kostenlos.` : "Inserieren Sie jetzt."}</p>
               <Link className="btn btn-red" href="/inserat-aufgeben">Inserat aufgeben</Link>
             </div>
           )}
@@ -82,7 +82,7 @@ export default async function HomePage() {
               <h3 className="h3">Anteile verkaufen</h3>
               <p className="muted" style={{ flex: 1 }}>Sie halten Aktien oder GmbH-Anteile an einer nicht kotierten Firma und möchten verkaufen.</p>
               <p className="small" style={{ fontWeight: 600 }}>{left > 0 ? "Jetzt 60 Tage gratis · danach " : ""}ab {chf(minRenewal)} pro 30 Tage</p>
-              <Link className="btn btn-red" href="/inserat-aufgeben?typ=sell" style={{ alignSelf: "flex-start" }}>Verkaufsinserat erfassen</Link>
+              <Link className="btn btn-red" href="/inserat-aufgeben?typ=sell" style={{ alignSelf: "flex-start" }}>Verkaufsangebot erfassen</Link>
             </div>
             <div className="entry" style={{ borderTop: "4px solid var(--ink)" }}>
               <h3 className="h3">Kapital suchen</h3>
@@ -106,7 +106,7 @@ export default async function HomePage() {
           <ol className="howto">
             {[
               ["Inserat erfassen", "Branche, Anteil, Preisvorstellung, Vinkulierung und Vorkaufsrechte. Der Firmenname bleibt verborgen."],
-              ["Prüfung", "Wir prüfen die Angaben und den Handelsregistereintrag, bevor das Inserat online geht."],
+              ["Prüfung", "Wir prüfen die Angaben und den Handelsregistereintrag, bevor das Angebot online geht."],
               ["Anfragen erhalten", "Interessenten unterzeichnen digital eine Vertraulichkeitserklärung und sehen dann den Firmennamen."],
               ["Direkt verhandeln", "Preis, Vertrag und Übertragung regeln Käufer und Verkäufer selbst – ohne Provision an uns."],
             ].map(([t, d], i) => (

@@ -66,7 +66,7 @@ export default function ListingWizard({
       if (!sell && num(w.amount) == null) return "Bitte den gesuchten Betrag in CHF angeben.";
       if (w.amount.trim() && num(w.amount) == null) return "Betrag: bitte eine Zahl in CHF.";
       if (w.description.trim().length < 80) return `Beschreibung: mindestens 80 Zeichen (aktuell ${w.description.trim().length}).`;
-      if (w.reason.trim().length < 10) return "Bitte den Grund für das Inserat angeben.";
+      if (w.reason.trim().length < 10) return "Bitte den Grund für das Angebot angeben.";
     }
     if (s === last && !w.agb) return "Bitte bestätigen Sie die Angaben und die AGB.";
     return "";
@@ -101,7 +101,7 @@ export default function ListingWizard({
       <div className="wrap">
         <div className="wizard">
           <div className="stack" style={{ gap: 16 }}>
-            <h1 className="h2">{mode === "create" ? "Inserat aufgeben" : "Inserat bearbeiten"}</h1>
+            <h1 className="h2">{mode === "create" ? "Inserat aufgeben" : "Angebot bearbeiten"}</h1>
             <ol className="steps" aria-label="Schritte">
               {steps.map((s, i) => (
                 <li key={s} data-state={i < step ? "done" : i === step ? "on" : ""} aria-current={i === step ? "step" : undefined}><span>{i < step ? "✓" : i + 1}</span>{s}</li>
@@ -160,7 +160,7 @@ export default function ListingWizard({
                   <select value={w.sub} onChange={(e) => set("sub", e.target.value)} disabled={!w.branche}>
                     <option value="">Bitte wählen</option>{w.branche && subsOf(w.branche).map((s) => <option key={s}>{s}</option>)}
                   </select>
-                  <span className="hint">Nicht dabei? Wählen Sie «Andere» und beschreiben Sie die Tätigkeit im Inserat.</span>
+                  <span className="hint">Nicht dabei? Wählen Sie «Andere» und beschreiben Sie die Tätigkeit im Angebot.</span>
                 </label>
                 <label className="field">Kanton (Sitz)
                   <select value={w.kanton} onChange={(e) => set("kanton", e.target.value)}>
@@ -191,7 +191,7 @@ export default function ListingWizard({
               )}
               {sell && (
                 <label className="check"><input type="checkbox" checked={w.companyInformed} onChange={(e) => set("companyInformed", e.target.checked)} />
-                  <span>Die Firma (Verwaltungsrat oder Geschäftsführung) ist über das Inserat informiert <span className="small muted" style={{ display: "block" }}>Ergibt das Badge «Firma informiert» und schafft Vertrauen bei Käufern.</span></span></label>
+                  <span>Die Firma (Verwaltungsrat oder Geschäftsführung) ist über das Angebot informiert <span className="small muted" style={{ display: "block" }}>Ergibt das Badge «Firma informiert» und schafft Vertrauen bei Käufern.</span></span></label>
               )}
             </>
           )}
@@ -203,7 +203,7 @@ export default function ListingWizard({
                 <p className="muted">Klare Angaben bringen mehr ernsthafte Anfragen. Nennen Sie den Firmennamen nicht im Text.</p>
               </div>
               <div className="fgrid">
-                <label className="field" style={{ gridColumn: "1/-1" }}>Titel des Inserats<input value={w.title} onChange={(e) => set("title", e.target.value)} maxLength={80} placeholder={sell ? "z. B. Treuhandbüro, Teilverkauf 25 %" : "z. B. Solarinstallateur, Kapital für zwei neue Teams"} /><span className="hint">Ohne Firmenname, max. 80 Zeichen ({w.title.length}/80)</span></label>
+                <label className="field" style={{ gridColumn: "1/-1" }}>Titel des Angebots<input value={w.title} onChange={(e) => set("title", e.target.value)} maxLength={80} placeholder={sell ? "z. B. Treuhandbüro, Teilverkauf 25 %" : "z. B. Solarinstallateur, Kapital für zwei neue Teams"} /><span className="hint">Ohne Firmenname, max. 80 Zeichen ({w.title.length}/80)</span></label>
                 {sell ? (
                   <>
                     <label className="field">Anteil in % oder Anzahl Aktien<input value={w.stake} onChange={(e) => set("stake", e.target.value)} maxLength={60} placeholder="z. B. 25 % oder 120 Namenaktien" /></label>
@@ -225,7 +225,7 @@ export default function ListingWizard({
                     help={<>Startups haben oft zwei Kategorien: <b>Stammaktien</b> halten meist Gründer und Mitarbeitende. <b>Vorzugsaktien</b> erhalten Investoren in Finanzierungsrunden; sie haben Vorrechte, etwa beim Verkauf der ganzen Firma (Liquidationspräferenz). Mitarbeiteraktien können Sperrfristen oder Rückkaufsrechte haben.</>} />
                 )}
                 <label className="field" style={{ gridColumn: "1/-1" }}>Beschreibung<textarea value={w.description} onChange={(e) => set("description", e.target.value)} maxLength={4000} style={{ minHeight: 160 }} /><span className="hint">Tätigkeit, Marktstellung, Kennzahlen, was Käufer erwartet – mindestens 80 Zeichen ({w.description.trim().length})</span></label>
-                <label className="field" style={{ gridColumn: "1/-1" }}>Grund für das Inserat<textarea value={w.reason} onChange={(e) => set("reason", e.target.value)} maxLength={1000} placeholder={sell ? "z. B. Nachfolgeregelung, Erbteilung, Diversifikation" : "z. B. Ausbau Vertrieb, neue Produktionsanlage"} /></label>
+                <label className="field" style={{ gridColumn: "1/-1" }}>Grund für das Angebot<textarea value={w.reason} onChange={(e) => set("reason", e.target.value)} maxLength={1000} placeholder={sell ? "z. B. Nachfolgeregelung, Erbteilung, Diversifikation" : "z. B. Ausbau Vertrieb, neue Produktionsanlage"} /></label>
               </div>
               {(w.vinkuliert === "unklar" || w.vorkauf === "unklar") && (
                 <div className="notice small"><Info /><span>Bitte klären Sie Vinkulierung und Vorkaufsrechte in den Statuten oder im Aktionärbindungsvertrag. Ohne diese Angaben scheitern viele Verkäufe.</span></div>
@@ -243,7 +243,7 @@ export default function ListingWizard({
                       <b style={{ fontSize: 18 }}>Startangebot: 60 Tage kostenlos</b><span className="chip red">Noch {startLeft} Plätze</span>
                     </span>
                     <span>Alle Leistungen von <b>Plus</b>. Kein Zahlungsmittel nötig.</span>
-                    <span className="small muted">Gilt längstens bis {startUntil}. 7 Tage vor Ablauf erinnern wir Sie: Sie wählen ein Paket oder das Inserat endet automatisch – ohne Kosten.</span>
+                    <span className="small muted">Gilt längstens bis {startUntil}. 7 Tage vor Ablauf erinnern wir Sie: Sie wählen ein Paket oder das Angebot endet automatisch – ohne Kosten.</span>
                   </button>
                   <p className="small muted" style={{ marginTop: -8 }}>Oder direkt ein Paket wählen:</p>
                 </>
@@ -272,7 +272,7 @@ export default function ListingWizard({
               <div className="detail-side" style={{ position: "static", gap: 14 }}>
                 <span className="fact-l">Zusammenfassung</span>
                 {mode === "edit" ? (
-                  <p className="small">Nach dem Speichern prüfen wir die Änderungen. Bis zur erneuten Freischaltung ist das Inserat nicht öffentlich sichtbar.</p>
+                  <p className="small">Nach dem Speichern prüfen wir die Änderungen. Bis zur erneuten Freischaltung ist das Angebot nicht öffentlich sichtbar.</p>
                 ) : w.plan === "start" || !plan ? (
                   <div className="summary"><span>Startangebot, 60 Tage</span><span>CHF 0</span><span className="total">Total</span><span className="total">CHF 0</span></div>
                 ) : (

@@ -6,7 +6,7 @@ import { requireUser } from "@/lib/auth";
 import { db, schema } from "@/lib/db";
 import { updateListing } from "@/app/inserat-aufgeben/actions";
 
-export const metadata = { title: "Inserat bearbeiten" };
+export const metadata = { title: "Angebot bearbeiten" };
 export const dynamic = "force-dynamic";
 
 const s = (n: number | null | undefined) => (n == null ? "" : String(n));

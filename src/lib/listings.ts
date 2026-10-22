@@ -152,7 +152,7 @@ export const listingInput = z.object({
   vinkuliert: yesNo,
   vorkauf: yesNo,
   description: z.string().trim().min(80, "Beschreibung: mindestens 80 Zeichen").max(4000),
-  reason: z.string().trim().min(10, "Grund für das Inserat: mindestens 10 Zeichen").max(1000),
+  reason: z.string().trim().min(10, "Grund für das Angebot: mindestens 10 Zeichen").max(1000),
 }).superRefine((d, ctx) => {
   if (!subsOf(d.branche).includes(d.sub)) ctx.addIssue({ code: "custom", path: ["sub"], message: "Unterbranche passt nicht zur Branche" });
   if (d.segment === "startup" && !PHASEN.includes(d.phase ?? "")) ctx.addIssue({ code: "custom", path: ["phase"], message: "Bitte die Phase wählen" });

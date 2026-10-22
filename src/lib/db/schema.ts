@@ -78,7 +78,7 @@ export const listings = mysqlTable("listings", {
   index("listings_branche_idx").on(t.branche),
 ]);
 
-/* Abo pro Inserat: Laufzeit, Verlängerung, Pause, Payrexx-Token */
+/* Abo pro Angebot: Laufzeit, Verlängerung, Pause, Payrexx-Token */
 export const subscriptions = mysqlTable("subscriptions", {
   id: int("id").autoincrement().primaryKey(),
   listingId: int("listing_id").notNull().references(() => listings.id, { onDelete: "cascade" }),

@@ -6,7 +6,7 @@ export default function ImprintPage() {
       <h1 className="h2">Impressum</h1>
       <p><b>SCHMID Business Solutions</b><br />[Strasse und Nr. ergänzen]<br />3612 Steffisburg<br />Schweiz</p>
       <p>UID: CHE-199.237.91<br />E-Mail: <a href="mailto:schmidmobile@gmail.com">schmidmobile@gmail.com</a></p>
-      <p>SwissOwners ist eine Inserateplattform. Für den Inhalt der Inserate sind ausschliesslich die Inserierenden verantwortlich.</p>
+      <p>SwissOwners ist eine Inserateplattform. Für den Inhalt der Angebote sind ausschliesslich die Inserierenden verantwortlich.</p>
     </article></div></section>
   );
 }

@@ -14,18 +14,18 @@ export const dynamic = "force-dynamic";
 
 const STATUS_NOTE: Record<string, string> = {
   draft: "Entwurf – noch nicht eingereicht.",
-  pending_payment: "Zahlung ausstehend – das Inserat ist noch nicht eingereicht.",
-  in_review: "In Prüfung – das Inserat ist noch nicht öffentlich.",
-  paused: "Pausiert – das Inserat ist nicht öffentlich sichtbar.",
-  expired: "Beendet – das Inserat ist nicht mehr öffentlich.",
-  sold: "Als verkauft markiert – das Inserat ist nicht mehr öffentlich.",
+  pending_payment: "Zahlung ausstehend – das Angebot ist noch nicht eingereicht.",
+  in_review: "In Prüfung – das Angebot ist noch nicht öffentlich.",
+  paused: "Pausiert – das Angebot ist nicht öffentlich sichtbar.",
+  expired: "Beendet – das Angebot ist nicht mehr öffentlich.",
+  sold: "Als verkauft markiert – das Angebot ist nicht mehr öffentlich.",
   rejected: "Nicht freigeschaltet – bitte anpassen und erneut einreichen.",
 };
 
 export async function generateMetadata({ params }: { params: Promise<{ nr: string }> }): Promise<Metadata> {
   const id = idFromNo((await params).nr);
   const l = id ? await getListing(id) : undefined;
-  if (!l || l.status !== "online") return { title: "Inserat", robots: { index: false } };
+  if (!l || l.status !== "online") return { title: "Angebot", robots: { index: false } };
   return { title: l.title, description: l.description.slice(0, 160) };
 }
 
@@ -65,7 +65,7 @@ export default async function DetailPage({ params }: { params: Promise<{ nr: str
     <section style={{ paddingBlock: 28 }}>
       <div className="wrap stack" style={{ gap: 22 }}>
         <nav className="crumbs" aria-label="Pfad">
-          <Link href="/">Start</Link><span>/</span><Link href="/inserate">Inserate</Link><span>/</span>
+          <Link href="/">Start</Link><span>/</span><Link href="/inserate">Angebote</Link><span>/</span>
           <Link href={`/inserate?branche=${encodeURIComponent(l.branche)}`}>{l.branche}</Link><span>/</span>
           <Link href={`/inserate?branche=${encodeURIComponent(l.branche)}&sub=${encodeURIComponent(l.sub)}`}>{l.sub}</Link>
         </nav>
@@ -77,7 +77,7 @@ export default async function DetailPage({ params }: { params: Promise<{ nr: str
             <div className="stack" style={{ gap: 12 }}>
               <div className="row" style={{ gap: 10 }}>
                 <TypePill type={l.type} /><SegPill seg={l.segment} />
-                <span className="small muted">Inserat-Nr. {no} · {ago(l.publishedAt)} · {l.views} Aufrufe</span>
+                <span className="small muted">Angebots-Nr. {no} · {ago(l.publishedAt)} · {l.views} Aufrufe</span>
               </div>
               <h1 className="h2">{l.title}</h1>
               <div className="badges row" style={{ gap: 6 }}><Badges l={l} /></div>
@@ -87,7 +87,7 @@ export default async function DetailPage({ params }: { params: Promise<{ nr: str
               <div className="notice neutral small"><Info /><span><b>Startup-Bewertung:</b> Der Preis der letzten Finanzierungsrunde ist kein Marktpreis. Bei Weiterverkäufen werden oft Abschläge bezahlt. Prüfen Sie Aktienkategorie, Vorzugsrechte und den Aktionärbindungsvertrag.</span></div>
             )}
             <div className="stack" style={{ gap: 10 }}><h2 className="h3">Beschreibung</h2><p style={{ maxWidth: "65ch", whiteSpace: "pre-line" }}>{l.description}</p></div>
-            <div className="stack" style={{ gap: 10 }}><h2 className="h3">Grund für das Inserat</h2><p style={{ maxWidth: "65ch", whiteSpace: "pre-line" }}>{l.reason}</p></div>
+            <div className="stack" style={{ gap: 10 }}><h2 className="h3">Grund für das Angebot</h2><p style={{ maxWidth: "65ch", whiteSpace: "pre-line" }}>{l.reason}</p></div>
             <div className="stack" style={{ gap: 10 }}>
               <h2 className="h3">Firma</h2>
               {revealed ? (

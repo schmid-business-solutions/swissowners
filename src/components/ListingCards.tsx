@@ -56,7 +56,7 @@ export function SegPill({ seg }: { seg: "kmu" | "startup" }) {
 export function Badges({ l, noPrem, short }: { l: CardData; noPrem?: boolean; short?: boolean }) {
   return (
     <>
-      {l.plan === "premium" && !noPrem && <span className="chip prem"><Star />Top-Inserat</span>}
+      {l.plan === "premium" && !noPrem && <span className="chip prem"><Star />Top-Angebot</span>}
       <span className="chip ok"><Check />Verifiziert</span>
       {l.type === "cap" ? <span className="chip ok">Firma inseriert selbst</span> : l.companyInformed ? <span className="chip ok">Firma informiert</span> : null}
       {!short && l.vinkuliert === "ja" && <span className="chip">Vinkuliert</span>}
@@ -67,17 +67,17 @@ export function Badges({ l, noPrem, short }: { l: CardData; noPrem?: boolean; sh
   );
 }
 
-/** Inserat in der Übersicht: Bild, Titel, kurze Beschreibung, eine Hauptzahl */
+/** Angebot in der Übersicht: Bild, Titel, kurze Beschreibung, eine Hauptzahl */
 export function RowCard({ l }: { l: Listing }) {
   const { f1, f2 } = facts(l);
   const big = l.type === "sell" ? f2 : f1, small = l.type === "sell" ? f1 : f2;
   const cls = "lcard" + (l.plan === "premium" ? " is-prem" : l.plan === "plus" || l.plan === "start" ? " is-plus" : "");
   return (
-    <Link className={cls} href={`/inserate/${listingNo(l.id)}`} aria-label={`Inserat ansehen: ${l.title}`}>
+    <Link className={cls} href={`/inserate/${listingNo(l.id)}`} aria-label={`Angebot ansehen: ${l.title}`}>
       <span className="lc-art">
         <Art branche={l.branche} />
         <span className="lc-br">{l.branche}</span>
-        {l.plan === "premium" && <span className="lc-prem"><Star />Top-Inserat</span>}
+        {l.plan === "premium" && <span className="lc-prem"><Star />Top-Angebot</span>}
       </span>
       <span className="lc-main">
         <span className="lc-top">
@@ -106,9 +106,9 @@ function Fact({ k, v }: { k: string; v: string }) {
 export function PremCard({ l }: { l: Listing }) {
   const { f1, f2 } = facts(l);
   return (
-    <Link className="pcard" href={`/inserate/${listingNo(l.id)}`} aria-label={`Top-Inserat ansehen: ${l.title}`}>
+    <Link className="pcard" href={`/inserate/${listingNo(l.id)}`} aria-label={`Top-Angebot ansehen: ${l.title}`}>
       <span className="pc-top">
-        <span className="prem-tag"><Star />Top-Inserat</span>
+        <span className="prem-tag"><Star />Top-Angebot</span>
         <span className="row" style={{ gap: 6 }}><TypePill type={l.type} /><SegPill seg={l.segment} /></span>
       </span>
       <span className="pc-title">{l.title}</span>

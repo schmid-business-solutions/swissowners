@@ -38,10 +38,10 @@ export default async function VerifyPage({ searchParams }: { searchParams: Promi
               {failed && <p className="flash err">Der Link ist abgelaufen oder wurde bereits verwendet.</p>}
               <p className="muted">
                 {neu ? "Ihr Konto ist erstellt. " : ""}Wir haben Ihnen eine E-Mail{user ? ` an ${user.email}` : ""} mit einem Bestätigungslink gesendet.
-                Erst danach können Sie Inserate erfassen und Anfragen senden.
+                Erst danach können Sie Angebote erfassen und Anfragen senden.
               </p>
               {user && <ResendVerification />}
-              <Link className="link" href="/inserate">Inzwischen Inserate ansehen</Link>
+              <Link className="link" href="/inserate">Inzwischen Angebote ansehen</Link>
             </>
           )}
         </div>

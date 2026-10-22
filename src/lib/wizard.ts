@@ -1,4 +1,4 @@
-/* Gemeinsame Typen und Vorgaben für das Inserat-Formular (Server und Client) */
+/* Gemeinsame Typen und Vorgaben für das Angebot-Formular (Server und Client) */
 export type WizardData = {
   type: "sell" | "cap"; segment: "kmu" | "startup";
   branche: string; sub: string; kanton: string; legalForm: string; revenueClass: string;

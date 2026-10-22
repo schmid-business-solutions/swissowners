@@ -15,8 +15,8 @@ export async function sendRequest(listingId: number, _: RequestState, fd: FormDa
   if (!user) return { error: "Bitte melden Sie sich an." };
   if (!user.emailVerifiedAt) return { error: "Bitte bestätigen Sie zuerst Ihre E-Mail-Adresse." };
   const listing = await getListing(listingId);
-  if (!listing || listing.status !== "online") return { error: "Dieses Inserat ist nicht mehr verfügbar." };
-  if (listing.ownerId === user.id) return { error: "Das ist Ihr eigenes Inserat." };
+  if (!listing || listing.status !== "online") return { error: "Dieses Angebot ist nicht mehr verfügbar." };
+  if (listing.ownerId === user.id) return { error: "Das ist Ihr eigenes Angebot." };
   if (fd.get("nda") !== "on") return { error: "Bitte bestätigen Sie die Vertraulichkeitserklärung." };
   if (fd.get("share") !== "on") return { error: "Bitte bestätigen Sie die Weitergabe Ihrer Kontaktdaten." };
   const message = String(fd.get("message") ?? "").trim();
@@ -43,7 +43,7 @@ export async function sendRequest(listingId: number, _: RequestState, fd: FormDa
       subject: `Neue Anfrage zu ${listingNo(listing.id)}: ${listing.title}`,
       heading: "Sie haben eine neue Anfrage erhalten",
       paragraphs: [
-        `Zu Ihrem Inserat «${listing.title}» (${listingNo(listing.id)}).`,
+        `Zu Ihrem Angebot «${listing.title}» (${listingNo(listing.id)}).`,
         `Von: ${name}\nE-Mail: ${user.email}${phone || user.phone ? `\nTelefon: ${phone || user.phone}` : ""}`,
         `Nachricht:\n${message}`,
         `${name} hat die Vertraulichkeitserklärung digital unterzeichnet. Antworten Sie direkt auf diese E-Mail – sie geht an ${user.email}.`,

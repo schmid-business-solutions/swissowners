@@ -98,7 +98,7 @@ async function applyPayment(p: Payment, tokenTxId: number | null) {
     await db.update(schema.subscriptions).set({ plan, payrexxTokenTxId: token }).where(eq(schema.subscriptions.id, sub.id));
     await db.update(schema.listings).set({ plan, status: "in_review" })
       .where(and(eq(schema.listings.id, listing.id), eq(schema.listings.status, "pending_payment")));
-    await notifyAdmin(`Neues Inserat zur Prüfung: ${listingNo(listing.id)}`, [listing.title, `Paket ${PLANS[plan].name}, bezahlt.`], `${appUrl()}/admin/inserate/${listing.id}`);
+    await notifyAdmin(`Neues Angebot zur Prüfung: ${listingNo(listing.id)}`, [listing.title, `Paket ${PLANS[plan].name}, bezahlt.`], `${appUrl()}/admin/inserate/${listing.id}`);
   } else if (p.kind === "upgrade") {
     const from = sub.periodEnd && sub.periodEnd > now && sub.status === "active" ? sub.periodEnd : now;
     await db.update(schema.subscriptions).set({
@@ -124,13 +124,13 @@ async function applyPayment(p: Payment, tokenTxId: number | null) {
       subject: `Zahlungsbestätigung ${listingNo(listing.id)}`,
       heading: "Vielen Dank für Ihre Zahlung",
       paragraphs: [
-        `Wir haben ${chf(p.amountRappen / 100)} für das Paket ${PLANS[plan].name} zu Ihrem Inserat «${listing.title}» erhalten (inkl. 8,1 % MWST).`,
+        `Wir haben ${chf(p.amountRappen / 100)} für das Paket ${PLANS[plan].name} zu Ihrem Angebot «${listing.title}» erhalten (inkl. 8,1 % MWST).`,
         p.kind === "initial"
           ? "Wir prüfen jetzt Ihre Angaben und den Handelsregistereintrag – in der Regel innerhalb eines Werktags. Die Laufzeit beginnt mit der Freischaltung."
           : `Das Paket verlängert sich danach automatisch um jeweils ${RENEWAL_DAYS} Tage für ${chf(PLANS[plan].renewal)}, bis Sie kündigen oder pausieren.`,
         "SCHMID Business Solutions, Steffisburg · UID CHE-199.237.91",
       ],
-      cta: { label: "Zu meinen Inseraten", url: `${appUrl()}/konto` },
+      cta: { label: "Zu meinen Angeboten", url: `${appUrl()}/konto` },
     });
   }
 }
@@ -151,15 +151,15 @@ export async function approveListing(listingId: number) {
   const end = sub?.periodEnd ?? addDays(now, FIRST_PERIOD_DAYS);
   if (owner) await sendMail({
     to: owner.email,
-    subject: `Ihr Inserat ist online: ${listingNo(listing.id)}`,
-    heading: "Ihr Inserat ist online",
+    subject: `Ihr Angebot ist online: ${listingNo(listing.id)}`,
+    heading: "Ihr Angebot ist online",
     paragraphs: [
       `«${listing.title}» ist geprüft und ab sofort auf SwissOwners sichtbar.`,
       listing.plan === "start"
-        ? `Ihr Startangebot läuft kostenlos bis ${date(end)}. Wir erinnern Sie ${REMIND_START_DAYS} Tage vorher; danach wählen Sie ein Paket oder das Inserat endet automatisch.`
+        ? `Ihr Startangebot läuft kostenlos bis ${date(end)}. Wir erinnern Sie ${REMIND_START_DAYS} Tage vorher; danach wählen Sie ein Paket oder das Angebot endet automatisch.`
         : `Die erste Laufzeit dauert bis ${date(end)}. Danach verlängert sich das Paket automatisch um ${RENEWAL_DAYS} Tage, bis Sie kündigen oder pausieren.`,
     ],
-    cta: { label: "Inserat ansehen", url: `${appUrl()}/inserate/${listingNo(listing.id)}` },
+    cta: { label: "Angebot ansehen", url: `${appUrl()}/inserate/${listingNo(listing.id)}` },
   });
 }
 
@@ -170,10 +170,10 @@ export async function rejectListing(listingId: number, reason: string) {
   const [owner] = await db.select().from(schema.users).where(eq(schema.users.id, listing.ownerId)).limit(1);
   if (owner) await sendMail({
     to: owner.email,
-    subject: `Ihr Inserat braucht eine Anpassung: ${listingNo(listing.id)}`,
-    heading: "Ihr Inserat konnte noch nicht freigeschaltet werden",
-    paragraphs: [`«${listing.title}»`, `Grund: ${reason}`, "Sie können das Inserat in «Mein Bereich» anpassen und erneut zur Prüfung einreichen."],
-    cta: { label: "Inserat bearbeiten", url: `${appUrl()}/konto/inserate/${listing.id}/bearbeiten` },
+    subject: `Ihr Angebot braucht eine Anpassung: ${listingNo(listing.id)}`,
+    heading: "Ihr Angebot konnte noch nicht freigeschaltet werden",
+    paragraphs: [`«${listing.title}»`, `Grund: ${reason}`, "Sie können das Angebot in «Mein Bereich» anpassen und erneut zur Prüfung einreichen."],
+    cta: { label: "Angebot bearbeiten", url: `${appUrl()}/konto/inserate/${listing.id}/bearbeiten` },
   });
 }
 
@@ -233,11 +233,11 @@ export async function runDaily() {
   for (const { sub, listing, owner } of subs) {
     const no = listingNo(listing.id);
     try {
-      // Pause zu lange → Inserat endet
+      // Pause zu lange → Angebot endet
       if (sub.status === "paused") {
         if (sub.pausedAt && now.getTime() - sub.pausedAt.getTime() > MAX_PAUSE_DAYS * DAY) {
           await endListing(listing, "expired");
-          await sendMail({ to: owner.email, subject: `Inserat beendet: ${no}`, heading: "Ihr pausiertes Inserat ist beendet",
+          await sendMail({ to: owner.email, subject: `Angebot beendet: ${no}`, heading: "Ihr pausiertes Angebot ist beendet",
             paragraphs: [`«${listing.title}» war länger als ${MAX_PAUSE_DAYS} Tage pausiert und ist jetzt beendet. Es wurde nichts belastet.`],
             cta: { label: "Mein Bereich", url: `${appUrl()}/konto` } });
           log.push(`${no}: Pause abgelaufen`);
@@ -258,7 +258,7 @@ export async function runDaily() {
           subject: listing.plan === "start" ? `Ihr Startangebot endet am ${date(sub.periodEnd)}` : `Verlängerung am ${date(sub.periodEnd)}: ${no}`,
           heading: listing.plan === "start" ? "Ihr Startangebot endet bald" : "Ihr Paket verlängert sich bald",
           paragraphs: listing.plan === "start"
-            ? [`Das kostenlose Startangebot für «${listing.title}» endet am ${date(sub.periodEnd)}.`, "Wählen Sie ein Paket, damit Ihr Inserat online bleibt. Ohne Paket endet es automatisch – es entstehen keine Kosten."]
+            ? [`Das kostenlose Startangebot für «${listing.title}» endet am ${date(sub.periodEnd)}.`, "Wählen Sie ein Paket, damit Ihr Angebot online bleibt. Ohne Paket endet es automatisch – es entstehen keine Kosten."]
             : [`Ihr Paket ${planName(plan)} für «${listing.title}» verlängert sich am ${date(sub.periodEnd)} automatisch um ${RENEWAL_DAYS} Tage für ${chf(PLANS[plan as PaidPlan].renewal)}.`, "Sie können jederzeit in «Mein Bereich» kündigen oder pausieren."],
           cta: { label: listing.plan === "start" ? "Paket wählen" : "Mein Bereich", url: `${appUrl()}/konto` },
         });
@@ -271,8 +271,8 @@ export async function runDaily() {
       // Laufzeit vorbei
       if (willEnd) {
         await endListing(listing, "expired");
-        await sendMail({ to: owner.email, subject: `Inserat beendet: ${no}`, heading: "Ihr Inserat ist beendet",
-          paragraphs: [`Die Laufzeit von «${listing.title}» ist abgelaufen. Sie können das Inserat in «Mein Bereich» mit einem Paket wieder aktivieren.`],
+        await sendMail({ to: owner.email, subject: `Angebot beendet: ${no}`, heading: "Ihr Angebot ist beendet",
+          paragraphs: [`Die Laufzeit von «${listing.title}» ist abgelaufen. Sie können das Angebot in «Mein Bereich» mit einem Paket wieder aktivieren.`],
           cta: { label: "Mein Bereich", url: `${appUrl()}/konto` } });
         log.push(`${no}: beendet`);
         continue;
@@ -307,7 +307,7 @@ export async function runDaily() {
         await db.update(schema.subscriptions).set({ status: "past_due" }).where(eq(schema.subscriptions.id, sub.id));
         await db.update(schema.listings).set({ status: "paused" }).where(eq(schema.listings.id, listing.id));
         await sendMail({ to: owner.email, subject: `Zahlung fehlgeschlagen: ${no}`, heading: "Die automatische Verlängerung hat nicht geklappt",
-          paragraphs: [`Wir konnten ${chf(amount / 100)} für «${listing.title}» nicht belasten. Das Inserat ist vorübergehend offline.`, "Bezahlen Sie in «Mein Bereich», dann ist es sofort wieder online."],
+          paragraphs: [`Wir konnten ${chf(amount / 100)} für «${listing.title}» nicht belasten. Das Angebot ist vorübergehend offline.`, "Bezahlen Sie in «Mein Bereich», dann ist es sofort wieder online."],
           cta: { label: "Jetzt bezahlen", url: `${appUrl()}/konto` } });
         log.push(`${no}: Belastung fehlgeschlagen`);
       }

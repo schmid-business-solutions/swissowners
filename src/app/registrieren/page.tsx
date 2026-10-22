@@ -11,7 +11,7 @@ export default async function RegisterPage({ searchParams }: { searchParams: Pro
         <div className="auth">
           <div className="stack" style={{ gap: 8 }}>
             <h1 className="h2">Konto erstellen</h1>
-            <p className="muted">Mit einem Konto erfassen Sie Inserate, senden Anfragen und merken sich Angebote.</p>
+            <p className="muted">Mit einem Konto erfassen Sie Angebote, senden Anfragen und merken sich Angebote.</p>
           </div>
           <RegisterForm next={next} />
           <p className="muted">Bereits registriert? <Link className="link" href={`/login?next=${encodeURIComponent(next)}`}>Anmelden</Link></p>

@@ -3,7 +3,7 @@ import { FilterForm, SegSwitch, SortSelect } from "@/components/Filters";
 import { RowCard } from "@/components/ListingCards";
 import { facets, filtersToQuery, PAGE_SIZE, parseFilters, searchListings } from "@/lib/listings";
 
-export const metadata = { title: "Inserate durchsuchen", description: "Anteile an Schweizer KMU und Startups: Verkaufsinserate und Kapitalgesuche aus allen Branchen und Kantonen." };
+export const metadata = { title: "Angebote durchsuchen", description: "Anteile an Schweizer KMU und Startups: Verkaufsangebote und Kapitalgesuche aus allen Branchen und Kantonen." };
 export const dynamic = "force-dynamic";
 
 export default async function ListPage({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
@@ -16,15 +16,15 @@ export default async function ListPage({ searchParams }: { searchParams: Promise
     <section className="list-sec">
       <div className="wrap stack" style={{ gap: 24 }}>
         <div className="stack" style={{ gap: 6 }}>
-          <h1 className="h2">Inserate durchsuchen</h1>
-          <p className="muted">Verkaufsinserate und Kapitalgesuche von Schweizer KMU und Startups.</p>
+          <h1 className="h2">Angebote durchsuchen</h1>
+          <p className="muted">Verkaufsangebote und Kapitalgesuche von Schweizer KMU und Startups.</p>
         </div>
         <SegSwitch f={ff} facets={fc} />
         <div className="list-layout">
           <FilterForm f={ff} facets={fc} />
           <div className="results">
             <div className="results-head">
-              <p className="small muted" aria-live="polite"><b style={{ color: "var(--ink)" }}>{total}</b> {total === 1 ? "Inserat" : "Inserate"} gefunden</p>
+              <p className="small muted" aria-live="polite"><b style={{ color: "var(--ink)" }}>{total}</b> {total === 1 ? "Angebot" : "Angebote"} gefunden</p>
               <SortSelect f={ff} />
             </div>
             {rows.length ? (
@@ -41,7 +41,7 @@ export default async function ListPage({ searchParams }: { searchParams: Promise
               </>
             ) : (
               <div className="empty">
-                <h2 className="h3">Keine Inserate für diese Auswahl</h2>
+                <h2 className="h3">Keine Angebote für diese Auswahl</h2>
                 <p className="muted">Erweitern Sie Region oder Betrag – oder schauen Sie bald wieder vorbei.</p>
                 <Link className="btn btn-line" href="/inserate">Filter zurücksetzen</Link>
               </div>

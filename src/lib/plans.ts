@@ -13,9 +13,9 @@ export const REMIND_RENEWAL_DAYS = 5; // Erinnerung vor automatischer Verlänger
 export const VAT_RATE = 0.081;
 
 export const PLANS: Record<PaidPlan, { name: string; first: number; renewal: number; text: string }> = {
-  basis: { name: "Basis", first: 149, renewal: 49, text: "Inserat online, Anfragen mit digitaler Vertraulichkeitserklärung" },
+  basis: { name: "Basis", first: 149, renewal: 49, text: "Angebot online, Anfragen mit digitaler Vertraulichkeitserklärung" },
   plus: { name: "Plus", first: 249, renewal: 79, text: "Zusätzlich hervorgehoben in der Suche" },
-  premium: { name: "Premium", first: 449, renewal: 149, text: "Zusätzlich Top-Inserat auf der Startseite" },
+  premium: { name: "Premium", first: 449, renewal: 149, text: "Zusätzlich Top-Angebot auf der Startseite" },
 };
 
 export const PAID_PLANS = Object.keys(PLANS) as PaidPlan[];

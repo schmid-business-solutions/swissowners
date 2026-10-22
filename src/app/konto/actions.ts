@@ -45,7 +45,7 @@ export async function soldAction(fd: FormData) {
 
 export async function deleteAction(fd: FormData) {
   const { l } = await own(fd);
-  // Nur nie veröffentlichte, unbezahlte Inserate dürfen gelöscht werden
+  // Nur nie veröffentlichte, unbezahlte Angebote dürfen gelöscht werden
   if (!l.publishedAt && ["draft", "pending_payment", "rejected"].includes(l.status)) {
     const paid = await db.select({ id: schema.payments.id }).from(schema.payments)
       .where(and(eq(schema.payments.listingId, l.id), eq(schema.payments.status, "paid"))).limit(1);

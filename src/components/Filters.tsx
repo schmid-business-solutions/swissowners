@@ -49,16 +49,16 @@ export function FilterForm({ f, facets }: { f: F; facets: Facets }) {
   return (
     <form className="filters" aria-label="Filter" aria-busy={pending} onSubmit={(e) => e.preventDefault()}>
       <div className="filter-row">
-        <label className="field">Inseratetyp
+        <label className="field">Angebotstyp
           <select value={f.type} onChange={(e) => set({ type: e.target.value })}>
-            <option value="all">Alle Inserate</option><option value="sell">Anteile verkaufen</option><option value="cap">Kapital gesucht</option>
+            <option value="all">Alle Angebote</option><option value="sell">Anteile verkaufen</option><option value="cap">Kapital gesucht</option>
           </select>
         </label>
         <label className="field">Branche
           <select value={f.branche} onChange={(e) => set({ branche: e.target.value, sub: "all" })}>
             <option value="all">Alle Branchen ({base})</option>
             {withAds.map((b) => <option key={b} value={b}>{b} ({facets.branche[b]})</option>)}
-            {without.length > 0 && <optgroup label="Noch ohne Inserate">{without.map((b) => <option key={b} value={b}>{b}</option>)}</optgroup>}
+            {without.length > 0 && <optgroup label="Noch ohne Angebote">{without.map((b) => <option key={b} value={b}>{b}</option>)}</optgroup>}
           </select>
         </label>
         {showSub && (

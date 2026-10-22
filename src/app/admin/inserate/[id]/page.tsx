@@ -7,7 +7,7 @@ import { db, schema } from "@/lib/db";
 import { chf, date, listingNo } from "@/lib/format";
 import { approveAction, rejectAction } from "../../actions";
 
-export const metadata = { title: "Inserat prüfen", robots: { index: false } };
+export const metadata = { title: "Angebot prüfen", robots: { index: false } };
 export const dynamic = "force-dynamic";
 
 export default async function AdminListing({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ err?: string }> }) {
@@ -56,7 +56,7 @@ export default async function AdminListing({ params, searchParams }: { params: P
                   {err === "grund" && <p className="err">Bitte einen Grund angeben.</p>}
                   <button className="btn btn-line btn-block">Ablehnen</button>
                 </form>
-                {l.plan !== "start" && <p className="small muted">Bei Ablehnung eines bezahlten Inserats die Rückerstattung im Payrexx-Backend auslösen, falls der Inserent nicht korrigiert.</p>}
+                {l.plan !== "start" && <p className="small muted">Bei Ablehnung eines bezahlten Angebots die Rückerstattung im Payrexx-Backend auslösen, falls der Inserent nicht korrigiert.</p>}
               </>
             )}
             <Link className="link" href={`/inserate/${listingNo(l.id)}`}>Öffentliche Ansicht</Link>

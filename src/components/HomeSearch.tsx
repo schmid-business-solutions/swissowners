@@ -53,7 +53,7 @@ export default function HomeSearch() {
               {BETRAG.map(([v, l]) => <option key={v} value={v}>{l}</option>)}
             </select>
           </label>
-          <button type="submit" className="btn btn-red search-go"><Search />{tab === "sell" ? "Inserate suchen" : "Kapitalgesuche ansehen"}</button>
+          <button type="submit" className="btn btn-red search-go"><Search />{tab === "sell" ? "Angebote suchen" : "Kapitalgesuche ansehen"}</button>
         </div>
       </div>
     </form>

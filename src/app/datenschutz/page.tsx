@@ -10,19 +10,19 @@ export default function PrivacyPage() {
       <h2>1. Welche Daten wir bearbeiten</h2>
       <ul>
         <li><b>Konto:</b> Vorname, Nachname, E-Mail-Adresse, Passwort (verschlüsselt gespeichert), optional Telefonnummer.</li>
-        <li><b>Inserate:</b> Angaben zur Gesellschaft, Firmenname und UID, Beschreibung, Preisangaben, Aufrufzahlen.</li>
+        <li><b>Angebote:</b> Angaben zur Gesellschaft, Firmenname und UID, Beschreibung, Preisangaben, Aufrufzahlen.</li>
         <li><b>Anfragen:</b> Nachricht, Zeitpunkt und IP-Adresse der digitalen Vertraulichkeitserklärung, Name der unterzeichnenden Person.</li>
         <li><b>Zahlungen:</b> Betrag, Paket, Zeitpunkt und Referenzen des Zahlungsdienstleisters. Karten- und TWINT-Daten erhalten wir nicht.</li>
         <li><b>Technik:</b> Server-Protokolle (IP-Adresse, Zeitpunkt, aufgerufene Seite) und ein technisch notwendiges Sitzungs-Cookie für die Anmeldung. Wir verwenden keine Tracking- oder Werbe-Cookies.</li>
       </ul>
 
       <h2>2. Zwecke</h2>
-      <p>Betrieb der Plattform, Prüfung und Veröffentlichung von Inseraten, Weiterleitung von Anfragen an Inserierende, Abrechnung der Pakete, Kommunikation per E-Mail (z. B. Bestätigungen, Erinnerungen vor Verlängerungen), Missbrauchsbekämpfung und Erfüllung gesetzlicher Pflichten.</p>
+      <p>Betrieb der Plattform, Prüfung und Veröffentlichung von Angeboten, Weiterleitung von Anfragen an Inserierende, Abrechnung der Pakete, Kommunikation per E-Mail (z. B. Bestätigungen, Erinnerungen vor Verlängerungen), Missbrauchsbekämpfung und Erfüllung gesetzlicher Pflichten.</p>
 
       <h2>3. Weitergabe</h2>
       <ul>
         <li><b>An Inserierende:</b> Wenn Sie eine Anfrage senden, geben wir Name, E-Mail-Adresse, Telefonnummer (falls angegeben) und Nachricht an die inserierende Person weiter.</li>
-        <li><b>An Interessierte:</b> Firmenname und UID eines Inserats werden erst nach unterzeichneter Vertraulichkeitserklärung angezeigt. Ihre persönlichen Kontaktdaten als Inserent werden nicht angezeigt.</li>
+        <li><b>An Interessierte:</b> Firmenname und UID eines Angebots werden erst nach unterzeichneter Vertraulichkeitserklärung angezeigt. Ihre persönlichen Kontaktdaten als Inserent werden nicht angezeigt.</li>
         <li><b>Dienstleister:</b> Hosting (Hostinger International Ltd., Rechenzentrum in [Region ergänzen]), E-Mail-Versand (Google, Gmail; Datenbearbeitung auch ausserhalb der Schweiz, z. B. in den USA), Zahlungsabwicklung (Payrexx AG, Schweiz). Sie bearbeiten Daten nur in unserem Auftrag.</li>
       </ul>
 

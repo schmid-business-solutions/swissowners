@@ -48,7 +48,7 @@ export async function createListing(data: WizardData): Promise<SubmitResult> {
   const [listing] = await db.select().from(schema.listings).where(eq(schema.listings.id, ins.id)).limit(1);
 
   if (plan === "start") {
-    await notifyAdmin(`Neues Inserat zur Prüfung: ${listingNo(ins.id)}`, [listing.title, "Startangebot (gratis)."], `${appUrl()}/admin/inserate/${ins.id}`);
+    await notifyAdmin(`Neues Angebot zur Prüfung: ${listingNo(ins.id)}`, [listing.title, "Startangebot (gratis)."], `${appUrl()}/admin/inserate/${ins.id}`);
     redirect(`/inserat-aufgeben/danke?nr=${listingNo(ins.id)}`);
   }
   let link: string;
@@ -56,7 +56,7 @@ export async function createListing(data: WizardData): Promise<SubmitResult> {
     link = await startPayment(listing, user, plan as PaidPlan, "initial");
   } catch (err) {
     console.error("[payrexx]", err);
-    return { error: "Die Zahlungsseite konnte nicht geöffnet werden. Ihr Inserat ist als Entwurf gespeichert – Sie können die Zahlung in «Mein Bereich» erneut starten." };
+    return { error: "Die Zahlungsseite konnte nicht geöffnet werden. Ihr Angebot ist als Entwurf gespeichert – Sie können die Zahlung in «Mein Bereich» erneut starten." };
   }
   redirect(link);
 }
@@ -65,9 +65,9 @@ export async function updateListing(id: number, data: WizardData): Promise<Submi
   const user = await getUser();
   if (!user) return { error: "Bitte melden Sie sich erneut an." };
   const [l] = await db.select().from(schema.listings).where(and(eq(schema.listings.id, id), eq(schema.listings.ownerId, user.id))).limit(1);
-  if (!l) return { error: "Inserat nicht gefunden." };
-  if (l.status === "sold" || l.status === "expired") return { error: "Beendete Inserate können nicht mehr bearbeitet werden." };
-  if (l.status === "paused") return { error: "Bitte setzen Sie das Inserat zuerst fort, dann können Sie es bearbeiten." };
+  if (!l) return { error: "Angebot nicht gefunden." };
+  if (l.status === "sold" || l.status === "expired") return { error: "Beendete Angebote können nicht mehr bearbeitet werden." };
+  if (l.status === "paused") return { error: "Bitte setzen Sie das Angebot zuerst fort, dann können Sie es bearbeiten." };
   if (!data.agb) return { error: "Bitte bestätigen Sie die Angaben und die AGB." };
   const v = validate({ ...data, type: l.type });
   if (v.error) return v.error;
@@ -75,7 +75,7 @@ export async function updateListing(id: number, data: WizardData): Promise<Submi
   const status = l.status === "online" || l.status === "rejected" ? "in_review" : l.status;
   await db.update(schema.listings).set({ ...v.values!, type: l.type, status, rejectionReason: null }).where(eq(schema.listings.id, id));
   if (resubmit && status === "in_review") {
-    await notifyAdmin(`Inserat geändert, bitte prüfen: ${listingNo(id)}`, [v.values!.title], `${appUrl()}/admin/inserate/${id}`);
+    await notifyAdmin(`Angebot geändert, bitte prüfen: ${listingNo(id)}`, [v.values!.title], `${appUrl()}/admin/inserate/${id}`);
   }
   redirect("/konto?ok=gespeichert");
 }

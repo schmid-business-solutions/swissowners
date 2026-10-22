@@ -44,7 +44,7 @@ export default function Contact({ listingId, no, mode, userName, userPhone, save
           <Link className="btn btn-line btn-block" href="/konto?tab=anfragen">Zu meinen Anfragen</Link>
         </>
       ) : mode === "owner" ? (
-        <Link className="btn btn-line btn-block" href="/konto">Ihr Inserat verwalten</Link>
+        <Link className="btn btn-line btn-block" href="/konto">Ihr Angebot verwalten</Link>
       ) : mode === "anon" ? (
         <Link className="btn btn-red btn-block" href={loginHref}>Details anfragen</Link>
       ) : mode === "unverified" ? (
@@ -54,7 +54,7 @@ export default function Contact({ listingId, no, mode, userName, userPhone, save
       )}
       {mode !== "owner" && (
         <button className="btn btn-ghost btn-block" onClick={save} disabled={pendingSave} aria-pressed={saved}>
-          <Heart />{saved ? "Gemerkt" : "Inserat merken"}
+          <Heart />{saved ? "Gemerkt" : "Angebot merken"}
         </button>
       )}
 
@@ -68,8 +68,8 @@ export default function Contact({ listingId, no, mode, userName, userPhone, save
             {step === 0 ? (
               <>
                 <div className="nda" tabIndex={0} aria-label="Text der Vertraulichkeitserklärung">
-                  <b>Vertraulichkeitserklärung zu Inserat {no}</b>
-                  <p>1. Ich verpflichte mich, alle Informationen zu diesem Inserat, insbesondere den Namen der Firma und erhaltene Unterlagen, vertraulich zu behandeln und ausschliesslich zur Prüfung eines Erwerbs oder einer Beteiligung zu verwenden.</p>
+                  <b>Vertraulichkeitserklärung zu Angebot {no}</b>
+                  <p>1. Ich verpflichte mich, alle Informationen zu diesem Angebot, insbesondere den Namen der Firma und erhaltene Unterlagen, vertraulich zu behandeln und ausschliesslich zur Prüfung eines Erwerbs oder einer Beteiligung zu verwenden.</p>
                   <p>2. Ich gebe keine Informationen an Dritte weiter, ausgenommen an meine Berater, die ebenfalls zur Verschwiegenheit verpflichtet sind.</p>
                   <p>3. Ich nehme mit der Firma, ihren Mitarbeitenden, Kunden oder Lieferanten keinen direkten Kontakt auf, ohne vorgängige Zustimmung des Inserenten.</p>
                   <p>4. Die Pflicht gilt zwei Jahre ab heute. Es gilt Schweizer Recht. Die Erklärung gilt gegenüber dem Inserenten; SwissOwners ist nicht Vertragspartei.</p>
