@@ -394,3 +394,18 @@ body{font-size:17px;line-height:1.55}
 footer p{font-size:14.5px}
 footer .ft-lead{font-size:21px}
 @media (max-width:820px){.h1{letter-spacing:-0.02em}.lc-title{font-size:20px}.lc-big{font-size:23px}}
+
+/* ===== Hover-Effekte Navigation ===== */
+.navlink{transition:color .18s ease,border-color .18s ease}
+.navlink:hover{color:var(--red);border-bottom-color:rgba(216,0,15,.35)}
+.navlink[aria-current="page"]:hover{border-bottom-color:var(--red)}
+.logo .logo-mark{transition:transform .2s ease}
+.logo:hover .logo-mark{transform:rotate(90deg)}
+.btn{transition:background-color .18s ease,border-color .18s ease,color .18s ease,transform .18s ease}
+.btn-ghost:hover{color:var(--red)}
+.btn-line:hover{background:var(--ink);color:#FFFFFF}
+.btn-ink:hover{background:#000000}
+.mnav-item .mnav-t{transition:color .18s ease}
+.mnav-item:hover .mnav-t{color:var(--red)}
+.link:hover{text-decoration:underline;text-underline-offset:3px}
+@media (prefers-reduced-motion:reduce){.logo:hover .logo-mark{transform:none}}
