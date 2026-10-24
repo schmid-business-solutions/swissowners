@@ -548,3 +548,7 @@ html[data-header] .acct-btn:hover{background:rgba(255,255,255,.12);border-color:
 html[data-header="rot"] .avatar-initials{background:#FFFFFF;color:var(--red)}
 html[data-header] .avatar-out{background:rgba(255,255,255,.14);color:#FFFFFF;border-color:rgba(255,255,255,.35)}
 @media (max-width:1000px){.acct-btn{padding:4px}}
+
+/* ===== Einheitliche Seitenbreite: Inhalt und Footer so breit wie der Header ===== */
+.wrap{max-width:1520px}
+.hero-c .hero-main{max-width:none}
