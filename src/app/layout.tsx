@@ -43,7 +43,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       </head>
       <body>
         <BetaBar />
-        <Header userName={user ? `${user.firstName} ${user.lastName}` : null} isAdmin={user?.role === "admin"} newRequests={unread} />
+        <Header userName={user ? `${user.firstName} ${user.lastName}` : null} account={user ? { firstName: user.firstName, lastName: user.lastName, avatarVersion: user.avatarUpdatedAt ? user.avatarUpdatedAt.getTime() : null } : null} isAdmin={user?.role === "admin"} newRequests={unread} />
         <main className="app">{children}</main>
         <Footer />
         <HeaderPreview />

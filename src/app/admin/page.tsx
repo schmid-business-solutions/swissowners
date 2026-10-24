@@ -59,30 +59,28 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
           <div className="statbox"><span className="small muted">Konten</span><b>{Number(users[0].n)}</b></div>
           <div className="statbox"><span className="small muted">Umsatz bezahlt</span><b>{chf(Math.round(Number(revenue[0].sum) / 100))}</b></div>
         </div>
+        <div className="notice neutral" style={{ flexWrap: "wrap", alignItems: "center" }}>
+          <span style={{ flex: "1 1 320px" }}>
+            <b>Musterangebote: {samples}</b> · fiktive Beispiele, überall als «Musterangebot» gekennzeichnet. Echte Angebote stehen immer davor.
+          </span>
+          <span className="row" style={{ gap: 8 }}>
+            {samples === 0 ? (
+              <form action={createSamplesAction}><button className="btn btn-red" style={{ minHeight: 40 }}>{SAMPLE_LISTINGS.length} Musterangebote anlegen</button></form>
+            ) : (
+              <>
+                {!showSamples && <Link className="btn btn-line" style={{ minHeight: 40 }} href="/admin?status=muster">Muster verwalten</Link>}
+                <form action={deleteOldestSampleAction}><button className="btn btn-line" style={{ minHeight: 40 }}>Ältestes Muster löschen</button></form>
+                {showSamples && <form action={deleteAllSamplesAction}><ConfirmButton className="btn btn-ghost" question={`Alle ${samples} Musterangebote endgültig löschen?`}>Alle löschen</ConfirmButton></form>}
+              </>
+            )}
+          </span>
+        </div>
         <div className="tabbar" role="tablist">
           {LISTING_STATUS.map((s) => (
             <Link key={s} className="tablink" role="tab" aria-selected={!showSamples && s === st} href={`/admin?status=${s}`}>{LABEL[s]} ({c[s] ?? 0})</Link>
           ))}
           <Link className="tablink" role="tab" aria-selected={showSamples} href="/admin?status=muster">Musterangebote ({samples})</Link>
         </div>
-        {showSamples && (
-          <div className="notice neutral" style={{ flexWrap: "wrap" }}>
-            <span style={{ flex: "1 1 320px" }}>
-              Musterangebote sind fiktive Beispiele aus dem Prototyp und überall als «Musterangebot» gekennzeichnet. Echte Angebote stehen immer davor.
-              {" "}Empfehlung: Für jedes echte Angebot, das online geht, ein Musterangebot löschen.
-            </span>
-            <span className="row" style={{ gap: 8 }}>
-              {samples === 0 ? (
-                <form action={createSamplesAction}><button className="btn btn-red" style={{ minHeight: 40 }}>{SAMPLE_LISTINGS.length} Musterangebote anlegen</button></form>
-              ) : (
-                <>
-                  <form action={deleteOldestSampleAction}><button className="btn btn-line" style={{ minHeight: 40 }}>Ältestes Muster löschen</button></form>
-                  <form action={deleteAllSamplesAction}><ConfirmButton className="btn btn-ghost" question={`Alle ${samples} Musterangebote endgültig löschen?`}>Alle löschen</ConfirmButton></form>
-                </>
-              )}
-            </span>
-          </div>
-        )}
         <div className="table-wrap">
           <table>
             <thead><tr><th>Nr.</th><th>Titel</th><th>Firma</th><th>Inserent</th><th>Paket</th><th>{showSamples ? "Aktion" : "Geändert"}</th></tr></thead>

@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -10,7 +11,16 @@ const NAV: [string, string, string][] = [
   ["/#ablauf", "So funktioniert's", "In vier Schritten zum Abschluss"],
 ];
 
-export default function Header({ userName, isAdmin, newRequests }: { userName: string | null; isAdmin: boolean; newRequests: number }) {
+type Account = { firstName: string; lastName: string; avatarVersion: number | null };
+
+function Avatar({ a }: { a: Account }) {
+  const initials = ((a.firstName[0] ?? "") + (a.lastName[0] ?? "")).toUpperCase() || "?";
+  return a.avatarVersion
+    ? <img className="avatar" src={`/api/avatar?v=${a.avatarVersion}`} alt="" width={36} height={36} />
+    : <span className="avatar avatar-initials" aria-hidden="true">{initials}</span>;
+}
+
+export default function Header({ userName, account, isAdmin, newRequests }: { userName: string | null; account: Account | null; isAdmin: boolean; newRequests: number }) {
   const path = usePathname();
   const [open, setOpen] = useState(false);
   useEffect(() => setOpen(false), [path]);
@@ -32,12 +42,16 @@ export default function Header({ userName, isAdmin, newRequests }: { userName: s
             ))}
           </nav>
           <div className="hdr-actions">
-            {userName ? (
-              <Link className="icon-btn" href="/konto" aria-label={`Mein Bereich (${userName})`} title={userName}>
-                <User />{newRequests > 0 && <span className="dot" />}
+            {account ? (
+              <Link className="acct-btn" href="/konto" aria-label={`Mein Bereich (${userName})`} title={`${userName} · Mein Bereich`}>
+                <span className="avatar-wrap"><Avatar a={account} />{newRequests > 0 && <span className="dot" />}</span>
+                <span className="acct-name hide-sm">{account.firstName}</span>
               </Link>
             ) : (
-              <Link className="btn btn-ghost hide-sm" href="/login">Anmelden</Link>
+              <Link className="acct-btn acct-out" href="/login" aria-label="Anmelden">
+                <span className="avatar avatar-out"><User size={20} /></span>
+                <span className="acct-name hide-sm">Anmelden</span>
+              </Link>
             )}
             <Link className="btn btn-red hide-sm" href="/inserat-aufgeben">Inserat aufgeben</Link>
             <button className="icon-btn menu-btn" aria-label={open ? "Menü schliessen" : "Menü öffnen"} aria-expanded={open} onClick={() => setOpen(!open)}>

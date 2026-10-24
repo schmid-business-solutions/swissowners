@@ -533,3 +533,18 @@ html[data-header] header.top .beta-tag{border-color:rgba(255,255,255,.75);color:
 .lcard.is-sample .lc-art .art{filter:saturate(.55)}
 .sample-note{background:#FFF8E6;border:1px dashed #C79A2B;border-radius:6px;padding:16px 18px;display:flex;gap:12px;align-items:flex-start;color:#4A3600}
 .sample-note b{color:#3A2A00}
+
+/* ===== Konto im Header: Profilbild bzw. Initialen ===== */
+.acct-btn{display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:4px 12px 4px 4px;border-radius:999px;border:1px solid transparent;text-decoration:none;color:var(--ink);font-weight:700;font-size:15px;transition:background-color .18s ease,border-color .18s ease}
+.acct-btn:hover{background:var(--bg-soft);border-color:var(--line)}
+.avatar-wrap{position:relative;display:inline-grid}
+.avatar{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;object-fit:cover;flex:none}
+.avatar-initials{background:var(--red);color:#FFFFFF;font-size:14px;font-weight:800;letter-spacing:.02em}
+.avatar-out{background:var(--bg-soft);color:var(--ink-2);border:1px solid var(--line)}
+.acct-out .acct-name{font-weight:600}
+.avatar-wrap .dot{top:-1px;right:-1px}
+html[data-header] .acct-btn{color:#FFFFFF}
+html[data-header] .acct-btn:hover{background:rgba(255,255,255,.12);border-color:transparent}
+html[data-header="rot"] .avatar-initials{background:#FFFFFF;color:var(--red)}
+html[data-header] .avatar-out{background:rgba(255,255,255,.14);color:#FFFFFF;border-color:rgba(255,255,255,.35)}
+@media (max-width:1000px){.acct-btn{padding:4px}}

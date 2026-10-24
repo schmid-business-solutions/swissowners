@@ -73,7 +73,7 @@ export function buildAuthRequest(p: Provider) {
   return { url: `${c.authUrl}?${params}`, state, verifier };
 }
 
-export type Profile = { sub: string; email: string; emailVerified: boolean; firstName: string; lastName: string };
+export type Profile = { sub: string; email: string; emailVerified: boolean; firstName: string; lastName: string; picture?: string };
 
 export async function fetchProfile(p: Provider, code: string, verifier: string): Promise<Profile> {
   const c = CONFIG[p];
@@ -105,7 +105,30 @@ export async function fetchProfile(p: Provider, code: string, verifier: string):
     emailVerified: verified,
     firstName: String(info.given_name ?? "").trim().slice(0, 100),
     lastName: String(info.family_name ?? "").trim().slice(0, 100),
+    picture: typeof info.picture === "string" && /^https:\/\//.test(info.picture) ? info.picture : undefined,
   };
+}
+
+/** Lädt das Profilbild des Anbieters einmal serverseitig und speichert es bei uns.
+    So sehen Besucher es ohne Abruf bei Google/LinkedIn, und abgelaufene Bild-Links spielen keine Rolle. */
+export async function storeAvatar(userId: number, pictureUrl: string | undefined) {
+  if (!pictureUrl) return;
+  try {
+    // Google liefert per Parameter eine passende Grösse
+    const url = pictureUrl.replace(/=s\d+(-c)?$/, "=s160-c");
+    const res = await fetch(url, { signal: AbortSignal.timeout(5000), cache: "no-store" });
+    const mime = (res.headers.get("content-type") ?? "").split(";")[0].trim();
+    if (!res.ok || !/^image\/(jpeg|png|webp|gif)$/.test(mime)) return;
+    const buf = Buffer.from(await res.arrayBuffer());
+    if (buf.length === 0 || buf.length > 400_000) return;
+    const data = buf.toString("base64");
+    const now = new Date();
+    await db.insert(schema.userAvatars).values({ userId, mime, data, updatedAt: now })
+      .onDuplicateKeyUpdate({ set: { mime, data, updatedAt: now } });
+    await db.update(schema.users).set({ avatarUpdatedAt: now }).where(eq(schema.users.id, userId));
+  } catch (err) {
+    console.error("[oauth] Profilbild nicht gespeichert", err);
+  }
 }
 
 /** Findet oder erstellt das Konto zu einem Anbieter-Profil. Gibt die User-ID zurück. */

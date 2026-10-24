@@ -1,5 +1,5 @@
 import {
-  mysqlTable, int, varchar, text, datetime, boolean, mysqlEnum, uniqueIndex, index, primaryKey,
+  mysqlTable, int, varchar, text, mediumtext, datetime, boolean, mysqlEnum, uniqueIndex, index, primaryKey,
 } from "drizzle-orm/mysql-core";
 import { sql } from "drizzle-orm";
 
@@ -14,8 +14,17 @@ export const users = mysqlTable("users", {
   phone: varchar("phone", { length: 40 }),
   role: mysqlEnum("role", ["user", "admin"]).notNull().default("user"),
   emailVerifiedAt: datetime("email_verified_at"),
+  avatarUpdatedAt: datetime("avatar_updated_at"), // gesetzt, wenn ein Profilbild (von Google/LinkedIn) gespeichert ist
   createdAt: now(),
 }, (t) => [uniqueIndex("users_email_uq").on(t.email)]);
+
+/* Profilbild separat, damit es nicht bei jeder Seitenanfrage mitgeladen wird */
+export const userAvatars = mysqlTable("user_avatars", {
+  userId: int("user_id").primaryKey().references(() => users.id, { onDelete: "cascade" }),
+  mime: varchar("mime", { length: 40 }).notNull(),
+  data: mediumtext("data").notNull(), // Base64
+  updatedAt: datetime("updated_at").notNull().default(sql`CURRENT_TIMESTAMP`),
+});
 
 export const sessions = mysqlTable("sessions", {
   id: varchar("id", { length: 64 }).primaryKey(), // SHA-256 des Cookie-Tokens

@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { eq } from "drizzle-orm";
 import { createSession, isAdminEmail } from "@/lib/auth";
 import { db, schema } from "@/lib/db";
-import { OAuthUserError, fetchProfile, isProvider, upsertOAuthUser } from "@/lib/oauth";
+import { OAuthUserError, fetchProfile, isProvider, storeAvatar, upsertOAuthUser } from "@/lib/oauth";
 
 export const dynamic = "force-dynamic";
 
@@ -27,6 +27,7 @@ export async function GET(req: Request, { params }: { params: Promise<{ provider
   try {
     const profile = await fetchProfile(provider, q.get("code")!, saved.verifier ?? "");
     ({ userId } = await upsertOAuthUser(provider, profile));
+    await storeAvatar(userId, profile.picture);
   } catch (err) {
     if (err instanceof OAuthUserError) redirect("/login?err=oauth-email");
     console.error("[oauth]", provider, err);
