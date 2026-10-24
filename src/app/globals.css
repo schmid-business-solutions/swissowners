@@ -555,3 +555,7 @@ html[data-header] .avatar-out{background:rgba(255,255,255,.14);color:#FFFFFF;bor
 
 /* Startseite: Titel auf Desktop in zwei Zeilen */
 .hero-c .h1{max-width:1340px;font-size:clamp(38px,5vw,72px)}
+
+/* Startseite: Titel fix in zwei Zeilen (ab Tablet), unabhängig vom Browser-Umbruch */
+.hero-c .hero-title{max-width:none;text-wrap:wrap}
+@media (min-width:760px){.hero-c .hero-title > span{display:block;white-space:nowrap}}
