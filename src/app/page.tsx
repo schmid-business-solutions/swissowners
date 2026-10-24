@@ -27,8 +27,8 @@ export default async function HomePage() {
               </Link>
             )}
             <p className="eyebrow">Der Marktplatz für nicht kotierte Firmenanteile</p>
-            <h1 className="h1">Schweizer Firmenanteile kaufen und verkaufen.</h1>
-            <p className="lead">Beteiligungen an KMU und Startups inserieren, finden und direkt verhandeln – ohne Provision.</p>
+            <h1 className="h1">Schweizer Firmenanteile kaufen, verkaufen, finanzieren.</h1>
+            <p className="lead">Beteiligungen an KMU und Startups inserieren und finden – oder Eigenkapital für Ihre Firma suchen. Direkt verhandeln, ohne Provision.</p>
             <HomeSearch />
             <p className="small muted">Anonym inserieren · Firmenname erst nach digitaler Vertraulichkeitserklärung · keine Provision</p>
           </div>
