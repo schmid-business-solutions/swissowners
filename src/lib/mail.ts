@@ -18,6 +18,15 @@ function getTransport() {
   return transport;
 }
 
+/** Absendername und Betreff-Präfix aller E-Mails */
+const BRAND = "swissowners.ch";
+const withBrand = (subject: string) => (subject.startsWith(BRAND) ? subject : `${BRAND} – ${subject}`);
+/** Adresse aus MAIL_FROM («Name <adresse>» oder nur Adresse), sonst SMTP_USER */
+function senderAddress(): string {
+  const raw = process.env.MAIL_FROM ?? "";
+  return raw.match(/<([^>]+)>/)?.[1] ?? (raw.includes("@") ? raw.trim() : process.env.SMTP_USER ?? "");
+}
+
 const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]!);
 
 /** Schlichtes E-Mail-Layout im SwissOwners-Stil. paragraphs: Text-Absätze (werden escaped). */
@@ -52,15 +61,15 @@ export async function sendMail(opts: {
   const text = [opts.heading, "", ...opts.paragraphs, ...factText, ...(opts.after ?? []), ...(opts.cta ? ["", `${opts.cta.label}: ${opts.cta.url}`] : [])].join("\n\n");
   const t = getTransport();
   if (!t) {
-    console.log(`[mail:dev] An ${opts.to} · ${opts.subject}\n${text}\n`);
+    console.log(`[mail:dev] An ${opts.to} · ${withBrand(opts.subject)}\n${text}\n`);
     return;
   }
   try {
     await t.sendMail({
-      from: process.env.MAIL_FROM ?? process.env.SMTP_USER,
+      from: { name: BRAND, address: senderAddress() },
       to: opts.to,
       replyTo: opts.replyTo,
-      subject: opts.subject,
+      subject: withBrand(opts.subject),
       text,
       html: layout(opts.heading, opts.paragraphs, opts.cta, opts.facts, opts.after),
     });
@@ -73,7 +82,7 @@ export async function notifyAdmin(subject: string, paragraphs: string[], url?: s
   const to = process.env.ADMIN_NOTIFY_EMAIL;
   if (!to || !envSet("ADMIN_NOTIFY_EMAIL")) return;
   await sendMail({
-    to, subject: `[SwissOwners] ${subject}`, heading: subject, paragraphs,
+    to, subject, heading: subject, paragraphs,
     cta: url ? { label: extra?.ctaLabel ?? "Öffnen", url } : undefined,
     facts: extra?.facts, after: extra?.after, replyTo: extra?.replyTo,
   });
