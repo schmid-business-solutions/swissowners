@@ -560,20 +560,3 @@ html[data-header] .avatar-out{background:rgba(255,255,255,.14);color:#FFFFFF;bor
 h1,h2,h3,.h1,.h2,.h3,.lc-title,.lc-big{color:var(--ink)}
 .btn-red{font-weight:600;letter-spacing:.005em;box-shadow:none}
 .btn-red:hover{background:var(--red-dark)}
-
-/* ===== Logo-Animation beim Überfahren: Kreuz dreht mit leichtem Nachfedern, Ring pulsiert ===== */
-.logo .logo-mark{position:relative;transition:transform .55s cubic-bezier(.34,1.56,.64,1)}
-.logo .logo-mark svg{transition:transform .55s cubic-bezier(.34,1.56,.64,1)}
-.logo .logo-mark::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid var(--red);opacity:0;transform:scale(1);pointer-events:none}
-html[data-header="rot"] header.top .logo-mark::after{border-color:#FFFFFF}
-.logo .logo-text i{display:inline-block;transition:transform .35s ease}
-.logo:hover .logo-mark,.logo:focus-visible .logo-mark{transform:scale(1.1)}
-.logo:hover .logo-mark svg,.logo:focus-visible .logo-mark svg{transform:rotate(180deg)}
-.logo:hover .logo-mark::after,.logo:focus-visible .logo-mark::after{animation:logo-ring .7s ease-out}
-.logo:hover .logo-text i,.logo:focus-visible .logo-text i{transform:translateX(2px)}
-@keyframes logo-ring{0%{opacity:.7;transform:scale(1)}100%{opacity:0;transform:scale(1.8)}}
-@media (prefers-reduced-motion:reduce){
-  .logo .logo-mark,.logo .logo-mark svg,.logo .logo-text i{transition:none}
-  .logo:hover .logo-mark,.logo:hover .logo-mark svg,.logo:hover .logo-text i{transform:none}
-  .logo:hover .logo-mark::after{animation:none}
-}
