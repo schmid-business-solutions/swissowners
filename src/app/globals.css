@@ -1,6 +1,6 @@
 /* Layout: Swiss marketplace — white ground, one red accent, centered 1180px column, cards for listings only */
 :root{
-  --bg:#FFFFFF; --page:#F5F3EF; --bg-soft:#EEEBE5; --ink:#1A1A1A; --ink-2:#47453F; --muted:#66625A; --line:#E1DDD5;
+  --bg:#FFFFFF; --page:#F5F3EF; --bg-soft:#EEEBE5; --ink:#33363A; --ink-2:#47453F; --muted:#66625A; --line:#E1DDD5;
   --red:#AF001E; --red-dark:#8A0017; --red-soft:#F6E5E7; --ok:#1D5E3A; --ok-soft:#E6F2EB;
   --font:'Hanken Grotesk', 'Helvetica Neue', Arial, sans-serif;
   color-scheme: light;
@@ -451,15 +451,11 @@ html[data-header="rot"] .navlink{color:rgba(255,255,255,.9)}
 html[data-header="rot"] .navlink:hover{color:#FFFFFF;border-bottom-color:rgba(255,255,255,.6)}
 html[data-header="rot"] .navlink[aria-current="page"]{color:#FFFFFF;border-bottom-color:#FFFFFF}
 html[data-header="rot"] .hdr-actions .btn-red{background:#FFFFFF;color:var(--red)}
-html[data-header="rot"] .hdr-actions .btn-red:hover{background:#111111;color:#FFFFFF}
+html[data-header="rot"] .hdr-actions .btn-red:hover{background:var(--ink);color:#FFFFFF}
 html[data-header="rot"] .dot{background:#FFFFFF}
 /* Mobile: Balken etwas flacher */
 @media (max-width:820px){html[data-header] header.top .wrap{padding-block:14px}html[data-header] header.top .logo-text{font-size:22px}html[data-header] header.top .logo-mark{width:36px;height:36px}}
 /* Umschalter für die Vorschau */
-.hp-bar{position:fixed;left:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:70;display:flex;align-items:center;gap:6px;background:#111111;color:#FFFFFF;border-radius:999px;padding:6px 8px 6px 14px;font-size:14px;font-weight:600;box-shadow:0 10px 30px rgba(0,0,0,.3)}
-.hp-bar button{border:1px solid rgba(255,255,255,.35);background:none;color:#FFFFFF;border-radius:999px;padding:6px 12px;font:inherit;cursor:pointer}
-.hp-bar button[aria-pressed="true"]{background:#FFFFFF;color:#111111;border-color:#FFFFFF}
-.hp-bar .hp-x{border:0;font-size:20px;line-height:1;padding:4px 8px}
 
 /* ===== Anmelde-Buttons im Erscheinungsbild von Google und LinkedIn ===== */
 .sso-btn{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;min-height:50px;padding:0 16px;border-radius:999px;text-decoration:none;font-family:Roboto,Arial,"Helvetica Neue",sans-serif;font-size:16px;font-weight:500;letter-spacing:.25px;cursor:pointer;position:relative;transition:background-color .18s ease,box-shadow .18s ease,border-color .18s ease}
@@ -518,7 +514,7 @@ footer{background:#1A1A1A}
 .beta-tag-inv{border-color:rgba(255,255,255,.7);color:#FFFFFF}
 html[data-header] header.top .beta-tag{border-color:rgba(255,255,255,.75);color:#FFFFFF}
 .ft-brand .beta-tag{align-self:center;margin:0 0 0 6px}
-.beta-bar{background:#1A1A1A;color:#E9E6E0;font-size:14px}
+.beta-bar{background:var(--ink);color:#E9E6E0;font-size:14px}
 .beta-bar .wrap{max-width:1520px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding-block:8px}
 .beta-bar .beta-tag{margin:0;align-self:center}
 .beta-bar a{color:#FFFFFF;font-weight:700;text-underline-offset:3px}
@@ -559,3 +555,8 @@ html[data-header] .avatar-out{background:rgba(255,255,255,.14);color:#FFFFFF;bor
 /* Startseite: Titel fix in zwei Zeilen (ab Tablet), unabhängig vom Browser-Umbruch */
 .hero-c .hero-title{max-width:none;text-wrap:wrap}
 @media (min-width:760px){.hero-c .hero-title > span{display:block;white-space:nowrap}}
+
+/* Feedback: Titel und dunkle Elemente in Anthrazit, rote Buttons etwas ruhiger */
+h1,h2,h3,.h1,.h2,.h3,.lc-title,.lc-big{color:var(--ink)}
+.btn-red{font-weight:600;letter-spacing:.005em;box-shadow:none}
+.btn-red:hover{background:var(--red-dark)}

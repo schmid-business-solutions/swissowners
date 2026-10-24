@@ -9,7 +9,6 @@ import "./globals.css";
 import Header from "@/components/Header";
 import BetaBar from "@/components/BetaBar";
 import Footer from "@/components/Footer";
-import HeaderPreview, { HEADER_PREVIEW_SCRIPT } from "@/components/HeaderPreview";
 import { getUser } from "@/lib/auth";
 import { db, schema } from "@/lib/db";
 import { appUrl } from "@/lib/format";
@@ -36,16 +35,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const user = await getUser().catch(() => null);
   const unread = user ? await unreadRequests(user.id).catch(() => 0) : 0;
   return (
-    <html lang="de-CH" suppressHydrationWarning>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: HEADER_PREVIEW_SCRIPT }} />
-      </head>
+    <html lang="de-CH" data-header="rot">
       <body>
         <BetaBar />
         <Header userName={user ? `${user.firstName} ${user.lastName}` : null} account={user ? { firstName: user.firstName, lastName: user.lastName, avatarVersion: user.avatarUpdatedAt ? user.avatarUpdatedAt.getTime() : null } : null} isAdmin={user?.role === "admin"} newRequests={unread} />
         <main className="app">{children}</main>
         <Footer />
-        <HeaderPreview />
       </body>
     </html>
   );
