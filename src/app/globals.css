@@ -1,7 +1,7 @@
 /* Layout: Swiss marketplace — white ground, one red accent, centered 1180px column, cards for listings only */
 :root{
-  --bg:#FFFFFF; --bg-soft:#F4F4F2; --ink:#1B1B1B; --ink-2:#4A4A48; --muted:#636360; --line:#DCDCD8;
-  --red:#D8000F; --red-dark:#A3000C; --red-soft:#FCE8E9; --ok:#1D5E3A; --ok-soft:#E6F2EB;
+  --bg:#FFFFFF; --page:#F5F3EF; --bg-soft:#EEEBE5; --ink:#1A1A1A; --ink-2:#47453F; --muted:#66625A; --line:#E1DDD5;
+  --red:#AF001E; --red-dark:#8A0017; --red-soft:#F6E5E7; --ok:#1D5E3A; --ok-soft:#E6F2EB;
   --font:'Hanken Grotesk', 'Helvetica Neue', Arial, sans-serif;
   color-scheme: light;
 }
@@ -486,3 +486,43 @@ header.top .navlink{font-size:17px;padding:8px 0}
 /* Footer-Logo immer gleich: rotes Zeichen mit weissem Kreuz, unabhängig von der Header-Variante */
 footer .logo-mark{background:var(--red)}
 footer .logo-mark path{fill:#FFFFFF}
+
+
+/* ===== Farbwelt im Stil grosser Schweizer Medienportale (Okt. 2026) =====
+   Fast weisser, leicht warmer Seitenhintergrund; Inhalte in weissen Boxen mit dünner Linie; tieferes Rot. */
+body{background:var(--page)}
+main.app > section,.soft{background:transparent}
+.hero-sec{background:transparent}
+.lcard,.pcard,.card,.entry,.filters,.search,.detail-side,.adrow,.msg,.empty,.table-wrap,.choice,.kv,.statbox{background:var(--bg);border:1px solid var(--line);border-radius:6px;box-shadow:none}
+.pcard{border-top:4px solid var(--red)}
+.lcard.is-prem{border-color:var(--red);box-shadow:inset 0 0 0 1px var(--red)}
+.lcard:hover,.pcard:hover,.card:hover{border-color:#C9C3B8;box-shadow:0 4px 14px rgba(40,30,20,.06)}
+.lcard.is-prem:hover{border-color:var(--red);box-shadow:inset 0 0 0 1px var(--red),0 4px 14px rgba(40,30,20,.06)}
+.lc-side,.card .facts,.pcard .facts{border-color:var(--line)}
+.entry[style]{border-top-width:4px!important}
+.trust{background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:22px 24px}
+.notice.neutral{background:var(--bg);border:1px solid var(--line)}
+.auth{background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:28px}
+.wizard{background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:28px}
+@media (max-width:820px){.auth,.wizard{padding:20px 16px}}
+.stabs{background:var(--bg-soft)}
+.filters{background:var(--bg)}
+.chip{background:var(--bg-soft);color:var(--ink-2)}
+.kv{gap:1px;background:var(--line)}
+.legal{background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:28px 32px;max-width:860px}
+header.top{border-bottom:1px solid var(--line)}
+footer{background:#1A1A1A}
+
+/* ===== Beta-Kennzeichnung ===== */
+.beta-tag{display:inline-flex;align-items:center;height:20px;padding:0 7px;border:1.5px solid var(--red);border-radius:4px;color:var(--red);font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;line-height:1;align-self:flex-start;margin:2px 0 0 4px;font-family:var(--font)}
+.beta-tag-inv{border-color:rgba(255,255,255,.7);color:#FFFFFF}
+html[data-header] header.top .beta-tag{border-color:rgba(255,255,255,.75);color:#FFFFFF}
+.ft-brand .beta-tag{align-self:center;margin:0 0 0 6px}
+.beta-bar{background:#1A1A1A;color:#E9E6E0;font-size:14px}
+.beta-bar .wrap{max-width:1520px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding-block:8px}
+.beta-bar .beta-tag{margin:0;align-self:center}
+.beta-bar a{color:#FFFFFF;font-weight:700;text-underline-offset:3px}
+.beta-bar a:hover{color:#FFFFFF;text-decoration-thickness:2px}
+.legal ul li{display:flex;gap:8px;align-items:flex-start}
+.legal ul li > svg{margin-top:5px;flex:none;color:var(--red)}
+@media (max-width:820px){.beta-bar{font-size:13px}.beta-bar .wrap{gap:6px 10px;padding-block:7px}header.top .beta-tag{height:18px;font-size:10px;padding:0 5px}}

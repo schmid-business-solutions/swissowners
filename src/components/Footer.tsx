@@ -10,6 +10,7 @@ export default function Footer() {
             <div className="ft-brand">
               <span className="logo-mark"><Cross size={17} /></span>
               <span className="ft-brand-text">Swiss<i>Owners</i></span>
+              <span className="beta-tag beta-tag-inv">Beta</span>
             </div>
             <p className="ft-lead">Der Marktplatz für Firmenanteile in der Schweiz.</p>
             <p>Auf SwissOwners inserieren Aktionärinnen, Gesellschafter und Firmen ihre Anteile an KMU und Startups. Investorinnen und Investoren finden passende Beteiligungen aus allen Branchen und Kantonen.</p>
@@ -33,6 +34,7 @@ export default function Footer() {
             <b>SwissOwners</b>
             <Link href="/#ablauf">So funktioniert&apos;s</Link>
             <Link href="/konto?tab=anfragen">Anfragen</Link>
+            <Link href="/beta">Beta-Version</Link>
             <a href="mailto:schmidmobile@gmail.com">Kontakt</a>
           </nav>
         </div>

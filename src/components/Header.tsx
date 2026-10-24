@@ -24,6 +24,7 @@ export default function Header({ userName, isAdmin, newRequests }: { userName: s
           <Link className="logo" href="/" aria-label="SwissOwners Startseite">
             <span className="logo-mark"><Cross size={21} /></span>
             <span className="logo-text">Swiss<i>Owners</i></span>
+            <span className="beta-tag" aria-label="Beta-Version">Beta</span>
           </Link>
           <nav className="main" aria-label="Hauptnavigation">
             {nav.map(([href, label]) => (

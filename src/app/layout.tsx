@@ -7,6 +7,7 @@ import "@fontsource/hanken-grotesk/latin-700.css";
 import "@fontsource/hanken-grotesk/latin-800.css";
 import "./globals.css";
 import Header from "@/components/Header";
+import BetaBar from "@/components/BetaBar";
 import Footer from "@/components/Footer";
 import HeaderPreview, { HEADER_PREVIEW_SCRIPT } from "@/components/HeaderPreview";
 import { getUser } from "@/lib/auth";
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
   icons: { icon: "/favicon.svg" },
 };
 
-export const viewport: Viewport = { width: "device-width", initialScale: 1, viewportFit: "cover", themeColor: "#D8000F" };
+export const viewport: Viewport = { width: "device-width", initialScale: 1, viewportFit: "cover", themeColor: "#AF001E" };
 
 async function unreadRequests(userId: number) {
   const [row] = await db
@@ -41,6 +42,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <script dangerouslySetInnerHTML={{ __html: HEADER_PREVIEW_SCRIPT }} />
       </head>
       <body>
+        <BetaBar />
         <Header userName={user ? `${user.firstName} ${user.lastName}` : null} isAdmin={user?.role === "admin"} newRequests={unread} />
         <main className="app">{children}</main>
         <Footer />
