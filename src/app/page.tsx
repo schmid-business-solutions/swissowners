@@ -36,11 +36,13 @@ export default async function HomePage() {
       </section>
 
       <section className="soft" style={{ paddingBlock: 28 }}>
-        <div className="wrap trust">
+        <div className="wrap">
+          <div className="trust">
           <div><Shield /><span><b>Geprüfte Angebote</b><span className="small muted">Abgleich mit dem Handelsregister vor der Freischaltung</span></span></div>
           <div><Lock size={26} color="var(--red)" /><span><b>Diskret und anonym</b><span className="small muted">Firmenname erst nach Vertraulichkeitserklärung</span></span></div>
           <div><Tag /><span><b>Fixe Gebühren</b><span className="small muted">Keine Provision auf Ihren Deal</span></span></div>
           <div><Home /><span><b>Startups und KMU</b><span className="small muted">An einem Ort, aus allen Branchen und Kantonen</span></span></div>
+          </div>
         </div>
       </section>
 
