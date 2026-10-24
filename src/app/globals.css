@@ -552,3 +552,6 @@ html[data-header] .avatar-out{background:rgba(255,255,255,.14);color:#FFFFFF;bor
 /* ===== Einheitliche Seitenbreite: Inhalt und Footer so breit wie der Header ===== */
 .wrap{max-width:1520px}
 .hero-c .hero-main{max-width:none}
+
+/* Startseite: Titel auf Desktop in zwei Zeilen */
+.hero-c .h1{max-width:1340px;font-size:clamp(38px,5vw,72px)}
