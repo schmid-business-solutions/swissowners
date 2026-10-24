@@ -32,7 +32,7 @@ export default function AgbPage() {
 
       <h2>6. Pakete, Preise, Laufzeit und Verlängerung</h2>
       <ul>
-        <li>Es gelten die bei Bestellung angezeigten Preise in CHF inklusive Mehrwertsteuer.</li>
+        <li>Es gelten die bei Bestellung angezeigten Preise in CHF. Es wird keine Mehrwertsteuer erhoben.</li>
         <li>Die erste Laufzeit beträgt 60 Tage ab Freischaltung. Danach verlängert sich das Paket automatisch um jeweils 30 Tage zum angezeigten Verlängerungspreis, bis es gekündigt, pausiert oder das Angebot als verkauft markiert wird. SwissOwners erinnert 5 Tage vor jeder Verlängerung per E-Mail.</li>
         <li>Die Kündigung ist jederzeit in «Mein Bereich» möglich und wirkt auf das Ende der laufenden Periode. Eine Pause ist bis zu 90 Tage möglich; während der Pause ist das Angebot offline und es wird nichts belastet.</li>
         <li>Das Startangebot ist kostenlos, läuft 60 Tage und endet ohne Paketwahl automatisch und kostenfrei.</li>

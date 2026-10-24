@@ -1,6 +1,6 @@
 /* Preismodell: Startangebot, danach drei Pakete.
    Erste Laufzeit 60 Tage, danach automatische Verlängerung um je 30 Tage bis Kündigung oder Pause.
-   Preise in CHF inkl. MWST. Hier zentral anpassen. */
+   Preise in CHF (keine MWST). Hier zentral anpassen. */
 
 export type PaidPlan = "basis" | "plus" | "premium";
 export type Plan = "start" | PaidPlan;

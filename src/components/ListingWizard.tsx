@@ -279,7 +279,6 @@ export default function ListingWizard({
                   <>
                     <div className="summary">
                       <span>Paket {plan.name}, erste 60 Tage</span><span>{chfFmt(plan.first)}</span>
-                      <span className="muted">inkl. MWST 8,1 %</span><span className="muted">{chfFmt(Math.round((plan.first / 1.081) * 0.081 * 20) / 20).replace(".", ",")}</span>
                       <span className="total">Total heute</span><span className="total">{chfFmt(plan.first)}</span>
                     </div>
                     <p className="small muted">Danach {chfFmt(plan.renewal)} alle 30 Tage, bis Sie kündigen oder pausieren. Bezahlung über Payrexx (TWINT, Karte, PostFinance u. a.).</p>

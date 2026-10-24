@@ -32,7 +32,7 @@ export default async function PricingPage() {
             </div>
           ))}
         </div>
-        <p className="small muted">Preise in CHF inkl. 8,1 % MWST. Bezahlung über Payrexx (TWINT, Kreditkarte, PostFinance u. a.).</p>
+        <p className="small muted">Preise in CHF. Bezahlung über Payrexx (TWINT, Kreditkarte, PostFinance u. a.).</p>
         <Link className="btn btn-red" href="/inserat-aufgeben" style={{ alignSelf: "flex-start" }}>Inserat aufgeben</Link>
       </div>
     </section>

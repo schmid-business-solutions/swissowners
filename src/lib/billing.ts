@@ -124,7 +124,7 @@ async function applyPayment(p: Payment, tokenTxId: number | null) {
       subject: `Zahlungsbestätigung ${listingNo(listing.id)}`,
       heading: "Vielen Dank für Ihre Zahlung",
       paragraphs: [
-        `Wir haben ${chf(p.amountRappen / 100)} für das Paket ${PLANS[plan].name} zu Ihrem Angebot «${listing.title}» erhalten (inkl. 8,1 % MWST).`,
+        `Wir haben ${chf(p.amountRappen / 100)} für das Paket ${PLANS[plan].name} zu Ihrem Angebot «${listing.title}» erhalten.`,
         p.kind === "initial"
           ? "Wir prüfen jetzt Ihre Angaben und den Handelsregistereintrag – in der Regel innerhalb eines Werktags. Die Laufzeit beginnt mit der Freischaltung."
           : `Das Paket verlängert sich danach automatisch um jeweils ${RENEWAL_DAYS} Tage für ${chf(PLANS[plan].renewal)}, bis Sie kündigen oder pausieren.`,
@@ -300,7 +300,7 @@ export async function runDaily() {
         await db.update(schema.subscriptions).set({ periodEnd: addDays(sub.periodEnd, RENEWAL_DAYS), remindedFor: null })
           .where(eq(schema.subscriptions.id, sub.id));
         await sendMail({ to: owner.email, subject: `Zahlungsbestätigung Verlängerung ${no}`, heading: "Ihr Paket wurde verlängert",
-          paragraphs: [`Wir haben ${chf(amount / 100)} (inkl. 8,1 % MWST) für weitere ${RENEWAL_DAYS} Tage belastet. «${listing.title}» bleibt bis ${date(addDays(sub.periodEnd, RENEWAL_DAYS))} online.`] });
+          paragraphs: [`Wir haben ${chf(amount / 100)} für weitere ${RENEWAL_DAYS} Tage belastet. «${listing.title}» bleibt bis ${date(addDays(sub.periodEnd, RENEWAL_DAYS))} online.`] });
         log.push(`${no}: verlängert`);
       } else {
         await db.update(schema.payments).set({ status: "failed" }).where(eq(schema.payments.id, ins.id));
