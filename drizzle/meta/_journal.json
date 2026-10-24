@@ -15,6 +15,13 @@
       "when": 1792689245189,
       "tag": "0001_social_login",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1792825738048,
+      "tag": "0002_sample_listings",
+      "breakpoints": true
     }
   ]
 }

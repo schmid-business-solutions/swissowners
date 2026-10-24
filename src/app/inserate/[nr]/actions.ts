@@ -16,6 +16,7 @@ export async function sendRequest(listingId: number, _: RequestState, fd: FormDa
   if (!user.emailVerifiedAt) return { error: "Bitte bestätigen Sie zuerst Ihre E-Mail-Adresse." };
   const listing = await getListing(listingId);
   if (!listing || listing.status !== "online") return { error: "Dieses Angebot ist nicht mehr verfügbar." };
+  if (listing.isSample) return { error: "Musterangebote nehmen keine Anfragen an." };
   if (listing.ownerId === user.id) return { error: "Das ist Ihr eigenes Angebot." };
   if (fd.get("nda") !== "on") return { error: "Bitte bestätigen Sie die Vertraulichkeitserklärung." };
   if (fd.get("share") !== "on") return { error: "Bitte bestätigen Sie die Weitergabe Ihrer Kontaktdaten." };

@@ -74,12 +74,13 @@ const planRankSql = sql`CASE ${L.plan} WHEN 'premium' THEN 3 WHEN 'plus' THEN 2 
 export const PAGE_SIZE = 12;
 
 export async function searchListings(f: Filters) {
-  const order =
+  // Echte Angebote stehen immer vor Musterangeboten
+  const order = [asc(L.isSample), ...(
     f.sort === "neu" ? [desc(L.publishedAt)]
     : f.sort === "betrag_auf" ? [asc(sql`${L.amount} IS NULL`), asc(L.amount)]
     : f.sort === "betrag_ab" ? [asc(sql`${L.amount} IS NULL`), desc(L.amount)]
     : f.sort === "views" ? [desc(L.views)]
-    : [desc(planRankSql), desc(L.publishedAt)];
+    : [desc(planRankSql), desc(L.publishedAt)])];
   const w = where(f);
   const [rows, [{ n }]] = await Promise.all([
     db.select().from(L).where(w).orderBy(...order).limit(PAGE_SIZE).offset((f.page - 1) * PAGE_SIZE),
@@ -102,11 +103,11 @@ export async function facets(f: Filters) {
 }
 
 export async function premiumListings(limit = 3) {
-  return db.select().from(L).where(and(isPublic, eq(L.plan, "premium"))).orderBy(sql`RAND()`).limit(limit);
+  return db.select().from(L).where(and(isPublic, eq(L.plan, "premium"))).orderBy(asc(L.isSample), sql`RAND()`).limit(limit);
 }
 
 export async function latestListings(limit = 6) {
-  return db.select().from(L).where(and(isPublic, or(isNull(L.plan), sql`${L.plan} <> 'premium'`))).orderBy(desc(L.publishedAt)).limit(limit);
+  return db.select().from(L).where(and(isPublic, or(isNull(L.plan), sql`${L.plan} <> 'premium'`))).orderBy(asc(L.isSample), desc(L.publishedAt)).limit(limit);
 }
 
 export async function countPublic() {

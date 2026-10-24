@@ -38,7 +38,7 @@ export function Art({ branche }: { branche: string }) {
   );
 }
 
-type CardData = Pick<Listing, "type" | "segment" | "title" | "branche" | "sub" | "kanton" | "legalForm" | "stake" | "amount" | "valuation" | "minTicket" | "revenueClass" | "phase" | "vinkuliert" | "vorkauf" | "companyInformed" | "shareClass" | "plan" | "description"> & { id?: number; publishedAt?: Date | null };
+type CardData = Pick<Listing, "type" | "segment" | "title" | "branche" | "sub" | "kanton" | "legalForm" | "stake" | "amount" | "valuation" | "minTicket" | "revenueClass" | "phase" | "vinkuliert" | "vorkauf" | "companyInformed" | "shareClass" | "plan" | "description"> & { id?: number; publishedAt?: Date | null; isSample?: boolean };
 
 export function facts(l: CardData): { f1: [string, string]; f2: [string, string] } {
   if (l.type === "sell") return { f1: ["Anteil", l.stake || "–"], f2: ["Preisvorstellung", chf(l.amount)] };
@@ -56,9 +56,10 @@ export function SegPill({ seg }: { seg: "kmu" | "startup" }) {
 export function Badges({ l, noPrem, short }: { l: CardData; noPrem?: boolean; short?: boolean }) {
   return (
     <>
+      {l.isSample && <span className="chip sample">Musterangebot</span>}
       {l.plan === "premium" && !noPrem && <span className="chip prem"><Star />Top-Angebot</span>}
-      <span className="chip ok"><Check />Verifiziert</span>
-      {l.type === "cap" ? <span className="chip ok">Firma inseriert selbst</span> : l.companyInformed ? <span className="chip ok">Firma informiert</span> : null}
+      {!l.isSample && <span className="chip ok"><Check />Verifiziert</span>}
+      {l.isSample ? null : l.type === "cap" ? <span className="chip ok">Firma inseriert selbst</span> : l.companyInformed ? <span className="chip ok">Firma informiert</span> : null}
       {!short && l.vinkuliert === "ja" && <span className="chip">Vinkuliert</span>}
       {!short && l.vorkauf === "ja" && <span className="chip">Vorkaufsrecht</span>}
       {!short && l.legalForm === "GmbH" && <span className="chip">Zustimmung GV nötig</span>}
@@ -71,13 +72,14 @@ export function Badges({ l, noPrem, short }: { l: CardData; noPrem?: boolean; sh
 export function RowCard({ l }: { l: Listing }) {
   const { f1, f2 } = facts(l);
   const big = l.type === "sell" ? f2 : f1, small = l.type === "sell" ? f1 : f2;
-  const cls = "lcard" + (l.plan === "premium" ? " is-prem" : l.plan === "plus" || l.plan === "start" ? " is-plus" : "");
+  const cls = "lcard" + (l.plan === "premium" ? " is-prem" : l.plan === "plus" || l.plan === "start" ? " is-plus" : "") + (l.isSample ? " is-sample" : "");
   return (
     <Link className={cls} href={`/inserate/${listingNo(l.id)}`} aria-label={`Angebot ansehen: ${l.title}`}>
       <span className="lc-art">
         <Art branche={l.branche} />
         <span className="lc-br">{l.branche}</span>
         {l.plan === "premium" && <span className="lc-prem"><Star />Top-Angebot</span>}
+        {l.isSample && <span className="lc-sample">Musterangebot</span>}
       </span>
       <span className="lc-main">
         <span className="lc-top">

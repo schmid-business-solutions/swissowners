@@ -26,6 +26,7 @@ export async function generateMetadata({ params }: { params: Promise<{ nr: strin
   const id = idFromNo((await params).nr);
   const l = id ? await getListing(id) : undefined;
   if (!l || l.status !== "online") return { title: "Angebot", robots: { index: false } };
+  if (l.isSample) return { title: `Musterangebot: ${l.title}`, robots: { index: false } };
   return { title: l.title, description: l.description.slice(0, 160) };
 }
 
@@ -59,7 +60,7 @@ export default async function DetailPage({ params }: { params: Promise<{ nr: str
     ["Mitarbeitende", l.employees != null ? String(l.employees) : "–"],
     ["Umsatzklasse", l.revenueClass], f1, f2,
   ];
-  const mode = isOwner ? "owner" : !user ? "anon" : !user.emailVerifiedAt ? "unverified" : req ? "sent" : "ready";
+  const mode = l.isSample ? "sample" : isOwner ? "owner" : !user ? "anon" : !user.emailVerifiedAt ? "unverified" : req ? "sent" : "ready";
 
   return (
     <section style={{ paddingBlock: 28 }}>
@@ -80,6 +81,9 @@ export default async function DetailPage({ params }: { params: Promise<{ nr: str
                 <span className="small muted">Angebots-Nr. {no} · {ago(l.publishedAt)} · {l.views} Aufrufe</span>
               </div>
               <h1 className="h2">{l.title}</h1>
+              {l.isSample && (
+                <div className="sample-note"><Info /><span><b>Musterangebot.</b> Dieses Angebot ist ein fiktives Beispiel und zeigt, wie Angebote auf SwissOwners aussehen. Firma und Angaben sind erfunden; Anfragen sind nicht möglich.</span></div>
+              )}
               <div className="badges row" style={{ gap: 6 }}><Badges l={l} /></div>
             </div>
             <div className="kv">{kv.map(([k, v]) => <div key={k}><div className="fact-l">{k}</div><div className="fact-v">{v}</div></div>)}</div>
@@ -108,7 +112,7 @@ export default async function DetailPage({ params }: { params: Promise<{ nr: str
               <span className="small muted">{small[0]}: {small[1]}</span>
             </div>
             <Contact listingId={l.id} no={no} mode={mode} userName={user ? `${user.firstName} ${user.lastName}` : ""} userPhone={user?.phone ?? ""} saved={Boolean(saved)} />
-            <p className="small muted">Geprüft am {date(l.publishedAt)}. Keine Provision – Preis und Vertrag regeln Sie direkt mit dem Inserenten.</p>
+            <p className="small muted">{l.isSample ? "Fiktives Beispiel zur Veranschaulichung." : `Geprüft am ${date(l.publishedAt)}.`} Keine Provision – Preis und Vertrag regeln Sie direkt mit dem Inserenten.</p>
           </aside>
         </div>
       </div>

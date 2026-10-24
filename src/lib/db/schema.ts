@@ -77,6 +77,7 @@ export const listings = mysqlTable("listings", {
   vinkuliert: mysqlEnum("vinkuliert", ["ja", "nein", "unklar"]).notNull(),
   vorkauf: mysqlEnum("vorkauf", ["ja", "nein", "unklar"]).notNull(),
   companyInformed: boolean("company_informed").notNull().default(false),
+  isSample: boolean("is_sample").notNull().default(false), // Musterangebot (fiktiv), wird nach und nach durch echte Angebote ersetzt
   views: int("views").notNull().default(0),
   rejectionReason: text("rejection_reason"),
   publishedAt: datetime("published_at"),

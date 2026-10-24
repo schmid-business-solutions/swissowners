@@ -6,7 +6,7 @@ import { Check, Close, Heart } from "@/components/Icons";
 import { sendRequest, toggleSave } from "./actions";
 
 type Props = {
-  listingId: number; no: string; mode: "anon" | "unverified" | "owner" | "sent" | "ready";
+  listingId: number; no: string; mode: "anon" | "unverified" | "owner" | "sent" | "ready" | "sample";
   userName: string; userPhone: string; saved: boolean;
 };
 
@@ -38,7 +38,12 @@ export default function Contact({ listingId, no, mode, userName, userPhone, save
 
   return (
     <>
-      {mode === "sent" ? (
+      {mode === "sample" ? (
+        <>
+          <span className="btn btn-line btn-block" aria-disabled="true" style={{ cursor: "default", opacity: 0.6 }}>Musterangebot – keine Anfrage möglich</span>
+          <Link className="btn btn-red btn-block" href="/inserat-aufgeben">Eigenes Angebot erfassen</Link>
+        </>
+      ) : mode === "sent" ? (
         <>
           <div className="notice" style={{ background: "var(--ok-soft)" }}><Check size={22} /><span><b>Anfrage gesendet.</b><br /><span className="small">Der Inserent antwortet Ihnen direkt per E-Mail.</span></span></div>
           <Link className="btn btn-line btn-block" href="/konto?tab=anfragen">Zu meinen Anfragen</Link>
@@ -52,7 +57,7 @@ export default function Contact({ listingId, no, mode, userName, userPhone, save
       ) : (
         <button className="btn btn-red btn-block" onClick={() => { setOpen(true); setStep(0); }}>Details anfragen</button>
       )}
-      {mode !== "owner" && (
+      {mode !== "owner" && mode !== "sample" && (
         <button className="btn btn-ghost btn-block" onClick={save} disabled={pendingSave} aria-pressed={saved}>
           <Heart />{saved ? "Gemerkt" : "Angebot merken"}
         </button>

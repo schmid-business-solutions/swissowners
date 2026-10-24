@@ -1,0 +1,1 @@
+ALTER TABLE `listings` ADD `is_sample` boolean DEFAULT false NOT NULL;

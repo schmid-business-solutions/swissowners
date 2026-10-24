@@ -22,7 +22,7 @@ export async function startSlotsLeft(): Promise<number> {
   const [row] = await db
     .select({ n: sql<number>`count(*)` })
     .from(schema.listings)
-    .where(and(eq(schema.listings.plan, "start"), notInArray(schema.listings.status, ["draft", "rejected"])));
+    .where(and(eq(schema.listings.plan, "start"), eq(schema.listings.isSample, false), notInArray(schema.listings.status, ["draft", "rejected"])));
   return Math.max(0, slots - Number(row?.n ?? 0));
 }
 
