@@ -19,7 +19,6 @@ export const metadata: Metadata = {
   title: { default: "SwissOwners – Schweizer Firmenanteile", template: "%s · SwissOwners" },
   description: "Der Marktplatz für nicht kotierte Firmenanteile in der Schweiz. Anteile verkaufen, Kapital suchen, Beteiligungen finden – direkt verhandeln, ohne Provision.",
   openGraph: { siteName: "SwissOwners", locale: "de_CH", type: "website" },
-  icons: { icon: "/favicon.svg" },
 };
 
 export const viewport: Viewport = { width: "device-width", initialScale: 1, viewportFit: "cover", themeColor: "#AF001E" };
