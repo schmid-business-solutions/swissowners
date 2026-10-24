@@ -9,7 +9,8 @@ import {
 } from "./plans";
 import * as px from "./payrexx";
 import { addDays, appUrl, chf, date, listingNo } from "./format";
-import { notifyAdmin, sendMail } from "./mail";
+import { sendMail } from "./mail";
+import { notifyAdminListing } from "./admin-mail";
 
 const DAY = 86_400_000;
 type Affected = { affectedRows: number };
@@ -98,7 +99,7 @@ async function applyPayment(p: Payment, tokenTxId: number | null) {
     await db.update(schema.subscriptions).set({ plan, payrexxTokenTxId: token }).where(eq(schema.subscriptions.id, sub.id));
     await db.update(schema.listings).set({ plan, status: "in_review" })
       .where(and(eq(schema.listings.id, listing.id), eq(schema.listings.status, "pending_payment")));
-    await notifyAdmin(`Neues Angebot zur Prüfung: ${listingNo(listing.id)}`, [listing.title, `Paket ${PLANS[plan].name}, bezahlt.`], `${appUrl()}/admin/inserate/${listing.id}`);
+    await notifyAdminListing({ ...listing, plan }, `Neues Angebot zur Prüfung: ${listingNo(listing.id)}`, `bezahlt (${chf(p.amountRappen / 100)})`);
   } else if (p.kind === "upgrade") {
     const from = sub.periodEnd && sub.periodEnd > now && sub.status === "active" ? sub.periodEnd : now;
     await db.update(schema.subscriptions).set({

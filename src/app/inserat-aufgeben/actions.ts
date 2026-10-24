@@ -6,7 +6,8 @@ import { getUser } from "@/lib/auth";
 import { listingInput, toListingValues } from "@/lib/listings";
 import { startPayment, startSlotsLeft } from "@/lib/billing";
 import { isConfigured } from "@/lib/payrexx";
-import { notifyAdmin, sendMail } from "@/lib/mail";
+import { sendMail } from "@/lib/mail";
+import { notifyAdminListing } from "@/lib/admin-mail";
 import { appUrl, listingNo } from "@/lib/format";
 import { PAID_PLANS, type PaidPlan } from "@/lib/plans";
 import type { SubmitResult, WizardData } from "@/lib/wizard";
@@ -48,7 +49,7 @@ export async function createListing(data: WizardData): Promise<SubmitResult> {
   const [listing] = await db.select().from(schema.listings).where(eq(schema.listings.id, ins.id)).limit(1);
 
   if (plan === "start") {
-    await notifyAdmin(`Neues Angebot zur Prüfung: ${listingNo(ins.id)}`, [listing.title, "Startangebot (gratis)."], `${appUrl()}/admin/inserate/${ins.id}`);
+    await notifyAdminListing(listing, `Neues Angebot zur Prüfung: ${listingNo(ins.id)}`, "gratis");
     await sendMail({
       to: user.email,
       subject: `Angebot eingereicht: ${listingNo(ins.id)}`,
@@ -88,7 +89,8 @@ export async function updateListing(id: number, data: WizardData): Promise<Submi
   const status = l.status === "online" || l.status === "rejected" ? "in_review" : l.status;
   await db.update(schema.listings).set({ ...v.values!, type: l.type, status, rejectionReason: null }).where(eq(schema.listings.id, id));
   if (resubmit && status === "in_review") {
-    await notifyAdmin(`Angebot geändert, bitte prüfen: ${listingNo(id)}`, [v.values!.title], `${appUrl()}/admin/inserate/${id}`);
+    const [fresh] = await db.select().from(schema.listings).where(eq(schema.listings.id, id)).limit(1);
+    if (fresh) await notifyAdminListing(fresh, `Angebot geändert, bitte prüfen: ${listingNo(id)}`, l.status === "rejected" ? "nach Ablehnung neu eingereicht" : "Änderung an einem Online-Angebot");
   }
   redirect("/konto?ok=gespeichert");
 }

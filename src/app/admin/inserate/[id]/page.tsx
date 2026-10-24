@@ -11,8 +11,8 @@ export const metadata = { title: "Angebot prüfen", robots: { index: false } };
 export const dynamic = "force-dynamic";
 
 export default async function AdminListing({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ err?: string }> }) {
-  await requireAdmin();
   const id = Number((await params).id);
+  await requireAdmin(`/admin/inserate/${id}`);
   const { err } = await searchParams;
   const [row] = await db.select({ l: schema.listings, owner: schema.users }).from(schema.listings)
     .innerJoin(schema.users, eq(schema.users.id, schema.listings.ownerId)).where(eq(schema.listings.id, id)).limit(1);

@@ -21,11 +21,19 @@ function getTransport() {
 const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]!);
 
 /** Schlichtes E-Mail-Layout im SwissOwners-Stil. paragraphs: Text-Absätze (werden escaped). */
-function layout(heading: string, paragraphs: string[], cta?: { label: string; url: string }) {
-  const body = paragraphs.map((p) => `<p style="margin:0 0 14px;line-height:1.5">${esc(p).replace(/\n/g, "<br>")}</p>`).join("");
+export type Fact = [label: string, value: string];
+
+function factsTable(facts: Fact[]) {
+  const rows = facts.map(([k, v]) => `<tr><td style="padding:7px 12px 7px 0;color:#66625A;font-size:13px;vertical-align:top;white-space:nowrap;border-bottom:1px solid #EEEBE5">${esc(k)}</td><td style="padding:7px 0;font-size:14px;vertical-align:top;border-bottom:1px solid #EEEBE5">${esc(v).replace(/\n/g, "<br>")}</td></tr>`).join("");
+  return `<table role="presentation" cellpadding="0" cellspacing="0" style="width:100%;border-collapse:collapse;margin:4px 0 18px">${rows}</table>`;
+}
+
+function layout(heading: string, paragraphs: string[], cta?: { label: string; url: string }, facts?: Fact[], after?: string[]) {
+  const para = (p: string) => `<p style="margin:0 0 14px;line-height:1.5">${esc(p).replace(/\n/g, "<br>")}</p>`;
   const button = cta
     ? `<p style="margin:22px 0"><a href="${esc(cta.url)}" style="background:#AF001E;color:#fff;text-decoration:none;font-weight:700;padding:12px 20px;border-radius:4px;display:inline-block">${esc(cta.label)}</a></p>`
     : "";
+  const body = paragraphs.map(para).join("") + (facts?.length ? button + factsTable(facts) : "") + (after ?? []).map(para).join("");
   return `<!doctype html><html><body style="margin:0;background:#F5F3EF;font-family:Helvetica,Arial,sans-serif;color:#33363A">
 <div style="max-width:560px;margin:0 auto;background:#fff;border-top:4px solid #AF001E">
 <div style="padding:20px 26px;border-bottom:1px solid #E1DDD5;font-weight:800;font-size:22px;color:#AF001E;letter-spacing:-0.5px">Swiss<span style="font-weight:600">Owners</span></div>
@@ -37,8 +45,11 @@ function layout(heading: string, paragraphs: string[], cta?: { label: string; ur
 export async function sendMail(opts: {
   to: string; subject: string; heading: string; paragraphs: string[];
   cta?: { label: string; url: string }; replyTo?: string;
+  /** Optionale Tabelle mit Eckdaten (nach den Absätzen) und Absätze danach */
+  facts?: Fact[]; after?: string[];
 }) {
-  const text = [opts.heading, "", ...opts.paragraphs, ...(opts.cta ? ["", `${opts.cta.label}: ${opts.cta.url}`] : [])].join("\n\n");
+  const factText = opts.facts?.length ? [opts.facts.map(([k, v]) => `${k}: ${v}`).join("\n")] : [];
+  const text = [opts.heading, "", ...opts.paragraphs, ...factText, ...(opts.after ?? []), ...(opts.cta ? ["", `${opts.cta.label}: ${opts.cta.url}`] : [])].join("\n\n");
   const t = getTransport();
   if (!t) {
     console.log(`[mail:dev] An ${opts.to} · ${opts.subject}\n${text}\n`);
@@ -51,15 +62,19 @@ export async function sendMail(opts: {
       replyTo: opts.replyTo,
       subject: opts.subject,
       text,
-      html: layout(opts.heading, opts.paragraphs, opts.cta),
+      html: layout(opts.heading, opts.paragraphs, opts.cta, opts.facts, opts.after),
     });
   } catch (err) {
     console.error("[mail] Versand fehlgeschlagen", opts.to, opts.subject, err);
   }
 }
 
-export async function notifyAdmin(subject: string, paragraphs: string[], url?: string) {
+export async function notifyAdmin(subject: string, paragraphs: string[], url?: string, extra?: { facts?: Fact[]; after?: string[]; ctaLabel?: string; replyTo?: string }) {
   const to = process.env.ADMIN_NOTIFY_EMAIL;
   if (!to || !envSet("ADMIN_NOTIFY_EMAIL")) return;
-  await sendMail({ to, subject: `[SwissOwners] ${subject}`, heading: subject, paragraphs, cta: url ? { label: "Öffnen", url } : undefined });
+  await sendMail({
+    to, subject: `[SwissOwners] ${subject}`, heading: subject, paragraphs,
+    cta: url ? { label: extra?.ctaLabel ?? "Öffnen", url } : undefined,
+    facts: extra?.facts, after: extra?.after, replyTo: extra?.replyTo,
+  });
 }

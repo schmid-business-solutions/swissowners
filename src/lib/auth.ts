@@ -65,8 +65,8 @@ export async function requireVerifiedUser(next = "/konto"): Promise<User> {
   return u;
 }
 
-export async function requireAdmin(): Promise<User> {
-  const u = await requireUser("/admin");
+export async function requireAdmin(next = "/admin"): Promise<User> {
+  const u = await requireUser(next);
   if (u.role !== "admin") redirect("/");
   return u;
 }
