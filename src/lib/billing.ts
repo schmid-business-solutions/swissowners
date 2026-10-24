@@ -128,7 +128,6 @@ async function applyPayment(p: Payment, tokenTxId: number | null) {
         p.kind === "initial"
           ? "Wir prüfen jetzt Ihre Angaben und den Handelsregistereintrag – in der Regel innerhalb eines Werktags. Die Laufzeit beginnt mit der Freischaltung."
           : `Das Paket verlängert sich danach automatisch um jeweils ${RENEWAL_DAYS} Tage für ${chf(PLANS[plan].renewal)}, bis Sie kündigen oder pausieren.`,
-        "SCHMID Business Solutions, Steffisburg · UID CHE-199.237.91",
       ],
       cta: { label: "Zu meinen Angeboten", url: `${appUrl()}/konto` },
     });

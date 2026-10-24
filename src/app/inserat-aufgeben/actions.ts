@@ -6,7 +6,7 @@ import { getUser } from "@/lib/auth";
 import { listingInput, toListingValues } from "@/lib/listings";
 import { startPayment, startSlotsLeft } from "@/lib/billing";
 import { isConfigured } from "@/lib/payrexx";
-import { notifyAdmin } from "@/lib/mail";
+import { notifyAdmin, sendMail } from "@/lib/mail";
 import { appUrl, listingNo } from "@/lib/format";
 import { PAID_PLANS, type PaidPlan } from "@/lib/plans";
 import type { SubmitResult, WizardData } from "@/lib/wizard";
@@ -49,6 +49,19 @@ export async function createListing(data: WizardData): Promise<SubmitResult> {
 
   if (plan === "start") {
     await notifyAdmin(`Neues Angebot zur Prüfung: ${listingNo(ins.id)}`, [listing.title, "Startangebot (gratis)."], `${appUrl()}/admin/inserate/${ins.id}`);
+    await sendMail({
+      to: user.email,
+      subject: `Angebot eingereicht: ${listingNo(ins.id)}`,
+      heading: "Vielen Dank – Ihr Angebot ist eingereicht",
+      paragraphs: [
+        `Guten Tag ${user.firstName} ${user.lastName}`,
+        `Wir haben Ihr Angebot «${listing.title}» (${listingNo(ins.id)}) erhalten.`,
+        "Wir prüfen jetzt Ihre Angaben und den Handelsregistereintrag – in der Regel innerhalb eines Werktags. Sobald das Angebot freigeschaltet ist, erhalten Sie eine weitere E-Mail.",
+        "Ihr Startangebot ist kostenlos und läuft 60 Tage ab Freischaltung. Bis dahin können Sie das Angebot in «Mein Bereich» jederzeit ansehen und anpassen.",
+        "Freundliche Grüsse\nIhr SwissOwners-Team",
+      ],
+      cta: { label: "Zu meinen Angeboten", url: `${appUrl()}/konto` },
+    });
     redirect(`/inserat-aufgeben/danke?nr=${listingNo(ins.id)}`);
   }
   let link: string;
