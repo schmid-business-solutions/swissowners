@@ -52,7 +52,10 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
       <div className="wrap stack" style={{ gap: 22 }}>
         <div className="row" style={{ justifyContent: "space-between", gap: 12 }}>
           <h1 className="h2">Admin</h1>
-          <Link className="btn btn-line" href="/admin/pruefung">Partner und Verwaltungsräte prüfen</Link>
+          <div className="row" style={{ gap: 8 }}>
+            <Link className="btn btn-line" href="/admin/kontakt">Kontaktanfragen</Link>
+            <Link className="btn btn-line" href="/admin/pruefung">Partner und Verwaltungsräte prüfen</Link>
+          </div>
         </div>
         {ok && <p className="flash ok">{OK_MSG[ok] ?? "Erledigt."}</p>}
         <div className="admin-grid">

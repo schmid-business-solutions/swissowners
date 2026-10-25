@@ -271,6 +271,24 @@ export const appFlags = mysqlTable("app_flags", {
   createdAt: now(),
 });
 
+/** Nachrichten aus dem Kontaktformular (/kontakt) */
+export const contactMessages = mysqlTable("contact_messages", {
+  id: int("id").autoincrement().primaryKey(),
+  topic: varchar("topic", { length: 30 }).notNull(),
+  name: varchar("name", { length: 160 }).notNull(),
+  email: varchar("email", { length: 255 }).notNull(),
+  phone: varchar("phone", { length: 40 }),
+  company: varchar("company", { length: 160 }),
+  subject: varchar("subject", { length: 200 }).notNull(),
+  message: text("message").notNull(),
+  details: text("details"), // JSON mit den Zusatzfeldern des Themas
+  userId: int("user_id").references(() => users.id, { onDelete: "set null" }),
+  ip: varchar("ip", { length: 64 }),
+  status: mysqlEnum("status", ["new", "done"]).notNull().default("new"),
+  doneAt: datetime("done_at"),
+  createdAt: now(),
+}, (t) => [index("contact_status_idx").on(t.status, t.createdAt)]);
+
 export type User = typeof users.$inferSelect;
 export type Listing = typeof listings.$inferSelect;
 export type Subscription = typeof subscriptions.$inferSelect;
@@ -279,3 +297,4 @@ export type Org = typeof orgs.$inferSelect;
 export type BoardProfile = typeof boardProfiles.$inferSelect;
 export type BoardMandate = typeof boardMandates.$inferSelect;
 export type Inquiry = typeof inquiries.$inferSelect;
+export type ContactMessage = typeof contactMessages.$inferSelect;

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BETA_LAUNCH, BETA_START, BETA_UNTIL, FEEDBACK_EMAIL } from "@/lib/beta";
+import { BETA_LAUNCH, BETA_START, BETA_UNTIL } from "@/lib/beta";
 import { Check, Info } from "@/components/Icons";
 
 export const metadata = {
@@ -37,7 +37,7 @@ export default function BetaPage() {
           <h2>Ihre Meinung zählt</h2>
           <p>Ist Ihnen etwas aufgefallen, fehlt eine Funktion oder hat etwas nicht funktioniert? Schreiben Sie uns – jede Rückmeldung hilft, SwissOwners besser zu machen.</p>
           <div className="row" style={{ gap: 10, marginTop: 6 }}>
-            <a className="btn btn-red" href={`mailto:${FEEDBACK_EMAIL}?subject=${encodeURIComponent("Feedback zur Beta-Version von SwissOwners")}`}>Feedback senden</a>
+            <a className="btn btn-red" href="/kontakt?thema=feedback">Feedback senden</a>
             <Link className="btn btn-line" href="/inserate">Angebote ansehen</Link>
           </div>
         </article>

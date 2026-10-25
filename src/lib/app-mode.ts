@@ -4,7 +4,7 @@
    - Start durch die App (Referrer android-app://ch.swissowners.app, z. B. in der Testversion mit Adressleiste).
    Einmal erkannt, merkt sich der Tab den Modus in sessionStorage (gilt nur für diesen Tab, nicht für den Browser).
    Ist niemand angemeldet, geht es in der App zuerst zu Intro und Anmeldung (/app). Läuft im <head> vor dem Zeichnen. */
-export const APP_PUBLIC = ["/app", "/login", "/registrieren", "/passwort-vergessen", "/passwort-neu", "/bestaetigen", "/agb", "/datenschutz", "/impressum"];
+export const APP_PUBLIC = ["/app", "/login", "/registrieren", "/passwort-vergessen", "/passwort-neu", "/bestaetigen", "/agb", "/datenschutz", "/impressum", "/kontakt"];
 
 export const APP_MODE_SCRIPT = `(function(){try{
 var d=document.documentElement,s=window.sessionStorage,k="swo_app";
