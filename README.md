@@ -40,8 +40,8 @@ Ohne `SMTP_HOST` werden E-Mails in der Konsole ausgegeben (inkl. Bestätigungsli
 hPanel → **Datenbanken → MySQL-Datenbanken** → neue Datenbank und Benutzer erstellen. Daraus die `DATABASE_URL` bilden:
 `mysql://BENUTZER:PASSWORT@HOST:3306/DATENBANK` (HOST ist meist `localhost`; sonst steht der Hostname im hPanel).
 
-### 2. E-Mail-Versand über Gmail
-Versand über `schmidmobile@gmail.com`: SMTP `smtp.gmail.com`, Port 465. Als `SMTP_PASS` ein **Google-App-Passwort** verwenden (Google-Konto → Sicherheit → Bestätigung in zwei Schritten aktivieren → App-Passwörter), nicht das normale Gmail-Passwort. Gmail erlaubt rund 500 E-Mails pro Tag.
+### 2. E-Mail-Versand
+Versand über `office@schmidbusiness.com`: SMTP-Server und Port des E-Mail-Anbieters eintragen (bei Google Workspace `smtp.gmail.com`, Port 465, mit **App-Passwort**: Google-Konto → Sicherheit → Bestätigung in zwei Schritten → App-Passwörter). Absender (`MAIL_FROM`) und `SMTP_USER` sollten dieselbe Adresse sein.
 
 ### 3. Web-App aus GitHub erstellen
 hPanel → **Websites → Website erstellen → Web App → Import Git Repository** → Repo `schmid-business-solutions/swissowners`, Branch `main` wählen.
