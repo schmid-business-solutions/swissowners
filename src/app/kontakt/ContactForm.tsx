@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useActionState, useEffect, useMemo, useRef, useState } from "react";
 import { Check } from "@/components/Icons";
-import { CONTACT_GROUPS, CONTACT_TOPICS, topicById, type ExtraField } from "@/lib/contact";
+import { CONTACT_GROUPS, CONTACT_TOPICS, MAX_TOPICS, mergeTopics, parseTopics, type ExtraField } from "@/lib/contact";
 import { sendContact } from "./actions";
 
 const ICON: Record<string, React.ReactNode> = {
@@ -73,19 +73,24 @@ function Extra({ f }: { f: ExtraField }) {
 }
 
 export default function ContactForm({ initialTopic, defaults }: { initialTopic?: string; defaults: { name: string; email: string; phone: string } }) {
-  const [topicId, setTopicId] = useState(topicById(initialTopic ?? "")?.id ?? "");
-  const topic = useMemo(() => topicById(topicId), [topicId]);
+  const [ids, setIds] = useState<string[]>(() => parseTopics(initialTopic).map((t) => t.id));
+  const [limitHit, setLimitHit] = useState(false);
+  const chosen = useMemo(() => parseTopics(ids), [ids]);
+  const m = useMemo(() => mergeTopics(chosen), [chosen]);
   const [state, action, pending] = useActionState(sendContact, undefined);
   const [started] = useState(() => Date.now());
   const formRef = useRef<HTMLDivElement>(null);
   const doneRef = useRef<HTMLDivElement>(null);
 
-  const pick = (id: string) => {
-    setTopicId(id);
+  const toggle = (id: string) => {
+    const on = ids.includes(id);
+    if (!on && ids.length >= MAX_TOPICS) { setLimitHit(true); return; }
+    setLimitHit(false);
+    const next = on ? ids.filter((x) => x !== id) : [...ids, id];
+    setIds(next);
     const url = new URL(window.location.href);
-    url.searchParams.set("thema", id);
+    if (next.length) url.searchParams.set("thema", next.join(",")); else url.searchParams.delete("thema");
     window.history.replaceState(null, "", url);
-    requestAnimationFrame(() => formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }));
   };
   useEffect(() => { if (state?.ok) doneRef.current?.scrollIntoView({ behavior: "smooth", block: "center" }); }, [state]);
 
@@ -107,13 +112,16 @@ export default function ContactForm({ initialTopic, defaults }: { initialTopic?:
   return (
     <div className="stack" style={{ gap: 28 }}>
       <div className="stack" style={{ gap: 22 }}>
-        <h2 className="h3 contact-step"><span>1</span>Worum geht es?</h2>
+        <div className="stack" style={{ gap: 4 }}>
+          <h2 className="h3 contact-step"><span>1</span>Worum geht es?</h2>
+          <p className="small muted contact-sub">Wählen Sie 1 bis {MAX_TOPICS} Themen.</p>
+        </div>
         {CONTACT_GROUPS.map((g) => (
           <div key={g.id} className="stack" style={{ gap: 10 }}>
             <p className="contact-group">{g.label}</p>
             <div className="topic-grid">
               {CONTACT_TOPICS.filter((t) => t.group === g.id).map((t) => (
-                <button key={t.id} type="button" className="topic" aria-pressed={t.id === topicId} onClick={() => pick(t.id)}>
+                <button key={t.id} type="button" className="topic" aria-pressed={ids.includes(t.id)} onClick={() => toggle(t.id)} data-full={ids.length >= MAX_TOPICS ? "1" : undefined}>
                   <span className="topic-ic"><TopicIcon name={t.icon} /></span>
                   <span className="stack" style={{ gap: 2, minWidth: 0 }}>
                     <b>{t.label}</b>
@@ -124,35 +132,52 @@ export default function ContactForm({ initialTopic, defaults }: { initialTopic?:
             </div>
           </div>
         ))}
+        <div className={`topic-status${ids.length ? " on" : ""}`} aria-live="polite">
+          {ids.length === 0 ? <span className="small muted">Noch kein Thema gewählt.</span> : (
+            <>
+              <span className="small"><b>{ids.length} von {MAX_TOPICS}</b> gewählt{limitHit || ids.length >= MAX_TOPICS ? " – maximal erreicht. Zum Wechseln ein Thema abwählen." : ""}</span>
+              <button type="button" className="btn btn-red topic-next" onClick={() => formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })}>Weiter zum Formular</button>
+            </>
+          )}
+        </div>
       </div>
 
       <div ref={formRef} style={{ scrollMarginTop: 120 }}>
-        {!topic ? (
-          <div className="notice neutral contact-hint"><span className="small">Wählen Sie oben ein Thema – danach erscheint das passende Formular.</span></div>
+        {chosen.length === 0 ? (
+          <div className="notice neutral contact-hint"><span className="small">Wählen Sie oben 1 bis {MAX_TOPICS} Themen – danach erscheint das passende Formular.</span></div>
         ) : (
-          <form action={action} className="contact-form stack" key={topic.id}>
-            <h2 className="h3 contact-step"><span>2</span>{topic.label}</h2>
-            <input type="hidden" name="topic" value={topic.id} />
+          <form action={action} className="contact-form stack">
+            <div className="stack" style={{ gap: 8 }}>
+              <h2 className="h3 contact-step"><span>2</span>Ihre Nachricht</h2>
+              <div className="topic-tags">
+                {chosen.map((t) => (
+                  <button key={t.id} type="button" className="topic-tag" onClick={() => toggle(t.id)} aria-label={`${t.label} entfernen`}>
+                    {t.label}<span aria-hidden="true">×</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+            {chosen.map((t) => <input key={t.id} type="hidden" name="topic" value={t.id} />)}
             <input type="hidden" name="t" value={started} />
             <div className="hp" aria-hidden="true"><label>Fax<input name="fax" tabIndex={-1} autoComplete="off" /></label></div>
 
-            {topic.note && (
-              <div className="notice neutral"><span className="small">{topic.note.text} <Link href={topic.note.href}>{topic.note.link}</Link></span></div>
-            )}
+            {m.notes.map((n) => (
+              <div key={n.href} className="notice neutral"><span className="small">{n.text} <Link href={n.href}>{n.link}</Link></span></div>
+            ))}
 
             <div className="form-grid">
               <label className="field">Name<input name="name" required minLength={2} maxLength={160} autoComplete="name" defaultValue={defaults.name} /></label>
               <label className="field">E-Mail<input name="email" type="email" required maxLength={255} autoComplete="email" defaultValue={defaults.email} /></label>
               <label className="field"><span>Telefon<span className="opt"> (optional)</span></span><input name="phone" type="tel" maxLength={40} autoComplete="tel" defaultValue={defaults.phone} /></label>
-              <label className="field"><span>{topic.id === "presse" ? "Medium" : "Firma"}{!topic.companyRequired && <span className="opt"> (optional)</span>}</span>
-                <input name="company" required={topic.companyRequired} maxLength={160} autoComplete="organization" />
+              <label className="field"><span>{m.press ? "Firma oder Medium" : "Firma"}{!m.companyRequired && <span className="opt"> (optional)</span>}</span>
+                <input name="company" required={m.companyRequired} maxLength={160} autoComplete="organization" />
               </label>
-              {topic.extra?.map((f) => <div key={f.name} className={f.type === "rating" ? "span-2" : ""}><Extra f={f} /></div>)}
+              {m.extra.map((f) => <div key={f.name} className={f.type === "rating" ? "span-2" : ""}><Extra f={f} /></div>)}
             </div>
 
-            <label className="field"><span>Betreff<span className="opt"> (optional)</span></span><input name="subject" maxLength={200} placeholder={topic.label} /></label>
+            <label className="field"><span>Betreff<span className="opt"> (optional)</span></span><input name="subject" maxLength={200} placeholder={m.label} /></label>
             <label className="field">Nachricht
-              <textarea name="message" required minLength={20} maxLength={5000} rows={7} placeholder={topic.placeholder} />
+              <textarea name="message" required minLength={20} maxLength={5000} rows={7} placeholder={m.placeholder} />
             </label>
 
             <label className="check"><input type="checkbox" name="privacy" required />

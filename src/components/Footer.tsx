@@ -40,8 +40,6 @@ export default function Footer() {
             <Link href="/konto?tab=anfragen">Anfragen</Link>
             <Link href="/beta">Beta-Version</Link>
             <Link href="/kontakt">Kontakt</Link>
-            <Link href="/kontakt?thema=fehler">Fehler melden</Link>
-            <Link href="/kontakt?thema=idee">Idee einreichen</Link>
           </nav>
         </div>
         <p className="ft-note">Die Inserenten sind für ihre Angaben sowie für Prospektpflichten, Vinkulierungen und Vorkaufsrechte verantwortlich. SwissOwners ist eine reine Inserateplattform, vermittelt keine Geschäfte, erbringt keine Finanzdienstleistungen und ist nicht am Abschluss beteiligt. Beteiligungen an nicht kotierten Firmen bieten Chancen, bergen aber auch Risiken bis zum Totalverlust. Prüfen Sie Unterlagen sorgfältig und ziehen Sie bei Bedarf eine Fachperson bei.</p>

@@ -93,3 +93,31 @@ export const CONTACT_TOPICS: Topic[] = [
 
 export const topicById = (id: string) => CONTACT_TOPICS.find((t) => t.id === id);
 export const contactNo = (id: number) => `K-${1000 + id}`;
+
+export const MAX_TOPICS = 3;
+
+/** Gewählte Themen (1–3) aus einer Liste oder «a,b,c» – gültig, ohne Doppelte, in Katalog-Reihenfolge */
+export function parseTopics(input: string | string[] | undefined | null): Topic[] {
+  const ids = (Array.isArray(input) ? input : String(input ?? "").split(",")).map((s) => s.trim());
+  return CONTACT_TOPICS.filter((t) => ids.includes(t.id)).slice(0, MAX_TOPICS);
+}
+
+/** Formularbedarf mehrerer Themen zusammenführen: Zusatzfelder ohne Doppelte, Pflicht wenn bei einem Thema Pflicht */
+export function mergeTopics(topics: Topic[]) {
+  const extra: ExtraField[] = [];
+  for (const t of topics) {
+    for (const f of t.extra ?? []) {
+      const i = extra.findIndex((x) => x.name === f.name);
+      if (i < 0) extra.push({ ...f });
+      else if (f.required && !extra[i].required) extra[i] = { ...f };
+    }
+  }
+  return {
+    extra,
+    companyRequired: topics.some((t) => t.companyRequired),
+    press: topics.some((t) => t.id === "presse"),
+    notes: topics.flatMap((t) => (t.note ? [t.note] : [])),
+    label: topics.map((t) => t.label).join(" · "),
+    placeholder: topics.length === 1 ? topics[0].placeholder : "Beschreiben Sie Ihre Anliegen – gerne zu jedem gewählten Thema ein paar Sätze.",
+  };
+}

@@ -1,0 +1,1 @@
+ALTER TABLE `contact_messages` MODIFY COLUMN `topic` varchar(60) NOT NULL;

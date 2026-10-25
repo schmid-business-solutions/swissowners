@@ -17,7 +17,7 @@ export default async function AdminContactPage({ searchParams }: { searchParams:
   const C = schema.contactMessages;
   const [counts, rows] = await Promise.all([
     db.select({ s: C.status, n: sql<number>`count(*)` }).from(C).groupBy(C.status),
-    db.select().from(C).where(thema ? sql`${C.status} = ${status} and ${C.topic} = ${thema}` : eq(C.status, status)).orderBy(desc(C.createdAt)).limit(200),
+    db.select().from(C).where(thema ? sql`${C.status} = ${status} and find_in_set(${thema}, ${C.topic})` : eq(C.status, status)).orderBy(desc(C.createdAt)).limit(200),
   ]);
   const n = (s: string) => Number(counts.find((c) => c.s === s)?.n ?? 0);
   const q = (o: Record<string, string | undefined>) => "/admin/kontakt?" + new URLSearchParams(Object.entries({ status, thema, ...o }).filter(([, v]) => v) as [string, string][]).toString();
@@ -38,12 +38,11 @@ export default async function AdminContactPage({ searchParams }: { searchParams:
         </div>
         {rows.length === 0 && <p className="muted">Keine Anfragen.</p>}
         {rows.map((r) => {
-          const t = topicById(r.topic);
           const details: Record<string, string> = r.details ? JSON.parse(r.details) : {};
           return (
             <article key={r.id} className="contact-card stack" style={{ gap: 10, background: "var(--bg)", borderColor: "var(--line)" }}>
               <div className="row" style={{ justifyContent: "space-between", gap: 10, flexWrap: "wrap" }}>
-                <span className="row" style={{ gap: 10 }}><span className="pill cap">{t?.label ?? r.topic}</span><b>{r.subject}</b></span>
+                <span className="row" style={{ gap: 10 }}>{r.topic.split(",").map((id) => <span key={id} className="pill cap">{topicById(id)?.label ?? id}</span>)}<b>{r.subject}</b></span>
                 <span className="small muted">{contactNo(r.id)} · {date(r.createdAt)}</span>
               </div>
               <p className="small"><b>{r.name}</b>{r.company ? ` · ${r.company}` : ""} · <a href={`mailto:${r.email}?subject=${encodeURIComponent(`Re: ${r.subject} (${contactNo(r.id)})`)}`}>{r.email}</a>{r.phone ? ` · ${r.phone}` : ""}{r.userId ? " · mit Konto" : ""}</p>

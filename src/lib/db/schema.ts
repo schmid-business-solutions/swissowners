@@ -274,7 +274,7 @@ export const appFlags = mysqlTable("app_flags", {
 /** Nachrichten aus dem Kontaktformular (/kontakt) */
 export const contactMessages = mysqlTable("contact_messages", {
   id: int("id").autoincrement().primaryKey(),
-  topic: varchar("topic", { length: 30 }).notNull(),
+  topic: varchar("topic", { length: 60 }).notNull(), // 1–3 Themen, kommagetrennt
   name: varchar("name", { length: 160 }).notNull(),
   email: varchar("email", { length: 255 }).notNull(),
   phone: varchar("phone", { length: 40 }),
