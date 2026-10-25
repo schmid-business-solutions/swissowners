@@ -6,7 +6,7 @@
   color-scheme: light;
 }
 *{box-sizing:border-box}
-body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.5}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.5}
 /* Footer bleibt auch bei kurzen Seiten unten: Inhaltsbereich füllt mindestens die Bildschirmhöhe */
 body{display:flex;flex-direction:column;min-height:100vh;min-height:100dvh}
 body > *{flex-shrink:0}
