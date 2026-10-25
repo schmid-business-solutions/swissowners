@@ -57,6 +57,123 @@ export const LISTING_STATUS = ["draft", "pending_payment", "in_review", "online"
 export type ListingStatus = (typeof LISTING_STATUS)[number];
 export const PLAN_ENUM = ["start", "basis", "plus", "premium"] as const;
 
+/* ---------- Partner (Berater, M&A, Startup-Förderer, Investoren) ---------- */
+export const ORG_KINDS = ["ma", "nachfolge", "treuhand", "bewertung", "recht", "bank", "foerderung", "park", "inkubator", "vc", "angels"] as const;
+export type OrgKind = (typeof ORG_KINDS)[number];
+/* Status für Profile und Mandate: Prüfung wie bei Angeboten */
+export const REVIEW_STATUS = ["in_review", "online", "paused", "expired", "rejected"] as const;
+export type ReviewStatus = (typeof REVIEW_STATUS)[number];
+
+export const orgs = mysqlTable("orgs", {
+  id: int("id").autoincrement().primaryKey(),
+  slug: varchar("slug", { length: 90 }).notNull(),
+  kind: mysqlEnum("kind", ORG_KINDS).notNull(),
+  name: varchar("name", { length: 160 }).notNull(),
+  uid: varchar("uid", { length: 20 }),
+  tagline: varchar("tagline", { length: 160 }).notNull(),
+  description: text("description").notNull(),
+  services: varchar("services", { length: 600 }).notNull().default(""), // Kommaliste
+  branchen: varchar("branchen", { length: 800 }).notNull().default(""), // Kommaliste, leer = alle Branchen
+  focus: varchar("focus", { length: 200 }), // z. B. Dealgrösse oder Phase
+  kanton: varchar("kanton", { length: 60 }).notNull(),
+  region: varchar("region", { length: 40 }).notNull(),
+  city: varchar("city", { length: 80 }).notNull(),
+  languages: varchar("languages", { length: 120 }).notNull().default("Deutsch"),
+  website: varchar("website", { length: 200 }),
+  email: varchar("email", { length: 200 }).notNull(),
+  phone: varchar("phone", { length: 40 }),
+  status: mysqlEnum("status", REVIEW_STATUS).notNull().default("in_review"),
+  verified: boolean("verified").notNull().default(false),
+  isSample: boolean("is_sample").notNull().default(false),
+  rejectionReason: text("rejection_reason"),
+  createdBy: int("created_by"),
+  publishedAt: datetime("published_at"),
+  createdAt: now(),
+  updatedAt: datetime("updated_at").notNull().default(sql`CURRENT_TIMESTAMP`).$onUpdate(() => new Date()),
+}, (t) => [uniqueIndex("orgs_slug_uq").on(t.slug), index("orgs_status_idx").on(t.status)]);
+
+export const orgMembers = mysqlTable("org_members", {
+  orgId: int("org_id").notNull().references(() => orgs.id, { onDelete: "cascade" }),
+  userId: int("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  role: mysqlEnum("role", ["admin", "member"]).notNull().default("member"),
+  createdAt: now(),
+}, (t) => [primaryKey({ columns: [t.orgId, t.userId] }), index("org_members_user_idx").on(t.userId)]);
+
+/* ---------- Verwaltungsräte ---------- */
+export const BOARD_ROLES = ["praesidium", "mitglied", "delegiert", "beirat"] as const;
+
+export const boardProfiles = mysqlTable("board_profiles", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  displayName: varchar("display_name", { length: 160 }).notNull(),
+  headline: varchar("headline", { length: 160 }).notNull(),
+  bio: text("bio").notNull(),
+  experience: text("experience").notNull(), // Werdegang
+  mandates: text("mandates"), // heutige Mandate, eine Zeile pro Mandat
+  skills: varchar("skills", { length: 600 }).notNull(), // Kommaliste
+  branchen: varchar("branchen", { length: 800 }).notNull().default(""),
+  languages: varchar("languages", { length: 120 }).notNull(),
+  kanton: varchar("kanton", { length: 60 }).notNull(),
+  region: varchar("region", { length: 40 }).notNull(),
+  capacity: varchar("capacity", { length: 60 }).notNull(),
+  fee: varchar("fee", { length: 120 }),
+  investor: boolean("investor").notNull().default(false),
+  ticket: varchar("ticket", { length: 120 }),
+  linkedin: varchar("linkedin", { length: 200 }),
+  visibility: mysqlEnum("visibility", ["public", "members", "anonymous"]).notNull().default("members"),
+  status: mysqlEnum("status", REVIEW_STATUS).notNull().default("in_review"),
+  isSample: boolean("is_sample").notNull().default(false),
+  rejectionReason: text("rejection_reason"),
+  views: int("views").notNull().default(0),
+  publishedAt: datetime("published_at"),
+  createdAt: now(),
+  updatedAt: datetime("updated_at").notNull().default(sql`CURRENT_TIMESTAMP`).$onUpdate(() => new Date()),
+}, (t) => [index("board_profiles_user_idx").on(t.userId), index("board_profiles_status_idx").on(t.status)]);
+
+export const boardMandates = mysqlTable("board_mandates", {
+  id: int("id").autoincrement().primaryKey(),
+  ownerId: int("owner_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  orgId: int("org_id").references(() => orgs.id, { onDelete: "set null" }),
+  role: mysqlEnum("role", BOARD_ROLES).notNull(),
+  title: varchar("title", { length: 100 }).notNull(),
+  segment: mysqlEnum("segment", ["kmu", "startup"]).notNull(),
+  branche: varchar("branche", { length: 100 }).notNull(),
+  kanton: varchar("kanton", { length: 60 }).notNull(),
+  region: varchar("region", { length: 40 }).notNull(),
+  companyName: varchar("company_name", { length: 200 }).notNull(),
+  companyUid: varchar("company_uid", { length: 20 }).notNull(),
+  revenueClass: varchar("revenue_class", { length: 40 }),
+  employees: int("employees"),
+  phase: varchar("phase", { length: 40 }),
+  skills: varchar("skills", { length: 600 }).notNull(),
+  description: text("description").notNull(),
+  effort: varchar("effort", { length: 160 }).notNull(),
+  fee: varchar("fee", { length: 160 }).notNull(),
+  requirements: text("requirements"),
+  languages: varchar("languages", { length: 120 }).notNull(),
+  startAt: varchar("start_at", { length: 80 }).notNull(),
+  investWelcome: boolean("invest_welcome").notNull().default(false),
+  status: mysqlEnum("status", REVIEW_STATUS).notNull().default("in_review"),
+  isSample: boolean("is_sample").notNull().default(false),
+  rejectionReason: text("rejection_reason"),
+  views: int("views").notNull().default(0),
+  publishedAt: datetime("published_at"),
+  createdAt: now(),
+  updatedAt: datetime("updated_at").notNull().default(sql`CURRENT_TIMESTAMP`).$onUpdate(() => new Date()),
+}, (t) => [index("board_mandates_status_idx").on(t.status), index("board_mandates_owner_idx").on(t.ownerId)]);
+
+/* Anfragen an VR-Mandate, VR-Profile und Partner */
+export const inquiries = mysqlTable("inquiries", {
+  id: int("id").autoincrement().primaryKey(),
+  kind: mysqlEnum("kind", ["mandate", "profile", "org"]).notNull(),
+  targetId: int("target_id").notNull(),
+  senderId: int("sender_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  message: text("message").notNull(),
+  ndaAcceptedAt: datetime("nda_accepted_at"),
+  readAt: datetime("read_at"),
+  createdAt: now(),
+}, (t) => [uniqueIndex("inquiries_target_sender_uq").on(t.kind, t.targetId, t.senderId), index("inquiries_target_idx").on(t.kind, t.targetId)]);
+
 export const listings = mysqlTable("listings", {
   id: int("id").autoincrement().primaryKey(),
   ownerId: int("owner_id").notNull().references(() => users.id, { onDelete: "cascade" }),
@@ -87,6 +204,8 @@ export const listings = mysqlTable("listings", {
   vorkauf: mysqlEnum("vorkauf", ["ja", "nein", "unklar"]).notNull(),
   companyInformed: boolean("company_informed").notNull().default(false),
   isSample: boolean("is_sample").notNull().default(false), // Musterangebot (fiktiv), wird nach und nach durch echte Angebote ersetzt
+  orgId: int("org_id").references(() => orgs.id, { onDelete: "set null" }), // inseriert durch einen Partner im Auftrag
+  mandateConfirmed: boolean("mandate_confirmed").notNull().default(false),
   views: int("views").notNull().default(0),
   rejectionReason: text("rejection_reason"),
   publishedAt: datetime("published_at"),
@@ -146,7 +265,17 @@ export const savedListings = mysqlTable("saved_listings", {
   createdAt: now(),
 }, (t) => [primaryKey({ columns: [t.userId, t.listingId] })]);
 
+/* Einmalige Aufgaben beim Serverstart (z. B. Mustereinträge anlegen); Zeile wird nach Ausführung gelöscht */
+export const appFlags = mysqlTable("app_flags", {
+  key: varchar("key", { length: 60 }).primaryKey(),
+  createdAt: now(),
+});
+
 export type User = typeof users.$inferSelect;
 export type Listing = typeof listings.$inferSelect;
 export type Subscription = typeof subscriptions.$inferSelect;
 export type Payment = typeof payments.$inferSelect;
+export type Org = typeof orgs.$inferSelect;
+export type BoardProfile = typeof boardProfiles.$inferSelect;
+export type BoardMandate = typeof boardMandates.$inferSelect;
+export type Inquiry = typeof inquiries.$inferSelect;

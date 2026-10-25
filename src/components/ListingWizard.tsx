@@ -4,7 +4,7 @@ import { useState, useTransition } from "react";
 import { AKTIENKATEGORIEN, BRANCHEN, KANTONE, PHASEN, RECHTSFORMEN, UMSATZKLASSEN, subsOf } from "@/lib/taxonomy";
 import { Arrow, Back, Info } from "./Icons";
 import { Card } from "./ListingCards";
-import type { PlanInfo, SubmitResult, WizardData } from "@/lib/wizard";
+import type { OrgOption, PlanInfo, SubmitResult, WizardData } from "@/lib/wizard";
 export type { PlanInfo, SubmitResult, WizardData } from "@/lib/wizard";
 
 const FIELD_STEP: Record<string, number> = {
@@ -35,9 +35,9 @@ function HelpField({ label, help, value, onChange, options }: {
 }
 
 export default function ListingWizard({
-  initial, mode, plans, startLeft, startUntil, onSubmit,
+  initial, mode, plans, startLeft, startUntil, onSubmit, orgs = [],
 }: {
-  initial: WizardData; mode: "create" | "edit"; plans: PlanInfo[]; startLeft: number; startUntil: string;
+  initial: WizardData; mode: "create" | "edit"; plans: PlanInfo[]; startLeft: number; startUntil: string; orgs?: OrgOption[];
   onSubmit: (data: WizardData) => Promise<SubmitResult>;
 }) {
   const steps = mode === "create" ? ["Typ", "Firma", "Angebot", "Paket", "Prüfen und absenden"] : ["Typ", "Firma", "Angebot", "Prüfen und speichern"];
@@ -68,6 +68,7 @@ export default function ListingWizard({
       if (w.description.trim().length < 80) return `Beschreibung: mindestens 80 Zeichen (aktuell ${w.description.trim().length}).`;
       if (w.reason.trim().length < 10) return "Bitte den Grund für das Angebot angeben.";
     }
+    if (s === 0 && w.orgId && !w.mandateConfirmed) return "Bitte bestätigen Sie den Auftrag Ihres Kunden.";
     if (s === last && !w.agb) return "Bitte bestätigen Sie die Angaben und die AGB.";
     return "";
   }
@@ -136,8 +137,32 @@ export default function ListingWizard({
                   <b>Etablierte Firma</b><span className="small muted">Bestehendes Geschäft mit regelmässigen Umsätzen, zum Beispiel Gewerbe, Industrie oder Dienstleistung</span>
                 </button>
               </div>
+              {orgs.length > 0 && (
+                <>
+                  <h2 className="h3">Für wen inserieren Sie?</h2>
+                  <div className="choice-grid">
+                    <button {...choice(!w.orgId)} onClick={() => setW((p) => ({ ...p, orgId: "", mandateConfirmed: false }))}>
+                      <b>Für mich oder meine Firma</b><span className="small muted">Sie sind selbst Aktionär, Gesellschafter oder Organ der Firma</span>
+                    </button>
+                    <button {...choice(Boolean(w.orgId))} onClick={() => set("orgId", w.orgId || String(orgs[0].id))}>
+                      <b>Im Auftrag eines Kunden</b><span className="small muted">Als Partner, mit Badge «Vertreten durch» und Anfragen an Sie</span>
+                    </button>
+                  </div>
+                  {w.orgId && (
+                    <div className="stack" style={{ gap: 12 }}>
+                      {orgs.length > 1 && (
+                        <label className="field">Partnerprofil
+                          <select value={w.orgId} onChange={(e) => set("orgId", e.target.value)}>{orgs.map((o) => <option key={o.id} value={o.id}>{o.name}</option>)}</select>
+                        </label>
+                      )}
+                      <label className="check"><input type="checkbox" checked={w.mandateConfirmed} onChange={(e) => set("mandateConfirmed", e.target.checked)} />
+                        <span>Ich bin von {sell ? "den verkaufenden Aktionären bzw. Gesellschaftern" : "der Firma"} beauftragt, dieses Inserat zu erstellen, und kann den Auftrag auf Verlangen belegen. <span className="small muted" style={{ display: "block" }}>Das Inserat erscheint mit «Vertreten durch {orgs.find((o) => String(o.id) === w.orgId)?.name}». Anfragen gehen an Sie.</span></span></label>
+                    </div>
+                  )}
+                </>
+              )}
               {!sell && (
-                <div className="notice neutral small"><Info /><span>Kapitalgesuche dürfen nur von der Firma selbst (Verwaltungsrat oder Geschäftsführung) aufgegeben werden. Für öffentliche Angebote von Effekten können Prospektpflichten bestehen – dafür sind Sie als Inserent verantwortlich.</span></div>
+                <div className="notice neutral small"><Info /><span>Kapitalgesuche dürfen nur von der Firma selbst (Verwaltungsrat oder Geschäftsführung) oder in ihrem Auftrag aufgegeben werden. Für öffentliche Angebote von Effekten können Prospektpflichten bestehen – dafür sind Sie als Inserent verantwortlich.</span></div>
               )}
             </>
           )}

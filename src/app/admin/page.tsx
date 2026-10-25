@@ -50,7 +50,10 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
   return (
     <section style={{ paddingBlock: 36 }}>
       <div className="wrap stack" style={{ gap: 22 }}>
-        <h1 className="h2">Admin</h1>
+        <div className="row" style={{ justifyContent: "space-between", gap: 12 }}>
+          <h1 className="h2">Admin</h1>
+          <Link className="btn btn-line" href="/admin/pruefung">Partner und Verwaltungsräte prüfen</Link>
+        </div>
         {ok && <p className="flash ok">{OK_MSG[ok] ?? "Erledigt."}</p>}
         <div className="admin-grid">
           <div className="statbox"><span className="small muted">Zur Prüfung</span><b>{c.in_review ?? 0}</b></div>

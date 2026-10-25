@@ -12,5 +12,13 @@ export async function register() {
     console.log("[SwissOwners] Datenbank-Migrationen aktuell");
   } catch (err) {
     console.error("[SwissOwners] Migration fehlgeschlagen", err);
+    return;
+  }
+  // Einmalige Aufgaben aus app_flags (von Migrationen gesetzt)
+  try {
+    const { runStartupTasks } = await import("./lib/startup-tasks");
+    await runStartupTasks();
+  } catch (err) {
+    console.error("[SwissOwners] Start-Aufgabe fehlgeschlagen", err);
   }
 }

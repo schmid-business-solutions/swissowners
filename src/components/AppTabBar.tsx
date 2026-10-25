@@ -16,8 +16,8 @@ export default function AppTabBar({ newRequests }: { newRequests: number }) {
   const tab = useSearchParams().get("tab");
   const active = {
     home: path === "/",
-    search: path.startsWith("/inserate"),
-    add: path.startsWith("/inserat-aufgeben"),
+    search: path.startsWith("/inserate") || path.startsWith("/verwaltungsraete") && !path.startsWith("/verwaltungsraete/mandat-inserieren") && !path.startsWith("/verwaltungsraete/mein-profil") || path.startsWith("/partner") && !path.startsWith("/partner/neu"),
+    add: path.startsWith("/inserat-aufgeben") || path.startsWith("/inserieren") || path.startsWith("/verwaltungsraete/mandat-inserieren") || path.startsWith("/verwaltungsraete/mein-profil") || path.startsWith("/partner/neu"),
     fav: path === "/konto" && tab === "merkliste",
     me: path.startsWith("/konto") && tab !== "merkliste",
   };
@@ -31,7 +31,7 @@ export default function AppTabBar({ newRequests }: { newRequests: number }) {
     <nav className="app-tabbar" aria-label="App-Navigation">
       {item("home", "/", "Start", HOME)}
       {item("search", "/inserate", "Suchen", SEARCH)}
-      <Link href="/inserat-aufgeben" className="tab-item tab-add" aria-current={active.add ? "page" : undefined}>
+      <Link href="/inserieren" className="tab-item tab-add" aria-current={active.add ? "page" : undefined}>
         <span className="tab-plus" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round"><path d="M12 5v14M5 12h14" /></svg></span>
         <span className="tab-lbl">Inserieren</span>
       </Link>

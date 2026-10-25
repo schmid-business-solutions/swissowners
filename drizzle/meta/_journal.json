@@ -29,6 +29,20 @@
       "when": 1792828666444,
       "tag": "0003_user_avatars",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1792948115680,
+      "tag": "0004_partner_vr",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1792948786328,
+      "tag": "0005_app_flags",
+      "breakpoints": true
     }
   ]
 }

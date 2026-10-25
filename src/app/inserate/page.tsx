@@ -2,6 +2,8 @@ import Link from "next/link";
 import { FilterForm, SegSwitch, SortSelect } from "@/components/Filters";
 import { RowCard } from "@/components/ListingCards";
 import { facets, filtersToQuery, PAGE_SIZE, parseFilters, searchListings } from "@/lib/listings";
+import { orgBadges } from "@/lib/orgs";
+import SearchSwitch from "@/components/SearchSwitch";
 
 export const metadata = { title: "Angebote durchsuchen", description: "Anteile an Schweizer KMU und Startups: Verkaufsangebote und Kapitalgesuche aus allen Branchen und Kantonen." };
 export const dynamic = "force-dynamic";
@@ -10,11 +12,13 @@ export default async function ListPage({ searchParams }: { searchParams: Promise
   const f = parseFilters(await searchParams);
   const [{ rows, total }, fc] = await Promise.all([searchListings(f), facets(f)]);
   const pages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+  const orgs = await orgBadges(rows.map((l) => l.orgId));
   const ff = { seg: f.seg, type: f.type, branche: f.branche, sub: f.sub, region: f.region, betrag: f.betrag, sort: f.sort };
 
   return (
     <section className="list-sec">
       <div className="wrap stack" style={{ gap: 24 }}>
+        <SearchSwitch current="angebote" />
         <div className="stack" style={{ gap: 6 }}>
           <h1 className="h2">Angebote durchsuchen</h1>
           <p className="muted">Verkaufsangebote und Kapitalgesuche von Schweizer KMU und Startups.</p>
@@ -29,7 +33,7 @@ export default async function ListPage({ searchParams }: { searchParams: Promise
             </div>
             {rows.length ? (
               <>
-                <div className="list-rows">{rows.map((l) => <RowCard key={l.id} l={l} />)}</div>
+                <div className="list-rows">{rows.map((l) => <RowCard key={l.id} l={l} org={l.orgId && orgs[l.orgId]?.online ? orgs[l.orgId] : undefined} />)}</div>
                 {pages > 1 && (
                   <nav className="pager" aria-label="Seiten">
                     {Array.from({ length: pages }, (_, i) => i + 1).map((p) =>

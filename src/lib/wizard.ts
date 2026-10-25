@@ -8,7 +8,10 @@ export type WizardData = {
   vinkuliert: "ja" | "nein" | "unklar"; vorkauf: "ja" | "nein" | "unklar";
   description: string; reason: string;
   plan: "start" | "basis" | "plus" | "premium"; agb: boolean;
+  orgId: string; mandateConfirmed: boolean; // im Auftrag über ein Partnerprofil
 };
+
+export type OrgOption = { id: number; name: string };
 
 export type PlanInfo = { id: "basis" | "plus" | "premium"; name: string; first: number; renewal: number; text: string };
 export type SubmitResult = { error?: string; field?: string } | undefined;
@@ -19,6 +22,6 @@ export const emptyWizard = (type: "sell" | "cap" = "sell"): WizardData => ({
   companyName: "", companyUid: "", companyInformed: false,
   title: "", stake: "", amount: "", valuation: "", minTicket: "",
   vinkuliert: "unklar", vorkauf: "unklar", description: "", reason: "",
-  plan: "start", agb: false,
+  plan: "start", agb: false, orgId: "", mandateConfirmed: false,
 });
 

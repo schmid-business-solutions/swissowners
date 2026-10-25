@@ -11,6 +11,18 @@ import { notifyAdminListing } from "@/lib/admin-mail";
 import { appUrl, listingNo } from "@/lib/format";
 import { PAID_PLANS, type PaidPlan } from "@/lib/plans";
 import type { SubmitResult, WizardData } from "@/lib/wizard";
+import { getOrg, membership } from "@/lib/orgs";
+
+/** Partnerprofil prüfen: Mitglied, online, Auftrag bestätigt */
+async function orgFields(data: WizardData, userId: number, keepId?: number | null): Promise<{ orgId: number | null; mandateConfirmed: boolean } | { error: string }> {
+  if (!data.orgId) return { orgId: null, mandateConfirmed: false };
+  const id = Number(data.orgId);
+  const mem = await membership(id, userId);
+  const o = await getOrg(id);
+  if (!mem || !o || (o.status !== "online" && o.id !== keepId)) return { error: "Dieses Partnerprofil ist nicht verfügbar." };
+  if (!data.mandateConfirmed) return { error: "Bitte bestätigen Sie den Auftrag Ihres Kunden." };
+  return { orgId: id, mandateConfirmed: true };
+}
 
 function validate(data: WizardData) {
   const r = listingInput.safeParse({
@@ -32,6 +44,8 @@ export async function createListing(data: WizardData): Promise<SubmitResult> {
   if (!data.agb) return { error: "Bitte bestätigen Sie die Angaben und die AGB." };
   const v = validate(data);
   if (v.error) return v.error;
+  const of = await orgFields(data, user.id);
+  if ("error" in of) return { error: of.error };
 
   const plan = data.plan;
   if (plan === "start") {
@@ -43,7 +57,7 @@ export async function createListing(data: WizardData): Promise<SubmitResult> {
   }
 
   const [ins] = await db.insert(schema.listings).values({
-    ...v.values!, ownerId: user.id, plan, status: plan === "start" ? "in_review" : "pending_payment",
+    ...v.values!, ...of, ownerId: user.id, plan, status: plan === "start" ? "in_review" : "pending_payment",
   }).$returningId();
   await db.insert(schema.subscriptions).values({ listingId: ins.id, plan, status: "pending" });
   const [listing] = await db.select().from(schema.listings).where(eq(schema.listings.id, ins.id)).limit(1);
@@ -85,9 +99,11 @@ export async function updateListing(id: number, data: WizardData): Promise<Submi
   if (!data.agb) return { error: "Bitte bestätigen Sie die Angaben und die AGB." };
   const v = validate({ ...data, type: l.type });
   if (v.error) return v.error;
+  const of = await orgFields(data, user.id, l.orgId);
+  if ("error" in of) return { error: of.error };
   const resubmit = l.status === "online" || l.status === "rejected";
   const status = l.status === "online" || l.status === "rejected" ? "in_review" : l.status;
-  await db.update(schema.listings).set({ ...v.values!, type: l.type, status, rejectionReason: null }).where(eq(schema.listings.id, id));
+  await db.update(schema.listings).set({ ...v.values!, ...of, type: l.type, status, rejectionReason: null }).where(eq(schema.listings.id, id));
   if (resubmit && status === "in_review") {
     const [fresh] = await db.select().from(schema.listings).where(eq(schema.listings.id, id)).limit(1);
     if (fresh) await notifyAdminListing(fresh, `Angebot geändert, bitte prüfen: ${listingNo(id)}`, l.status === "rejected" ? "nach Ablehnung neu eingereicht" : "Änderung an einem Online-Angebot");

@@ -6,11 +6,12 @@ import { countPublic, latestListings, premiumListings } from "@/lib/listings";
 import { startSlotsLeft } from "@/lib/billing";
 import { PLANS, startOffer } from "@/lib/plans";
 import { chf, date } from "@/lib/format";
+import { countBoard } from "@/lib/board";
 
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
-  const [prem, latest, total, left] = await Promise.all([premiumListings(3), latestListings(6), countPublic(), startSlotsLeft()]);
+  const [prem, latest, total, left, board] = await Promise.all([premiumListings(3), latestListings(6), countPublic(), startSlotsLeft(), countBoard().catch(() => ({ mandates: 0, profiles: 0 }))]);
   const { slots, until } = startOffer();
   const minRenewal = Math.min(...Object.values(PLANS).map((p) => p.renewal));
 
@@ -97,6 +98,35 @@ export default async function HomePage() {
               <p className="muted" style={{ flex: 1 }}>Durchsuchen Sie alle Angebote kostenlos und merken Sie sich die interessantesten.</p>
               <p className="small" style={{ fontWeight: 600 }}>Für Investoren kostenlos</p>
               <Link className="btn btn-line" href="/inserate" style={{ alignSelf: "flex-start" }}>Angebote durchsuchen</Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div className="wrap stack" style={{ gap: 28 }}>
+          <div className="stack" style={{ gap: 6 }}>
+            <p className="eyebrow">Neu</p>
+            <h2 className="h2">Verwaltungsräte und Partner</h2>
+          </div>
+          <div className="grid g3">
+            <div className="entry" style={{ borderTop: "4px solid var(--red)" }}>
+              <h3 className="h3">Verwaltungsrat gesucht?</h3>
+              <p className="muted" style={{ flex: 1 }}>Inserieren Sie ein VR-Mandat oder finden Sie erfahrene Verwaltungsrätinnen und Verwaltungsräte – auch solche, die sich finanziell beteiligen.</p>
+              <p className="small" style={{ fontWeight: 600 }}>{board.mandates} Mandate · {board.profiles} Profile</p>
+              <Link className="btn btn-red" href="/verwaltungsraete" style={{ alignSelf: "flex-start" }}>Zu den Verwaltungsräten</Link>
+            </div>
+            <div className="entry" style={{ borderTop: "4px solid var(--ink)" }}>
+              <h3 className="h3">Selbst ein Mandat suchen</h3>
+              <p className="muted" style={{ flex: 1 }}>Stellen Sie sich mit einem VR-Profil vor – öffentlich, nur für Angemeldete oder anonym. Passende Mandate sehen Sie direkt im Profil.</p>
+              <p className="small" style={{ fontWeight: 600 }}>Während der Beta kostenlos</p>
+              <Link className="btn btn-ink" href="/verwaltungsraete/mein-profil" style={{ alignSelf: "flex-start" }}>VR-Profil erstellen</Link>
+            </div>
+            <div className="entry" style={{ borderTop: "4px solid #9A9A95" }}>
+              <h3 className="h3">Partner finden</h3>
+              <p className="muted" style={{ flex: 1 }}>M&amp;A-Berater, Nachfolgeberater, Treuhänder, Startup-Förderer und Investoren – viele inserieren auch im Auftrag ihrer Kunden.</p>
+              <p className="small" style={{ fontWeight: 600 }}>Für Partner während der Beta kostenlos</p>
+              <Link className="btn btn-line" href="/partner" style={{ alignSelf: "flex-start" }}>Zum Partnerverzeichnis</Link>
             </div>
           </div>
         </div>

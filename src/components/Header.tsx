@@ -7,8 +7,9 @@ import { Cross, Menu, User } from "./Icons";
 
 const NAV: [string, string, string][] = [
   ["/inserate", "Anteile finden", "Alle Angebote durchsuchen"],
-  ["/inserat-aufgeben", "Inserat aufgeben", "Anteile verkaufen oder Kapital suchen"],
-  ["/#ablauf", "So funktioniert's", "In vier Schritten zum Abschluss"],
+  ["/verwaltungsraete", "Verwaltungsräte", "VR-Mandate und VR-Profile"],
+  ["/partner", "Partner", "M&A-Berater, Startup-Förderer, Investoren"],
+  ["/inserieren", "Inserieren", "Anteile, Kapital, VR-Mandat oder Profil"],
 ];
 
 type Account = { firstName: string; lastName: string; avatarVersion: number | null };
@@ -53,7 +54,7 @@ export default function Header({ userName, account, isAdmin, newRequests, appMod
                 <span className="acct-name hide-sm">Anmelden</span>
               </Link>
             )}
-            <Link className="btn btn-red hide-sm" href="/inserat-aufgeben">Inserat aufgeben</Link>
+            <Link className="btn btn-red hide-sm" href="/inserieren">Inserieren</Link>
             <button className="icon-btn menu-btn" aria-label={open ? "Menü schliessen" : "Menü öffnen"} aria-expanded={open} onClick={() => setOpen(!open)}>
               <Menu />
             </button>
@@ -70,7 +71,7 @@ export default function Header({ userName, account, isAdmin, newRequests, appMod
               <span className="mnav-txt"><span className="mnav-t">{userName ? "Mein Bereich" : "Anmelden"}</span>
                 <span className="mnav-s">{userName ? "Angebote, Anfragen, Merkliste" : "Oder kostenlos registrieren"}</span></span>
             </Link>
-            <Link href="/inserat-aufgeben" className="btn btn-red btn-block mnav-cta">Inserat aufgeben</Link>
+            <Link href="/inserieren" className="btn btn-red btn-block mnav-cta">Inserieren</Link>
           </div>
         </nav>
       </header>

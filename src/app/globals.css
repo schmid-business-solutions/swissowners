@@ -709,3 +709,54 @@ html[data-app] .detail-side{top:auto}
   .beta-bar .beta-more{display:none}
   .beta-bar a{flex:none;white-space:nowrap}
 }
+
+/* ===== Partner und Verwaltungsräte ===== */
+.segsw a{display:inline-flex;align-items:center;gap:6px;min-height:38px;padding:0 16px;border-radius:999px;font-weight:600;font-size:15px;color:var(--ink-2);text-decoration:none;white-space:nowrap}
+.segsw a[aria-pressed="true"]{background:var(--ink);color:#FFFFFF}
+@media (max-width:620px){.segsw{max-width:100%;overflow-x:auto;scrollbar-width:none}.segsw a{padding:0 12px;font-size:14px}}
+.pill.vr{background:var(--ink);color:#FFFFFF}
+.chip.org{background:#EEF2F7;color:#24384F}
+.mono{display:grid;place-items:center;flex:none;font-weight:800;letter-spacing:.02em;color:#FFFFFF;background:var(--grad);background-origin:border-box}
+.mono-org{border-radius:14px}
+.mono-person{border-radius:50%;background:linear-gradient(135deg,#4A4F57,#2B2E33)}
+.mono-person.is-hidden{background:var(--bg-soft);color:var(--muted)}
+.xcard{display:flex;flex-direction:column;gap:12px;padding:20px;background:var(--bg);border:1px solid var(--line);border-radius:10px;text-decoration:none;color:var(--ink);min-width:0;transition:box-shadow .15s,border-color .15s}
+.xcard:hover{border-color:#C9C3B8;box-shadow:0 4px 14px rgba(40,30,20,.06)}
+.xcard.is-sample{background:linear-gradient(0deg,rgba(255,244,214,.22),rgba(255,244,214,.22)),var(--bg)}
+.xcard-head{display:flex;gap:14px;align-items:center;min-width:0}
+.xcard-top{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.xcard-title{font-size:18px;font-weight:700;line-height:1.3;color:var(--ink)}
+.xcard-text{color:var(--ink-2);font-size:15px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.xcard-foot{display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap;margin-top:auto}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.org-box{display:flex;gap:12px;align-items:center;padding:12px;border:1px solid var(--line);border-radius:10px;text-decoration:none;color:var(--ink);background:var(--bg)}
+.org-box:hover{border-color:#C9C3B8}
+.plain-list{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px}
+.filter-inline{display:grid;gap:12px 16px;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));align-items:end}
+.checks{display:flex;flex-wrap:wrap;gap:8px}
+.check-chip{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 14px;border:1px solid #CFCAC1;border-radius:999px;cursor:pointer;font-size:14px;font-weight:600;color:var(--ink-2);background:var(--bg);-webkit-user-select:none;user-select:none}
+.check-chip input{position:absolute;opacity:0;width:1px;height:1px}
+.check-chip.on{background:var(--ink);border-color:var(--ink);color:#FFFFFF}
+.check-chip:has(input:focus-visible){outline:3px solid var(--red);outline-offset:2px}
+.check-chip:has(input:disabled){opacity:.45;cursor:not-allowed}
+.choose-row{flex-direction:row!important;align-items:center;justify-content:space-between;gap:16px;text-decoration:none;color:var(--ink)}
+details > summary{list-style:none}
+details > summary::-webkit-details-marker{display:none}
+details > summary::before{content:"▸ ";color:var(--muted)}
+details[open] > summary::before{content:"▾ "}
+
+/* Umschalter Angebote · Verwaltungsräte · Partner: nur in der App und auf kleinen Bildschirmen */
+.search-switch{display:none}
+@media (max-width:820px){
+  .search-switch{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin-bottom:-4px}
+}
+html[data-app] .search-switch{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+.search-switch a{flex:none;padding:9px 16px;border-radius:999px;background:#F3F1ED;color:var(--ink-2);font-weight:600;font-size:14px;text-decoration:none;white-space:nowrap}
+.search-switch a[aria-current="page"]{background:var(--ink);color:#FFFFFF}
+.search-switch::-webkit-scrollbar,.segsw::-webkit-scrollbar{display:none}
+
+/* App-Design für die neuen Karten */
+html[data-app] .xcard{border:0;border-radius:16px;box-shadow:0 1px 2px rgba(20,20,20,.06),0 4px 16px rgba(20,20,20,.07)}
+html[data-app] .org-box{border:0;background:#F7F6F3;border-radius:14px}
+html[data-app] .filter-inline{grid-template-columns:1fr 1fr}
+html[data-app] .filter-inline .btn{grid-column:1/-1}

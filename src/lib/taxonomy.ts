@@ -58,3 +58,37 @@ export const SORTS: [string, string][] = [
 
 export const TYPE_LABEL = { sell: "Anteile verkaufen", cap: "Kapital gesucht" } as const;
 export const SEG_LABEL = { kmu: "KMU", startup: "Startup" } as const;
+
+/* ---------- Partner ---------- */
+export const ORG_KIND_LABEL = {
+  ma: "M&A-Beratung", nachfolge: "Nachfolgeberatung", treuhand: "Treuhand", bewertung: "Unternehmensbewertung", recht: "Anwaltskanzlei", bank: "Bank",
+  foerderung: "Öffentliche Startup-Förderung", park: "Innovationspark oder Gründerzentrum", inkubator: "Inkubator oder Accelerator", vc: "Venture Capital", angels: "Business-Angel-Netzwerk",
+} as const;
+export const ORG_GROUPS = {
+  berater: { label: "Berater und M&A", kinds: ["ma", "nachfolge", "treuhand", "bewertung", "recht", "bank"] },
+  startup: { label: "Startup-Förderer und Investoren", kinds: ["foerderung", "park", "inkubator", "vc", "angels"] },
+} as const;
+export type OrgGroup = keyof typeof ORG_GROUPS;
+export const orgGroupOf = (kind: string): OrgGroup => ((ORG_GROUPS.startup.kinds as readonly string[]).includes(kind) ? "startup" : "berater");
+export const ORG_SERVICES = [
+  "Unternehmensverkauf", "Unternehmenskauf", "Nachfolgeregelung", "Unternehmensbewertung", "Kapitalsuche und Finanzierung", "Due Diligence",
+  "Recht und Verträge", "Steuern", "Coaching und Programme", "Investitionen", "Netzwerk und Events", "Büros und Infrastruktur",
+];
+
+/* ---------- Verwaltungsräte ---------- */
+export const BOARD_ROLE_LABEL = { praesidium: "Präsidium", mitglied: "Mitglied", delegiert: "Delegierte/r des VR", beirat: "Beirat" } as const;
+export const VR_SKILLS = [
+  "Strategie", "Finanzen und Controlling", "Recht und Compliance", "Digitalisierung und IT", "Marketing und Vertrieb", "Personal und Führung",
+  "Produktion und Operations", "Nachfolge und M&A", "Internationalisierung", "Nachhaltigkeit und ESG", "Risikomanagement", "Startups und Innovation",
+];
+export const SPRACHEN = ["Deutsch", "Französisch", "Italienisch", "Englisch"];
+export const KAPAZITAET = ["1 weiteres Mandat", "2 weitere Mandate", "3 oder mehr Mandate", "Zurzeit ausgelastet"];
+export const VISIBILITY_LABEL = {
+  public: "Öffentlich: Name und Profil für alle sichtbar",
+  members: "Nur für angemeldete Personen: Name erst nach Anmeldung sichtbar",
+  anonymous: "Anonym: Name und LinkedIn bleiben verborgen, Kontakt über SwissOwners",
+} as const;
+
+/** Kommaliste ↔ Array */
+export const splitList = (s: string | null | undefined): string[] => (s ?? "").split(",").map((x) => x.trim()).filter(Boolean);
+export const joinList = (a: string[]): string => a.map((x) => x.trim().replace(/,/g, " ")).filter(Boolean).join(", ");

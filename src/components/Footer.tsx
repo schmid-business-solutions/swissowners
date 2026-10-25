@@ -21,6 +21,8 @@ export default function Footer() {
             <Link href="/inserat-aufgeben?typ=sell">Anteile verkaufen</Link>
             <Link href="/inserat-aufgeben?typ=cap">Kapital suchen</Link>
             <Link href="/preise">Preise und Pakete</Link>
+            <Link href="/verwaltungsraete/mein-profil">VR-Profil erstellen</Link>
+            <Link href="/partner/neu">Partnerprofil erstellen</Link>
             <Link href="/konto">Meine Angebote</Link>
           </nav>
           <nav className="ft-col" aria-label="Investieren">
@@ -29,6 +31,9 @@ export default function Footer() {
             <Link href="/inserate?seg=startup">Startups</Link>
             <Link href="/inserate?seg=kmu">KMU</Link>
             <Link href="/konto?tab=merkliste">Merkliste</Link>
+            <Link href="/verwaltungsraete">VR-Mandate</Link>
+            <Link href="/verwaltungsraete?ansicht=profile">Verwaltungsräte finden</Link>
+            <Link href="/partner">Partner finden</Link>
           </nav>
           <nav className="ft-col" aria-label="SwissOwners">
             <b>SwissOwners</b>

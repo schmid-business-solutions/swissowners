@@ -69,7 +69,7 @@ export function Badges({ l, noPrem, short }: { l: CardData; noPrem?: boolean; sh
 }
 
 /** Angebot in der Übersicht: Bild, Titel, kurze Beschreibung, eine Hauptzahl */
-export function RowCard({ l }: { l: Listing }) {
+export function RowCard({ l, org }: { l: Listing; org?: { name: string; slug: string } }) {
   const { f1, f2 } = facts(l);
   const big = l.type === "sell" ? f2 : f1, small = l.type === "sell" ? f1 : f2;
   const cls = "lcard" + (l.plan === "premium" ? " is-prem" : l.plan === "plus" || l.plan === "start" ? " is-plus" : "") + (l.isSample ? " is-sample" : "");
@@ -89,7 +89,7 @@ export function RowCard({ l }: { l: Listing }) {
         <span className="lc-title">{l.title}</span>
         <span className="small muted">{l.sub} · {l.kanton}</span>
         <span className="lc-desc">{l.description}</span>
-        <span className="badges"><Badges l={l} noPrem short /></span>
+        <span className="badges"><Badges l={l} noPrem short />{org && <span className="chip org">Vertreten durch {org.name}</span>}</span>
       </span>
       <span className="lc-side">
         <span className="fact-l">{big[0]}</span>

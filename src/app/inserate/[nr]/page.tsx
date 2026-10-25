@@ -9,6 +9,9 @@ import { db, schema } from "@/lib/db";
 import { getListing } from "@/lib/listings";
 import { ago, date, idFromNo, listingNo } from "@/lib/format";
 import Contact from "./Contact";
+import { getOrg } from "@/lib/orgs";
+import { OrgLogo } from "@/components/BoardCards";
+import { ORG_KIND_LABEL } from "@/lib/taxonomy";
 
 export const dynamic = "force-dynamic";
 
@@ -49,6 +52,8 @@ export default async function DetailPage({ params }: { params: Promise<{ nr: str
     await db.update(schema.listings).set({ views: sql`${schema.listings.views} + 1` }).where(eq(schema.listings.id, l.id));
   }
 
+  const org = l.orgId ? await getOrg(l.orgId) : undefined;
+  const showOrg = org && org.status === "online";
   const revealed = isOwner || isAdmin || Boolean(req);
   const no = listingNo(l.id);
   const { f1, f2 } = facts(l);
@@ -111,6 +116,16 @@ export default async function DetailPage({ params }: { params: Promise<{ nr: str
               <span style={{ fontSize: 30, fontWeight: 800, fontVariantNumeric: "tabular-nums" }}>{big[1]}</span>
               <span className="small muted">{small[0]}: {small[1]}</span>
             </div>
+            {showOrg && (
+              <Link href={`/partner/${org.slug}`} className="org-box">
+                <OrgLogo name={org.name} size={44} />
+                <span className="stack" style={{ gap: 2, minWidth: 0 }}>
+                  <span className="fact-l">Vertreten durch</span>
+                  <b>{org.name}</b>
+                  <span className="small muted">{ORG_KIND_LABEL[org.kind]} · {org.city}</span>
+                </span>
+              </Link>
+            )}
             <Contact listingId={l.id} no={no} mode={mode} userName={user ? `${user.firstName} ${user.lastName}` : ""} userPhone={user?.phone ?? ""} saved={Boolean(saved)} />
             <p className="small muted">{l.isSample ? "Fiktives Beispiel zur Veranschaulichung." : `Geprüft am ${date(l.publishedAt)}.`} Keine Provision – Preis und Vertrag regeln Sie direkt mit dem Inserenten.</p>
           </aside>

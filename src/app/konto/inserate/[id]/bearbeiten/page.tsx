@@ -5,6 +5,7 @@ import type { WizardData } from "@/lib/wizard";
 import { requireUser } from "@/lib/auth";
 import { db, schema } from "@/lib/db";
 import { updateListing } from "@/app/inserat-aufgeben/actions";
+import { myOrgs } from "@/lib/orgs";
 
 export const metadata = { title: "Angebot bearbeiten" };
 export const dynamic = "force-dynamic";
@@ -22,6 +23,8 @@ export default async function EditPage({ params }: { params: Promise<{ id: strin
     shareClass: l.shareClass ?? "unklar", companyName: l.companyName, companyUid: l.companyUid, companyInformed: l.companyInformed,
     title: l.title, stake: l.stake ?? "", amount: s(l.amount), valuation: s(l.valuation), minTicket: s(l.minTicket),
     vinkuliert: l.vinkuliert, vorkauf: l.vorkauf, description: l.description, reason: l.reason, plan: l.plan, agb: false,
+    orgId: l.orgId ? String(l.orgId) : "", mandateConfirmed: l.mandateConfirmed,
   };
-  return <ListingWizard mode="edit" initial={initial} plans={[]} startLeft={0} startUntil="" onSubmit={updateListing.bind(null, id)} />;
+  const orgs = (await myOrgs(user.id)).filter((x) => x.org.status === "online" || x.org.id === l.orgId).map((x) => ({ id: x.org.id, name: x.org.name }));
+  return <ListingWizard orgs={orgs} mode="edit" initial={initial} plans={[]} startLeft={0} startUntil="" onSubmit={updateListing.bind(null, id)} />;
 }
