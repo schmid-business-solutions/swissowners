@@ -519,7 +519,9 @@ html[data-header] header.top .beta-tag{border-color:rgba(255,255,255,.75);color:
 .beta-bar .beta-tag{margin:0;align-self:center}
 .beta-bar a{color:#FFFFFF;font-weight:700;text-underline-offset:3px}
 .beta-bar a:hover{color:#FFFFFF;text-decoration-thickness:2px}
-.legal ul li{display:flex;gap:8px;align-items:flex-start}
+.legal ul li{display:list-item;line-height:1.6}
+.legal ul li:has(> svg){display:flex;gap:8px;align-items:flex-start;list-style:none;margin-left:-20px}
+.legal ul{gap:10px}
 .legal ul li > svg{margin-top:5px;flex:none;color:var(--red)}
 @media (max-width:820px){.beta-bar{font-size:13px}.beta-bar .wrap{gap:6px 10px;padding-block:7px}header.top .beta-tag{height:18px;font-size:10px;padding:0 5px}}
 
