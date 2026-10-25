@@ -43,8 +43,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang="de-CH" data-header="rot" data-app={app ? "1" : undefined}>
       <body>
-        {!app && <BetaBar />}
-        <Header userName={user ? `${user.firstName} ${user.lastName}` : null} account={user ? { firstName: user.firstName, lastName: user.lastName, avatarVersion: user.avatarUpdatedAt ? user.avatarUpdatedAt.getTime() : null } : null} isAdmin={user?.role === "admin"} newRequests={unread} appMode={app} />
+        <div className="site-top">
+          <Header userName={user ? `${user.firstName} ${user.lastName}` : null} account={user ? { firstName: user.firstName, lastName: user.lastName, avatarVersion: user.avatarUpdatedAt ? user.avatarUpdatedAt.getTime() : null } : null} isAdmin={user?.role === "admin"} newRequests={unread} appMode={app} />
+          {!app && <BetaBar />}
+        </div>
         <main className="app">{children}</main>
         {app ? (
           <p className="app-legal-bar small"><Link href="/agb">AGB</Link> · <Link href="/datenschutz">Datenschutz</Link> · <Link href="/impressum">Impressum</Link></p>
