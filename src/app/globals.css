@@ -800,3 +800,24 @@ html[data-app] .start-promo{border-radius:18px}
 .price-card{gap:8px}
 .price-card.is-hl{border-color:var(--red);box-shadow:inset 0 0 0 1px var(--red)}
 html[data-app] .price-card.is-hl{box-shadow:0 0 0 2px var(--red),0 4px 16px rgba(20,20,20,.07)}
+
+/* ===== Komplementärfarbe: Petrol/Türkis als ruhiger Gegenpol zum Rot ===== */
+:root{
+  --accent:#0E7C76; --accent-dark:#0A5C58; --accent-soft:#E2F3F1; --accent-ink:#0A524E;
+  --accent-grad:linear-gradient(135deg,#17A398 0%,#0E7C76 55%,#0A5550 100%);
+  --ok:#0A6E68; --ok-soft:#E2F3F1;
+}
+.eyebrow{color:var(--accent)}
+.prem-sec .eyebrow{color:var(--red)}
+.pill.cap{background:var(--accent-soft);color:var(--accent-ink)}
+.trust svg{stroke:var(--accent)!important;color:var(--accent)}
+.howto .num{background:var(--accent-grad)}
+.btn-accent,a.btn-accent{background:var(--accent-grad);background-origin:border-box;color:#FFFFFF;border-color:transparent}
+a.btn-accent:hover,.btn-accent:hover{background:linear-gradient(135deg,#128A80,#0A5C58);color:#FFFFFF}
+.pill.vr{background:var(--accent);color:#FFFFFF}
+.chip.org{background:var(--accent-soft);color:var(--accent-ink)}
+.sample-note{border-color:#C79A2B}
+.search-switch a[aria-current="page"],.segsw a[aria-pressed="true"],.segsw button[aria-pressed="true"]{background:var(--ink)}
+.xcard-title,.lc-title{transition:color .15s}
+.xcard:hover .xcard-title,.lcard:hover .lc-title{color:var(--accent-dark)}
+.mono-org{background:var(--accent-grad)}

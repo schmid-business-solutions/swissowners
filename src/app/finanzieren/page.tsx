@@ -36,7 +36,7 @@ export default async function FinancePage() {
         <div className="wrap stack" style={{ gap: 24 }}>
           <div className="grid g3">
             {ways.map((w) => (
-              <div key={w.n} className="entry" style={{ borderTop: `4px solid ${w.main ? "var(--red)" : "var(--ink)"}` }}>
+              <div key={w.n} className="entry" style={{ borderTop: `4px solid ${w.main ? "var(--red)" : "var(--accent)"}` }}>
                 <span className="num">{w.n}</span>
                 <h2 className="h3">{w.title}</h2>
                 <p className="muted" style={{ flex: 1 }}>{w.text}</p>

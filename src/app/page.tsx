@@ -95,13 +95,13 @@ export default async function HomePage() {
               <p className="small" style={{ fontWeight: 600 }}>{left > 0 ? "Jetzt 60 Tage gratis · danach " : ""}ab {chf(minRenewal)} pro 30 Tage</p>
               <Link className="btn btn-red" href="/inserat-aufgeben?typ=sell" style={{ alignSelf: "flex-start" }}>Verkaufsangebot erfassen</Link>
             </div>
-            <div className="entry" style={{ borderTop: "4px solid var(--ink)" }}>
+            <div className="entry" style={{ borderTop: "4px solid var(--accent)" }}>
               <h3 className="h3">Kapital suchen</h3>
               <p className="muted" style={{ flex: 1 }}>Ihre Firma sucht Eigenkapital von Privatinvestoren und Business Angels.</p>
               <p className="small" style={{ fontWeight: 600 }}>{left > 0 ? "Jetzt 60 Tage gratis · danach " : ""}ab {chf(minRenewal)} pro 30 Tage</p>
-              <Link className="btn btn-ink" href="/inserat-aufgeben?typ=cap" style={{ alignSelf: "flex-start" }}>Kapitalgesuch erfassen</Link>
+              <Link className="btn btn-accent" href="/inserat-aufgeben?typ=cap" style={{ alignSelf: "flex-start" }}>Kapitalgesuch erfassen</Link>
             </div>
-            <div className="entry" style={{ borderTop: "4px solid #9A9A95" }}>
+            <div className="entry" style={{ borderTop: "4px solid var(--ink)" }}>
               <h3 className="h3">Beteiligung suchen</h3>
               <p className="muted" style={{ flex: 1 }}>Durchsuchen Sie alle Angebote kostenlos und merken Sie sich die interessantesten.</p>
               <p className="small" style={{ fontWeight: 600 }}>Für Investoren kostenlos</p>
@@ -124,13 +124,13 @@ export default async function HomePage() {
               <p className="small" style={{ fontWeight: 600 }}>{board.mandates} Mandate · {board.profiles} Profile</p>
               <Link className="btn btn-red" href="/verwaltungsraete" style={{ alignSelf: "flex-start" }}>Zu den Verwaltungsräten</Link>
             </div>
-            <div className="entry" style={{ borderTop: "4px solid var(--ink)" }}>
+            <div className="entry" style={{ borderTop: "4px solid var(--accent)" }}>
               <h3 className="h3">Selbst ein Mandat suchen</h3>
               <p className="muted" style={{ flex: 1 }}>Stellen Sie sich mit einem VR-Profil vor – öffentlich, nur für Angemeldete oder anonym. Passende Mandate sehen Sie direkt im Profil.</p>
               <p className="small" style={{ fontWeight: 600 }}>Während der Beta kostenlos</p>
-              <Link className="btn btn-ink" href="/verwaltungsraete/mein-profil" style={{ alignSelf: "flex-start" }}>VR-Profil erstellen</Link>
+              <Link className="btn btn-accent" href="/verwaltungsraete/mein-profil" style={{ alignSelf: "flex-start" }}>VR-Profil erstellen</Link>
             </div>
-            <div className="entry" style={{ borderTop: "4px solid #9A9A95" }}>
+            <div className="entry" style={{ borderTop: "4px solid var(--ink)" }}>
               <h3 className="h3">Partner finden</h3>
               <p className="muted" style={{ flex: 1 }}>M&amp;A-Berater, Nachfolgeberater, Treuhänder, Startup-Förderer und Investoren – viele inserieren auch im Auftrag ihrer Kunden.</p>
               <p className="small" style={{ fontWeight: 600 }}>Für Partner während der Beta kostenlos</p>
