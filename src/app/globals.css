@@ -586,3 +586,37 @@ body:has(.app-screen){overflow:hidden}
 .app-legal{text-align:center}
 .app-legal a{color:inherit}
 @media (prefers-reduced-motion:reduce){.app-dots button{transition:none}}
+
+/* ---------- Android-App: feste App-Leisten (html[data-app]) ---------- */
+html[data-app]{-webkit-tap-highlight-color:transparent}
+html[data-app] body{padding-bottom:calc(68px + env(safe-area-inset-bottom,0px))}
+html[data-app] header.top{position:fixed;top:0;left:0;right:0;padding-top:env(safe-area-inset-top,0px);box-shadow:0 1px 0 rgba(0,0,0,.08),0 4px 14px rgba(0,0,0,.10)}
+html[data-app] body{padding-top:calc(64px + env(safe-area-inset-top,0px))}
+html[data-app] header.top .wrap{padding-block:10px;min-height:64px;gap:10px;max-width:none}
+html[data-app] header.top .logo{min-width:0;flex:none}
+html[data-app] header.top .logo-mark{width:34px;height:34px}
+html[data-app] header.top .logo-mark svg{width:19px;height:19px}
+html[data-app] header.top .logo-text{font-size:20px}
+html[data-app] header.top .beta-tag{display:none}
+html[data-app] header.top nav.main,html[data-app] header.top .menu-btn,html[data-app] header.top .hdr-actions > .btn,html[data-app] .mobile-nav,html[data-app] .menu-backdrop{display:none!important}
+html[data-app] .hdr-actions{margin-left:auto;min-width:0}
+html[data-app] .acct-btn{padding:3px 12px 3px 3px;gap:8px;min-width:0;max-width:52vw;background:rgba(255,255,255,.12)}
+html[data-app] .acct-btn .avatar{width:32px;height:32px}
+html[data-app] .acct-name{font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+html[data-app] main.app > section:last-of-type{padding-bottom:32px!important}
+html[data-app] .toast{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
+.app-legal-bar{text-align:center;color:var(--muted);padding:8px 16px 20px}
+.app-legal-bar a{color:inherit}
+
+.app-tabbar{position:fixed;left:0;right:0;bottom:0;z-index:40;display:grid;grid-template-columns:repeat(5,1fr);align-items:end;background:var(--bg);border-top:1px solid var(--line);box-shadow:0 -4px 16px rgba(0,0,0,.06);padding:6px 4px calc(6px + env(safe-area-inset-bottom,0px))}
+.tab-item{display:flex;flex-direction:column;align-items:center;gap:2px;min-height:56px;justify-content:flex-end;padding:4px 2px;text-decoration:none;color:var(--muted);font-size:11.5px;font-weight:600;letter-spacing:.01em;-webkit-user-select:none;user-select:none}
+.tab-item[aria-current="page"]{color:var(--red)}
+.tab-item[aria-current="page"] .tab-ico svg{stroke-width:2.4}
+.tab-ico{position:relative;display:grid;place-items:center;width:44px;height:30px;border-radius:999px;transition:background-color .15s ease}
+.tab-item[aria-current="page"] .tab-ico{background:var(--red-soft)}
+.tab-badge{position:absolute;top:-6px;left:calc(50% + 5px);min-width:16px;height:16px;padding:0 4px;border-radius:999px;background:var(--red);color:#FFFFFF;font-size:10.5px;font-weight:800;line-height:16px;text-align:center;border:2px solid var(--bg);box-sizing:content-box}
+.tab-plus{display:grid;place-items:center;width:52px;height:52px;margin-top:-22px;border-radius:50%;background:var(--red);color:#FFFFFF;box-shadow:0 6px 16px rgba(175,0,30,.35);border:4px solid var(--bg);box-sizing:content-box}
+.tab-add[aria-current="page"] .tab-plus{background:var(--red-dark)}
+.tab-item:active .tab-ico,.tab-add:active .tab-plus{transform:scale(.94)}
+@media (min-width:821px){.app-tabbar{max-width:620px;margin:0 auto;border-left:1px solid var(--line);border-right:1px solid var(--line);border-radius:16px 16px 0 0}}
+html[data-app] .detail-side{top:calc(env(safe-area-inset-top,0px) + 80px)}

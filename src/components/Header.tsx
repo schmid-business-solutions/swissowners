@@ -20,7 +20,7 @@ function Avatar({ a }: { a: Account }) {
     : <span className="avatar avatar-initials" aria-hidden="true">{initials}</span>;
 }
 
-export default function Header({ userName, account, isAdmin, newRequests }: { userName: string | null; account: Account | null; isAdmin: boolean; newRequests: number }) {
+export default function Header({ userName, account, isAdmin, newRequests, appMode = false }: { userName: string | null; account: Account | null; isAdmin: boolean; newRequests: number; appMode?: boolean }) {
   const path = usePathname();
   const [open, setOpen] = useState(false);
   useEffect(() => setOpen(false), [path]);
@@ -45,7 +45,7 @@ export default function Header({ userName, account, isAdmin, newRequests }: { us
             {account ? (
               <Link className="acct-btn" href="/konto" aria-label={`Mein Bereich (${userName})`} title={`${userName} · Mein Bereich`}>
                 <span className="avatar-wrap"><Avatar a={account} />{newRequests > 0 && <span className="dot" />}</span>
-                <span className="acct-name hide-sm">{account.firstName}</span>
+                <span className={appMode ? "acct-name" : "acct-name hide-sm"}>{appMode ? `${account.firstName} ${account.lastName}` : account.firstName}</span>
               </Link>
             ) : (
               <Link className="acct-btn acct-out" href="/login" aria-label="Anmelden">

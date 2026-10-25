@@ -12,6 +12,10 @@ import Footer from "@/components/Footer";
 import { getUser } from "@/lib/auth";
 import { db, schema } from "@/lib/db";
 import { appUrl } from "@/lib/format";
+import { cookies } from "next/headers";
+import { Suspense } from "react";
+import Link from "next/link";
+import AppTabBar from "@/components/AppTabBar";
 
 export const metadata: Metadata = {
   metadataBase: new URL(appUrl()),
@@ -34,13 +38,18 @@ async function unreadRequests(userId: number) {
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const user = await getUser().catch(() => null);
   const unread = user ? await unreadRequests(user.id).catch(() => 0) : 0;
+  /* App-Modus: in der Android-App (Cookie vom Proxy) feste App-Leisten statt Website-Header/-Footer */
+  const app = (await cookies()).get("swo_app")?.value === "1";
   return (
-    <html lang="de-CH" data-header="rot">
+    <html lang="de-CH" data-header="rot" data-app={app ? "1" : undefined}>
       <body>
-        <BetaBar />
-        <Header userName={user ? `${user.firstName} ${user.lastName}` : null} account={user ? { firstName: user.firstName, lastName: user.lastName, avatarVersion: user.avatarUpdatedAt ? user.avatarUpdatedAt.getTime() : null } : null} isAdmin={user?.role === "admin"} newRequests={unread} />
+        {!app && <BetaBar />}
+        <Header userName={user ? `${user.firstName} ${user.lastName}` : null} account={user ? { firstName: user.firstName, lastName: user.lastName, avatarVersion: user.avatarUpdatedAt ? user.avatarUpdatedAt.getTime() : null } : null} isAdmin={user?.role === "admin"} newRequests={unread} appMode={app} />
         <main className="app">{children}</main>
-        <Footer />
+        {app ? (
+          <p className="app-legal-bar small"><Link href="/agb">AGB</Link> · <Link href="/datenschutz">Datenschutz</Link> · <Link href="/impressum">Impressum</Link></p>
+        ) : <Footer />}
+        {app && user && <Suspense fallback={null}><AppTabBar newRequests={unread} /></Suspense>}
       </body>
     </html>
   );
