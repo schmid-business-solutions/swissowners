@@ -63,7 +63,7 @@ export default async function MandatePage({ params }: { params: Promise<{ nr: st
               <h1 className="h2">{m.title}</h1>
               {m.isSample && <div className="sample-note"><Info /><span><b>Mustermandat.</b> Dieses Mandat ist ein fiktives Beispiel. Firma und Angaben sind erfunden; Anfragen sind nicht möglich.</span></div>}
               <div className="row" style={{ gap: 6 }}>
-                {m.isSample ? <span className="chip sample">Mustermandat</span> : <span className="chip ok"><Check />Geprüft</span>}
+                {m.isSample ? <span className="chip sample">Mustermandat</span> : <span className="chip ok"><Check />Persönlich geprüft</span>}
                 {m.investWelcome && <span className="chip ok">Beteiligung möglich</span>}
               </div>
             </div>

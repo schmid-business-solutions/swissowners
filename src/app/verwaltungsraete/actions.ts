@@ -31,7 +31,7 @@ export async function saveProfile(_: FormState, fd: FormData): Promise<FormState
   await notifyAdmin(`${existing ? "VR-Profil geändert" : "Neues VR-Profil"} zur Prüfung: ${displayName}`, [v.headline, `Kompetenzen: ${v.skills}`, `${user.email}`], `${appUrl()}/admin/pruefung`, { ctaLabel: "Prüfen und freischalten" });
   if (!existing) await sendMail({
     to: user.email, subject: "VR-Profil eingereicht", heading: "Vielen Dank – Ihr VR-Profil ist eingereicht",
-    paragraphs: ["Wir prüfen Ihr Profil in der Regel innerhalb eines Werktags und schalten es dann frei.", "Danach finden Firmen Sie in der Suche, und Sie sehen passende Mandate. Während der Beta ist das Profil kostenlos."],
+    paragraphs: ["Wir prüfen Ihr Profil persönlich, in der Regel innerhalb eines Werktags und schalten es dann frei.", "Danach finden Firmen Sie in der Suche, und Sie sehen passende Mandate. Während der Beta ist das Profil kostenlos."],
     cta: { label: "Zu Mein Bereich", url: `${appUrl()}/konto?tab=vr` },
   });
   revalidatePath("/verwaltungsraete");
@@ -82,7 +82,7 @@ export async function saveMandate(mandateId: number | null, _: FormState, fd: Fo
     await notifyAdmin(`Neues VR-Mandat zur Prüfung: ${mandateNo(ins.id)}`, [`${BOARD_ROLE_LABEL[v.role]} · ${v.title}`, `Firma: ${v.companyName} (${v.companyUid})`, `${user.firstName} ${user.lastName} · ${user.email}`], `${appUrl()}/admin/pruefung`, { ctaLabel: "Prüfen und freischalten" });
     await sendMail({
       to: user.email, subject: `VR-Mandat eingereicht: ${mandateNo(ins.id)}`, heading: "Vielen Dank – Ihr VR-Mandat ist eingereicht",
-      paragraphs: [`Wir prüfen «${v.title}» und den Handelsregistereintrag in der Regel innerhalb eines Werktags.`, "Nach der Freischaltung ist das Mandat 60 Tage online. Während der Beta ist es kostenlos."],
+      paragraphs: [`Wir prüfen «${v.title}» und den Handelsregistereintrag persönlich, in der Regel innerhalb eines Werktags.`, "Nach der Freischaltung ist das Mandat 60 Tage online. Während der Beta ist es kostenlos."],
       cta: { label: "Zu Mein Bereich", url: `${appUrl()}/konto?tab=vr` },
     });
   } else {

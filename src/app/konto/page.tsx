@@ -26,14 +26,14 @@ const OK: Record<string, string> = {
   gekuendigt: "Gekündigt. Das Angebot bleibt bis zum Ende der Laufzeit online, danach endet es ohne weitere Belastung.",
   verkauft: "Als verkauft markiert. Herzlichen Glückwunsch! Es erfolgt keine weitere Belastung.",
   geloescht: "Angebot gelöscht.",
-  gespeichert: "Änderungen gespeichert. Wir prüfen das Angebot und schalten es wieder frei.",
+  gespeichert: "Änderungen gespeichert. Wir prüfen das Angebot persönlich und schalten es wieder frei.",
   passwort: "Ihr neues Passwort ist gespeichert.",
-  "partner-eingereicht": "Partnerprofil eingereicht. Wir prüfen es und melden uns per E-Mail.",
+  "partner-eingereicht": "Partnerprofil eingereicht. Wir prüfen es persönlich und melden uns per E-Mail.",
   "partner-gespeichert": "Änderungen gespeichert. Wir prüfen das Partnerprofil und schalten es wieder frei.",
   mitglied: "Person hinzugefügt und per E-Mail informiert.",
   entfernt: "Person entfernt.",
-  "profil-eingereicht": "VR-Profil gespeichert. Wir prüfen es und schalten es frei.",
-  "mandat-eingereicht": "VR-Mandat eingereicht. Wir prüfen es und schalten es frei.",
+  "profil-eingereicht": "VR-Profil gespeichert. Wir prüfen es persönlich und schalten es frei.",
+  "mandat-eingereicht": "VR-Mandat eingereicht. Wir prüfen es persönlich und schalten es frei.",
   "mandat-beendet": "VR-Mandat beendet.",
   "profil-geloescht": "Ihr VR-Profil ist gelöscht.",
 };
@@ -113,7 +113,7 @@ function AdRow({ l, sub, req }: { l: Listing; sub?: Subscription; req: number })
   const p = paid ? PLANS[l.plan as PaidPlan] : null;
   let term = "";
   if (l.status === "pending_payment") term = "Die Zahlung wurde noch nicht abgeschlossen. Das Angebot wird erst danach geprüft.";
-  else if (l.status === "in_review") term = sub?.periodEnd ? `Änderungen in Prüfung. Laufzeit bis ${date(sub.periodEnd)}.` : "Wir prüfen Ihre Angaben und den Handelsregistereintrag, in der Regel innerhalb eines Werktags. Die Laufzeit beginnt mit der Freischaltung.";
+  else if (l.status === "in_review") term = sub?.periodEnd ? `Änderungen in Prüfung. Laufzeit bis ${date(sub.periodEnd)}.` : "Wir prüfen Ihre Angaben und den Handelsregistereintrag persönlich, in der Regel innerhalb eines Werktags. Die Laufzeit beginnt mit der Freischaltung.";
   else if (l.status === "rejected") term = `Grund: ${l.rejectionReason ?? "–"} Bitte passen Sie das Angebot an.`;
   else if (sub?.status === "past_due") term = `Die automatische Verlängerung für ${chf(p?.renewal)} konnte nicht belastet werden. Das Angebot ist offline, bis Sie bezahlen.`;
   else if (l.status === "paused") term = `Pausiert: offline, es wird nichts belastet. Verbleibende Laufzeit ${sub?.pausedRemainingDays ?? 0} Tage. Die Pause endet nach spätestens 90 Tagen.`;

@@ -171,7 +171,7 @@ export default function ListingWizard({
             <>
               <div className="stack" style={{ gap: 8 }}>
                 <h2 className="h3">Angaben zur Firma</h2>
-                <p className="muted">Branche, Kanton und Kennzahlen sind öffentlich. Firmenname und UID bleiben verborgen, bis ein Interessent die Vertraulichkeitserklärung unterzeichnet. Wir prüfen sie vor der Freischaltung im Handelsregister.</p>
+                <p className="muted">Branche, Kanton und Kennzahlen sind öffentlich. Firmenname und UID bleiben verborgen, bis ein Interessent die Vertraulichkeitserklärung unterzeichnet. Wir prüfen sie vor der Freischaltung persönlich im Handelsregister.</p>
               </div>
               <div className="fgrid">
                 <label className="field">Firmenname (verborgen)<input value={w.companyName} onChange={(e) => set("companyName", e.target.value)} maxLength={200} autoComplete="organization" /></label>
@@ -297,7 +297,7 @@ export default function ListingWizard({
               <div className="detail-side" style={{ position: "static", gap: 14 }}>
                 <span className="fact-l">Zusammenfassung</span>
                 {mode === "edit" ? (
-                  <p className="small">Nach dem Speichern prüfen wir die Änderungen. Bis zur erneuten Freischaltung ist das Angebot nicht öffentlich sichtbar.</p>
+                  <p className="small">Nach dem Speichern prüfen wir die Änderungen persönlich. Bis zur erneuten Freischaltung ist das Angebot nicht öffentlich sichtbar.</p>
                 ) : w.plan === "start" || !plan ? (
                   <div className="summary"><span>Startangebot, 60 Tage</span><span>CHF 0</span><span className="total">Total</span><span className="total">CHF 0</span></div>
                 ) : (

@@ -127,7 +127,7 @@ export default async function DetailPage({ params }: { params: Promise<{ nr: str
               </Link>
             )}
             <Contact listingId={l.id} no={no} mode={mode} userName={user ? `${user.firstName} ${user.lastName}` : ""} userPhone={user?.phone ?? ""} saved={Boolean(saved)} />
-            <p className="small muted">{l.isSample ? "Fiktives Beispiel zur Veranschaulichung." : `Geprüft am ${date(l.publishedAt)}.`} Keine Provision – Preis und Vertrag regeln Sie direkt mit dem Inserenten.</p>
+            <p className="small muted">{l.isSample ? "Fiktives Beispiel zur Veranschaulichung." : `Persönlich geprüft am ${date(l.publishedAt)}.`} Keine Provision – Preis und Vertrag regeln Sie direkt mit dem Inserenten.</p>
           </aside>
         </div>
       </div>

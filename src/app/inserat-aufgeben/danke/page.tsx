@@ -15,7 +15,7 @@ export default async function ThanksPage({ searchParams }: { searchParams: Promi
               <h1 className="h2">Angebot eingereicht</h1>
               <p>
                 {bezahlt ? "Vielen Dank für Ihre Zahlung. " : "Ihr Startangebot läuft 60 Tage ab Freischaltung, kostenlos und ohne Zahlungsmittel. "}
-                Wir prüfen Ihre Angaben und den Handelsregistereintrag – in der Regel innerhalb eines Werktags. Sie erhalten eine E-Mail, sobald {nr ? `Angebot ${nr}` : "Ihr Angebot"} online ist.
+                Wir prüfen Ihre Angaben und den Handelsregistereintrag persönlich – in der Regel innerhalb eines Werktags. Sie erhalten eine E-Mail, sobald {nr ? `Angebot ${nr}` : "Ihr Angebot"} online ist.
               </p>
             </div>
           </div>

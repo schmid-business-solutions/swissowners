@@ -44,7 +44,7 @@ export default function PrivacyPage() {
       <p>Sie können Auskunft, Berichtigung, Löschung und Herausgabe Ihrer Daten verlangen sowie der Bearbeitung widersprechen. Ihr VR-Profil können Sie in «Mein Bereich» jederzeit bearbeiten, pausieren oder löschen; die Löschung eines Partnerprofils oder Ihres Kontos veranlassen wir auf Anfrage. Kontakt: <a href="mailto:office@schmidbusiness.com">office@schmidbusiness.com</a>. Sie können sich zudem beim Eidgenössischen Datenschutz- und Öffentlichkeitsbeauftragten (EDÖB) beschweren.</p>
 
       <h2>7. Datensicherheit</h2>
-      <p>Die Übertragung erfolgt verschlüsselt (HTTPS). Passwörter speichern wir ausschliesslich als kryptografischen Hash. Inhalte werden vor der Veröffentlichung geprüft, und der Zugriff auf nicht öffentliche Angaben ist auf berechtigte Personen beschränkt.</p>
+      <p>Die Übertragung erfolgt verschlüsselt (HTTPS). Passwörter speichern wir ausschliesslich als kryptografischen Hash. Inhalte werden vor der Veröffentlichung von einer Person aus unserem Team geprüft, und der Zugriff auf nicht öffentliche Angaben ist auf berechtigte Personen beschränkt.</p>
     </article></div></section>
   );
 }

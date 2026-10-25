@@ -71,7 +71,7 @@ export async function createListing(data: WizardData): Promise<SubmitResult> {
       paragraphs: [
         `Guten Tag ${user.firstName} ${user.lastName}`,
         `Wir haben Ihr Angebot «${listing.title}» (${listingNo(ins.id)}) erhalten.`,
-        "Wir prüfen jetzt Ihre Angaben und den Handelsregistereintrag – in der Regel innerhalb eines Werktags. Sobald das Angebot freigeschaltet ist, erhalten Sie eine weitere E-Mail.",
+        "Wir prüfen Ihre Angaben und den Handelsregistereintrag jetzt persönlich – in der Regel innerhalb eines Werktags. Sobald das Angebot freigeschaltet ist, erhalten Sie eine weitere E-Mail.",
         "Ihr Startangebot ist kostenlos und läuft 60 Tage ab Freischaltung. Bis dahin können Sie das Angebot in «Mein Bereich» jederzeit ansehen und anpassen.",
         "Freundliche Grüsse\nIhr SwissOwners-Team",
       ],

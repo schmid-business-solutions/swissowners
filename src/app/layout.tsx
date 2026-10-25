@@ -20,7 +20,7 @@ import AppTabBar from "@/components/AppTabBar";
 export const metadata: Metadata = {
   metadataBase: new URL(appUrl()),
   title: { default: "SwissOwners – Firmenanteile, Kapital und Verwaltungsräte", template: "%s · SwissOwners" },
-  description: "Wo Schweizer Firmen neue Eigentümer, Kapital und Verwaltungsräte finden. Der Marktplatz für KMU und Startups – geprüft, vertraulich, ohne Provision.",
+  description: "Wo Schweizer Firmen neue Eigentümer, Kapital und Verwaltungsräte finden. Der Marktplatz für KMU und Startups – persönlich geprüft, vertraulich, ohne Provision.",
   openGraph: { siteName: "SwissOwners", locale: "de_CH", type: "website" },
 };
 

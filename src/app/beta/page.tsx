@@ -28,7 +28,7 @@ export default function BetaPage() {
 
           <h2>Was heisst das für Sie?</h2>
           <ul>
-            <li><Check size={14} /> Ihre Angebote sind echt und werden geprüft – Interessenten können Sie bereits kontaktieren.</li>
+            <li><Check size={14} /> Ihre Angebote sind echt und werden persönlich geprüft – Interessenten können Sie bereits kontaktieren.</li>
             <li><Check size={14} /> Mit dem kostenlosen Startangebot inserieren Sie während der Testphase ohne Kosten.</li>
             <li><Check size={14} /> Ihr Konto und Ihre Angebote bleiben beim offiziellen Start bestehen.</li>
             <li><Info size={16} /> Funktionen, Texte und Gestaltung können sich während der Testphase noch ändern. Vereinzelt kann es zu Fehlern kommen.</li>

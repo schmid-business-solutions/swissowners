@@ -28,7 +28,7 @@ export async function saveOrg(orgId: number | null, _: FormState, fd: FormData):
       `${appUrl()}/admin/pruefung`, { ctaLabel: "Prüfen und freischalten", facts: [["UID", v.uid ?? "–"], ["Website", v.website ?? "–"], ["E-Mail", v.email]] });
     await sendMail({
       to: user.email, subject: `Partnerprofil eingereicht: ${v.name}`, heading: "Vielen Dank – Ihr Partnerprofil ist eingereicht",
-      paragraphs: [`Wir prüfen das Profil «${v.name}» in der Regel innerhalb eines Werktags und melden uns per E-Mail.`, "Während der Beta ist das Partnerprofil kostenlos. Nach der Freischaltung können Sie Angebote und VR-Mandate im Auftrag Ihrer Kunden inserieren und Ihr Team hinzufügen."],
+      paragraphs: [`Wir prüfen das Profil «${v.name}» persönlich, in der Regel innerhalb eines Werktags und melden uns per E-Mail.`, "Während der Beta ist das Partnerprofil kostenlos. Nach der Freischaltung können Sie Angebote und VR-Mandate im Auftrag Ihrer Kunden inserieren und Ihr Team hinzufügen."],
       cta: { label: "Zu Mein Bereich", url: `${appUrl()}/konto?tab=partner` },
     });
     revalidatePath("/konto");

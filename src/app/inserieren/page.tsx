@@ -17,7 +17,7 @@ export default function ChoosePage() {
       <div className="wrap stack" style={{ gap: 22, maxWidth: 820 }}>
         <div className="stack" style={{ gap: 6 }}>
           <h1 className="h2">Was möchten Sie inserieren?</h1>
-          <p className="muted">Alle Inserate werden vor der Freischaltung geprüft. Profile und VR-Mandate sind während der Beta kostenlos.</p>
+          <p className="muted">Alle Inserate prüft vor der Freischaltung ein Mensch aus unserem Team – nicht ein Algorithmus. Profile und VR-Mandate sind während der Beta kostenlos.</p>
         </div>
         <div className="stack" style={{ gap: 12 }}>
           {ITEMS.map((i) => (

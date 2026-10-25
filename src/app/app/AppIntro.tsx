@@ -18,7 +18,7 @@ const Person = () => (
 const SLIDES = [
   { icon: <Cross size={54} />, title: "Schweizer Firmenanteile. Direkt gehandelt.", text: "Kaufen, verkaufen oder Kapital suchen: SwissOwners ist der Marktplatz für Anteile an nicht kotierten KMU und Startups." },
   { icon: <Lock size={40} color="#FFFFFF" />, title: "Diskret von Anfang an.", text: "Firmenname und UID bleiben verborgen. Erst nach einer digitalen Vertraulichkeitserklärung erfahren Interessenten, um welche Firma es geht." },
-  { icon: <Handshake />, title: "Direkt verhandeln, ohne Provision.", text: "Käufer und Verkäufer einigen sich selbst. Jedes Angebot prüfen wir vor der Freischaltung." },
+  { icon: <Handshake />, title: "Direkt verhandeln, ohne Provision.", text: "Käufer und Verkäufer einigen sich selbst. Jedes Angebot prüft ein Mensch vor der Freischaltung." },
 ];
 
 function markSeen() {

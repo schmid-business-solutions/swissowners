@@ -43,7 +43,7 @@ export default function AgbPage() {
       </ul>
 
       <h2>6. Prüfung durch SwissOwners</h2>
-      <p>SwissOwners prüft Angebote, VR-Mandate, VR-Profile und Partnerprofile vor der Freischaltung auf Plausibilität und gleicht Gesellschaften, soweit eine UID vorliegt, mit dem Handelsregister ab. Diese Prüfung ist keine Due Diligence und keine Gewähr für die Richtigkeit der Angaben, die Werthaltigkeit von Anteilen oder die Bonität, Identität und Eignung der Beteiligten. SwissOwners kann Inhalte ohne Angabe von Gründen ablehnen, ändern lassen oder entfernen. Nach jeder Änderung wird ein Inhalt erneut geprüft.</p>
+      <p>SwissOwners prüft Angebote, VR-Mandate, VR-Profile und Partnerprofile vor der Freischaltung durch eine Person (nicht automatisiert) auf Plausibilität und gleicht Gesellschaften, soweit eine UID vorliegt, mit dem Handelsregister ab. Diese Prüfung ist keine Due Diligence und keine Gewähr für die Richtigkeit der Angaben, die Werthaltigkeit von Anteilen oder die Bonität, Identität und Eignung der Beteiligten. SwissOwners kann Inhalte ohne Angabe von Gründen ablehnen, ändern lassen oder entfernen. Nach jeder Änderung wird ein Inhalt erneut geprüft.</p>
 
       <h2>7. Anfragen und Vertraulichkeit</h2>
       <ul>

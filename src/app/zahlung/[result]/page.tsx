@@ -29,7 +29,7 @@ export default async function PaymentResult({ params, searchParams }: { params: 
           <div className="stack" style={{ gap: 6 }}>
             <h1 className="h2">Zahlung erhalten</h1>
             <p>{p.kind === "initial"
-              ? `Vielen Dank. Wir prüfen jetzt Angebot ${no} – in der Regel innerhalb eines Werktags. Die Laufzeit beginnt mit der Freischaltung.`
+              ? `Vielen Dank. Wir prüfen Angebot ${no} jetzt persönlich – in der Regel innerhalb eines Werktags. Die Laufzeit beginnt mit der Freischaltung.`
               : `Vielen Dank. Ihr Paket für Angebot ${no} ist aktiv.`} Eine Bestätigung ist per E-Mail unterwegs.</p>
           </div>
         </div>

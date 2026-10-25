@@ -127,7 +127,7 @@ async function applyPayment(p: Payment, tokenTxId: number | null) {
       paragraphs: [
         `Wir haben ${chf(p.amountRappen / 100)} für das Paket ${PLANS[plan].name} zu Ihrem Angebot «${listing.title}» erhalten.`,
         p.kind === "initial"
-          ? "Wir prüfen jetzt Ihre Angaben und den Handelsregistereintrag – in der Regel innerhalb eines Werktags. Die Laufzeit beginnt mit der Freischaltung."
+          ? "Wir prüfen Ihre Angaben und den Handelsregistereintrag jetzt persönlich – in der Regel innerhalb eines Werktags. Die Laufzeit beginnt mit der Freischaltung."
           : `Das Paket verlängert sich danach automatisch um jeweils ${RENEWAL_DAYS} Tage für ${chf(PLANS[plan].renewal)}, bis Sie kündigen oder pausieren.`,
       ],
       cta: { label: "Zu meinen Angeboten", url: `${appUrl()}/konto` },

@@ -22,7 +22,7 @@ export default async function HomePage() {
           <div className="hero-main">
             <p className="eyebrow">Der Marktplatz für Schweizer KMU und Startups</p>
             <h1 className="h1 hero-title"><span>Wo Schweizer Firmen neue Eigentümer,</span> <span>Kapital und Verwaltungsräte finden.</span></h1>
-            <p className="lead">Der Marktplatz für KMU und Startups – geprüft, vertraulich, ohne Provision.</p>
+            <p className="lead">Der Marktplatz für KMU und Startups – persönlich geprüft, vertraulich, ohne Provision.</p>
             <HomeSearch />
             <p className="small muted">Anonym inserieren · Firmenname erst nach digitaler Vertraulichkeitserklärung · keine Provision</p>
           </div>
@@ -32,7 +32,7 @@ export default async function HomePage() {
       <section className="soft" style={{ paddingBlock: 28 }}>
         <div className="wrap">
           <div className="trust">
-          <div><Shield /><span><b>Geprüfte Angebote</b><span className="small muted">Abgleich mit dem Handelsregister vor der Freischaltung</span></span></div>
+          <div><Shield /><span><b>Persönlich geprüft</b><span className="small muted">Jedes Inserat prüft ein Mensch, inklusive Abgleich mit dem Handelsregister</span></span></div>
           <div><Lock size={26} color="var(--red)" /><span><b>Diskret und anonym</b><span className="small muted">Firmenname erst nach Vertraulichkeitserklärung</span></span></div>
           <div><Tag /><span><b>Fixe Gebühren</b><span className="small muted">Keine Provision auf Ihren Deal</span></span></div>
           <div><Home /><span><b>Startups und KMU</b><span className="small muted">An einem Ort, aus allen Branchen und Kantonen</span></span></div>
@@ -146,7 +146,7 @@ export default async function HomePage() {
           <ol className="howto">
             {[
               ["Inserat erfassen", "Branche, Anteil, Preisvorstellung, Vinkulierung und Vorkaufsrechte. Der Firmenname bleibt verborgen."],
-              ["Prüfung", "Wir prüfen die Angaben und den Handelsregistereintrag, bevor das Angebot online geht."],
+              ["Persönliche Prüfung", "Ein Mensch aus unserem Team prüft die Angaben und den Handelsregistereintrag, bevor das Angebot online geht."],
               ["Anfragen erhalten", "Interessenten unterzeichnen digital eine Vertraulichkeitserklärung und sehen dann den Firmennamen."],
               ["Direkt verhandeln", "Preis, Vertrag und Übertragung regeln Käufer und Verkäufer selbst – ohne Provision an uns."],
             ].map(([t, d], i) => (

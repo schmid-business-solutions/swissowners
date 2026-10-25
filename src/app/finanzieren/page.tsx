@@ -19,7 +19,7 @@ export default async function FinancePage() {
   const top = rows.slice(0, 3);
   const orgs = await orgBadges(top.map((l) => l.orgId)).catch(() => ({} as Awaited<ReturnType<typeof orgBadges>>));
   const ways = [
-    { n: "1", title: "Kapitalgesuch inserieren", text: "Beschreiben Sie Ihre Firma, den gesuchten Betrag und die Bewertung. Der Firmenname bleibt verborgen, bis Investoren eine Vertraulichkeitserklärung unterzeichnen.", cta: "Kapitalgesuch erfassen", href: "/inserat-aufgeben?typ=cap", note: left > 0 ? "Startangebot: 60 Tage kostenlos" : "Fixe Gebühr, keine Provision", main: true },
+    { n: "1", title: "Kapitalgesuch inserieren", text: "Beschreiben Sie Ihre Firma, den gesuchten Betrag und die Bewertung. Wir prüfen es persönlich; der Firmenname bleibt verborgen, bis Investoren eine Vertraulichkeitserklärung unterzeichnen.", cta: "Kapitalgesuch erfassen", href: "/inserat-aufgeben?typ=cap", note: left > 0 ? "Startangebot: 60 Tage kostenlos" : "Fixe Gebühr, keine Provision", main: true },
     { n: "2", title: "Investoren mit VR-Erfahrung", text: "Erfahrene Verwaltungsrätinnen und Verwaltungsräte, die sich auch finanziell beteiligen – Kapital und Know-how in einem.", cta: "Investoren ansehen", href: "/verwaltungsraete?ansicht=profile&investor=1", note: "Direkt kontaktieren" },
     { n: "3", title: "Business Angels, VC und Förderer", text: "Venture-Capital-Firmen, Angel-Netzwerke, Inkubatoren und öffentliche Startup-Förderung im Partnerverzeichnis.", cta: "Partner finden", href: "/partner?gruppe=startup", note: "Viele inserieren auch für ihre Startups" },
   ];

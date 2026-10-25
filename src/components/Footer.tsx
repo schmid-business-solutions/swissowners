@@ -13,7 +13,7 @@ export default function Footer() {
             </div>
             <p className="ft-lead">Der Schweizer Marktplatz für Firmenanteile, Kapital und Verwaltungsräte.</p>
             <p>Anteile kaufen und verkaufen, Eigenkapital suchen, Verwaltungsräte und Partner finden – für KMU und Startups.</p>
-            <p>Jeder Eintrag wird geprüft. Sie verhandeln direkt, ohne Provision.</p>
+            <p>Jedes Inserat wird von einem Menschen geprüft. Sie verhandeln direkt, ohne Provision.</p>
           </div>
           <nav className="ft-col" aria-label="Anbieten">
             <b>Anbieten</b>
