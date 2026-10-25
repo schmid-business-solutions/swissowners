@@ -890,6 +890,3 @@ html[data-app] .contact-form{box-shadow:none}
 .topic-tag:hover{background:#F0D3D7}
 html[data-app] .topic-status{bottom:calc(76px + env(safe-area-inset-bottom))}
 @media (max-width:640px){.contact-sub,.topic-tags{padding-left:0}}
-/* Suche: Reiter zentriert */
-.sbox .stabs{align-self:center}
-.sbox .sbody{border-radius:8px}
