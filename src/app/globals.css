@@ -676,3 +676,20 @@ html[data-app] .steps li[data-state="on"]{font-size:13px;font-weight:700;color:v
 html[data-app] .tabbar,html[data-app] [role="tablist"]:not(.app-dots){border-bottom:0;gap:6px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
 html[data-app] .tablink,html[data-app] .tabbar button{border:0;border-radius:999px;padding:9px 16px;background:#F3F1ED;color:var(--ink-2);white-space:nowrap;font-size:14px}
 html[data-app] .tablink[aria-selected="true"],html[data-app] .tabbar button[aria-selected="true"]{background:var(--ink);color:#FFFFFF}
+
+/* ===== Moderner Farbverlauf (schräg, Rot bleibt Leitfarbe) ===== */
+:root{
+  --grad:linear-gradient(135deg,#E11A3C 0%,#AF001E 52%,#7A0016 100%);
+  --grad-hover:linear-gradient(135deg,#C9102F 0%,#94001A 52%,#600011 100%);
+  --grad-bar:radial-gradient(120% 220% at 0% 0%,rgba(255,255,255,.16) 0%,rgba(255,255,255,0) 50%),linear-gradient(115deg,#D9163A 0%,#AF001E 48%,#78001A 100%);
+}
+html[data-header="rot"] header.top{background:var(--grad-bar)}
+.btn-red{background:var(--grad);background-origin:border-box;border-color:transparent}
+.btn-red:hover{background:var(--grad-hover)}
+.logo-mark,footer .logo-mark,.hero-side,.num,.psec-h .num,.avatar-initials,.app-mark,.tab-plus,.sr-tag,
+.mnav-item[aria-current="page"] .mnav-ico,.info-btn[aria-expanded="true"],.steps li[data-state="on"] span{background:var(--grad)}
+.tab-add[aria-current="page"] .tab-plus{background:var(--grad-hover)}
+html[data-header="rot"] .avatar-initials{background:#FFFFFF}
+html[data-app] .steps li[data-state="done"] span,html[data-app] .steps li[data-state="on"] span{background:linear-gradient(90deg,#E11A3C,#AF001E)}
+.app-dots button.on{background:linear-gradient(90deg,#E11A3C,#AF001E)}
+.tab-plus,.app-mark,.logo-mark{background-origin:border-box}
