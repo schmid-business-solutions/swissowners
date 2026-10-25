@@ -620,3 +620,59 @@ html[data-app] .toast{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 .tab-item:active .tab-ico,.tab-add:active .tab-plus{transform:scale(.94)}
 @media (min-width:821px){.app-tabbar{max-width:620px;margin:0 auto;border-left:1px solid var(--line);border-right:1px solid var(--line);border-radius:16px 16px 0 0}}
 html[data-app] .detail-side{top:calc(env(safe-area-inset-top,0px) + 80px)}
+
+/* ---------- Android-App: eigenes App-Design (nur html[data-app]) ----------
+   Ganz weiss, Seitencontainer ohne Rahmen, Listenelemente als weiche Karten, kompaktere Typografie. */
+html[data-app] body,html[data-app] main.app > section,html[data-app] .soft,html[data-app] .hero-sec{background:#FFFFFF}
+html[data-app] .wrap{padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}
+html[data-app] section{padding-block:18px}
+html[data-app] main.app > section:first-of-type{padding-top:20px}
+html[data-app] .hero-sec{padding-block:24px 8px}
+html[data-app] .prem-sec{padding-block:16px 0}
+
+/* Seitencontainer: flach, randlos */
+html[data-app] .wizard,html[data-app] .legal,html[data-app] .auth,html[data-app] .trust,html[data-app] .filters,
+html[data-app] .detail-side,html[data-app] .notice.neutral,html[data-app] .table-wrap,html[data-app] .search{background:transparent;border:0;border-radius:0;box-shadow:none;padding:0}
+html[data-app] .wizard,html[data-app] .legal{max-width:none;gap:22px}
+html[data-app] .detail-side{border-top:1px solid #EFEDE9;padding-top:20px;position:static}
+html[data-app] .empty{border:0;background:#F7F6F3;border-radius:16px;padding:28px 20px}
+
+/* Listenelemente: weiche Karten ohne Linie */
+html[data-app] .lcard,html[data-app] .pcard,html[data-app] .card,html[data-app] .entry,html[data-app] .adrow,html[data-app] .msg,html[data-app] .statbox,html[data-app] .choice{border:0;border-radius:16px;box-shadow:0 1px 2px rgba(20,20,20,.06),0 4px 16px rgba(20,20,20,.07)}
+html[data-app] .lcard.is-prem{box-shadow:0 0 0 2px var(--red),0 4px 16px rgba(20,20,20,.07)}
+html[data-app] .pcard{border-top:0}
+html[data-app] .entry[style]{border-top-width:0!important}
+html[data-app] .choice[aria-pressed="true"]{box-shadow:0 0 0 2px var(--ok),0 4px 16px rgba(20,20,20,.07)}
+html[data-app] .lcard:hover,html[data-app] .card:hover,html[data-app] .pcard:hover{box-shadow:0 1px 2px rgba(20,20,20,.06),0 4px 16px rgba(20,20,20,.07)}
+html[data-app] .lcard:active,html[data-app] .card:active{transform:scale(.99)}
+html[data-app] .kv{background:transparent;gap:8px}
+html[data-app] .kv > div{background:#F7F6F3;border-radius:12px}
+html[data-app] .list-rows{gap:16px}
+html[data-app] .grid{gap:16px}
+
+/* Typografie kompakter */
+html[data-app] .h1{font-size:30px;line-height:1.12;letter-spacing:-0.025em}
+html[data-app] .h2,html[data-app] .wizard h1,html[data-app] .legal h1{font-size:26px;line-height:1.15}
+html[data-app] .h3,html[data-app] .wizard h2,html[data-app] .legal h2{font-size:20px;line-height:1.25}
+html[data-app] .lead{font-size:17px}
+html[data-app] body{font-size:16px}
+
+/* Formulare und Buttons im App-Stil */
+html[data-app] .btn{border-radius:12px;min-height:52px}
+html[data-app] .field input,html[data-app] .field select,html[data-app] .field textarea{border-radius:12px;border-color:#D9D6D0;background:#FAF9F7;height:52px}
+html[data-app] .field textarea{height:auto}
+html[data-app] .field input:focus,html[data-app] .field select:focus,html[data-app] .field textarea:focus{background:#FFFFFF;border-color:var(--ink)}
+html[data-app] .chip{border-radius:999px}
+
+/* Schritte im Inserat-Formular als Fortschrittsbalken */
+html[data-app] .steps{flex-wrap:nowrap;gap:6px}
+html[data-app] .steps li{flex:1 1 0;flex-direction:column;align-items:flex-start;gap:6px;font-size:0;min-width:0}
+html[data-app] .steps li + li::before{display:none}
+html[data-app] .steps li span{width:100%;height:5px;border-radius:3px;font-size:0;background:#ECEAE6}
+html[data-app] .steps li[data-state="done"] span,html[data-app] .steps li[data-state="on"] span{background:var(--red)}
+html[data-app] .steps li[data-state="on"]{font-size:13px;font-weight:700;color:var(--ink);white-space:nowrap;overflow:visible}
+
+/* Tabs im Konto als Segmente */
+html[data-app] .tabbar,html[data-app] [role="tablist"]:not(.app-dots){border-bottom:0;gap:6px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+html[data-app] .tablink,html[data-app] .tabbar button{border:0;border-radius:999px;padding:9px 16px;background:#F3F1ED;color:var(--ink-2);white-space:nowrap;font-size:14px}
+html[data-app] .tablink[aria-selected="true"],html[data-app] .tabbar button[aria-selected="true"]{background:var(--ink);color:#FFFFFF}
