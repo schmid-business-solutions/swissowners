@@ -20,13 +20,6 @@ export default async function HomePage() {
       <section className="hero-sec">
         <div className="wrap hero hero-c">
           <div className="hero-main">
-            {left > 0 && (
-              <Link className="start-ribbon" href="/inserat-aufgeben">
-                <span className="sr-tag">Startangebot</span>
-                <span>Die ersten {slots} Angebote 60 Tage gratis · noch <b>{left} Plätze</b></span>
-                <Arrow />
-              </Link>
-            )}
             <p className="eyebrow">Der Marktplatz für Schweizer KMU und Startups</p>
             <h1 className="h1 hero-title"><span>Wo Schweizer Firmen neue Eigentümer,</span> <span>Kapital und Verwaltungsräte finden.</span></h1>
             <p className="lead">Der Marktplatz für KMU und Startups – geprüft, vertraulich, ohne Provision.</p>
@@ -44,6 +37,21 @@ export default async function HomePage() {
           <div><Tag /><span><b>Fixe Gebühren</b><span className="small muted">Keine Provision auf Ihren Deal</span></span></div>
           <div><Home /><span><b>Startups und KMU</b><span className="small muted">An einem Ort, aus allen Branchen und Kantonen</span></span></div>
           </div>
+          {left > 0 && (
+            <div className="start-promo">
+              <div className="sp-text">
+                <span className="sp-tag">Startangebot</span>
+                <h2 className="sp-title">Die ersten {slots} Angebote 60 Tage kostenlos</h2>
+                <p className="sp-lead">Alle Leistungen des Pakets Plus, kein Zahlungsmittel nötig. Nach 60 Tagen wählen Sie ein Paket – oder das Angebot endet automatisch, ohne Kosten.</p>
+              </div>
+              <div className="sp-side">
+                <div className="sp-count"><b>{left}</b> von {slots} Plätzen frei</div>
+                <div className="sp-bar" aria-hidden="true"><span style={{ width: `${Math.max(4, Math.round((left / slots) * 100))}%` }} /></div>
+                <Link className="btn sp-cta" href="/inserat-aufgeben">Jetzt kostenlos inserieren <Arrow /></Link>
+                <span className="sp-note">Gilt bis {date(until)}</span>
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
