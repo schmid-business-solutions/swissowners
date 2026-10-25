@@ -560,3 +560,29 @@ html[data-header] .avatar-out{background:rgba(255,255,255,.14);color:#FFFFFF;bor
 h1,h2,h3,.h1,.h2,.h3,.lc-title,.lc-big{color:var(--ink)}
 .btn-red{font-weight:600;letter-spacing:.005em;box-shadow:none}
 .btn-red:hover{background:var(--red-dark)}
+
+/* ---------- Android-App: Intro und Anmeldung (Vollbild über Header/Footer) ---------- */
+body:has(.app-screen){overflow:hidden}
+.app-screen{position:fixed;inset:0;z-index:1000;background:var(--bg);overflow-y:auto;-webkit-overflow-scrolling:touch;padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px)}
+.app-mark{display:grid;place-items:center;width:56px;height:56px;border-radius:50%;background:var(--red);flex:none}
+.app-mark-lg{width:96px;height:96px}
+.app-title{font-size:clamp(26px,7vw,34px);font-weight:800;line-height:1.15;letter-spacing:-0.02em}
+.app-lead{font-size:17px;color:var(--muted);max-width:30em}
+.app-intro{min-height:100%;display:flex;flex-direction:column}
+.app-intro-top{display:flex;justify-content:flex-end;min-height:56px;padding:6px 8px}
+.app-track{flex:1;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain}
+.app-track::-webkit-scrollbar{display:none}
+.app-slide{flex:0 0 100%;scroll-snap-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:20px;padding:24px 28px}
+.app-intro-bottom{display:flex;flex-direction:column;gap:20px;padding:12px 24px 28px;max-width:520px;width:100%;margin:0 auto}
+.app-dots{display:flex;justify-content:center;gap:10px}
+.app-dots button{width:9px;height:9px;padding:0;border:0;border-radius:999px;background:var(--line);cursor:pointer;transition:width .2s ease,background-color .2s ease}
+.app-dots button.on{width:26px;background:var(--red)}
+.app-cta{display:flex;flex-direction:column;gap:12px}
+.app-auth{max-width:460px;margin:0 auto;display:flex;flex-direction:column;gap:20px;padding:32px 24px 40px}
+.app-auth form{display:flex;flex-direction:column;gap:16px}
+.app-brand{display:flex;align-items:center;gap:12px}
+.app-brand .logo-text{font-size:24px}
+.app-switch{text-align:center}
+.app-legal{text-align:center}
+.app-legal a{color:inherit}
+@media (prefers-reduced-motion:reduce){.app-dots button{transition:none}}
