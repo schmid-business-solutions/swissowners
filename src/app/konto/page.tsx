@@ -12,7 +12,7 @@ import { cancelAction, deleteAction, pauseAction, payAction, resumeAction, soldA
 import { mandateNo, myProfile } from "@/lib/board";
 import { myOrgs, orgMembersOf } from "@/lib/orgs";
 import { BOARD_ROLE_LABEL, ORG_KIND_LABEL } from "@/lib/taxonomy";
-import { endMandateAction, profileVisibleAction } from "@/app/verwaltungsraete/actions";
+import { deleteProfileAction, endMandateAction, profileVisibleAction } from "@/app/verwaltungsraete/actions";
 import { addMemberAction, removeMemberAction } from "@/app/partner/actions";
 import { OrgLogo } from "@/components/BoardCards";
 import type { BoardMandate, Inquiry } from "@/lib/db/schema";
@@ -35,6 +35,7 @@ const OK: Record<string, string> = {
   "profil-eingereicht": "VR-Profil gespeichert. Wir prüfen es und schalten es frei.",
   "mandat-eingereicht": "VR-Mandat eingereicht. Wir prüfen es und schalten es frei.",
   "mandat-beendet": "VR-Mandat beendet.",
+  "profil-geloescht": "Ihr VR-Profil ist gelöscht.",
 };
 const ERR: Record<string, string> = {
   zahlung: "Die Zahlungsseite konnte nicht geöffnet werden. Bitte später erneut versuchen.",
@@ -274,6 +275,7 @@ export default async function AccountPage({ searchParams }: { searchParams: Prom
               <Link className="btn btn-ghost" style={{ minHeight: 40 }} href="/verwaltungsraete/mein-profil">Bearbeiten</Link>
               {prof.status === "online" && <form action={profileVisibleAction}><input type="hidden" name="pause" value="1" /><button className="btn btn-ghost" style={{ minHeight: 40 }}>Pausieren</button></form>}
               {prof.status === "paused" && <form action={profileVisibleAction}><input type="hidden" name="pause" value="0" /><button className="btn btn-red" style={{ minHeight: 40 }}>Wieder sichtbar machen</button></form>}
+              <form action={deleteProfileAction}><ConfirmButton className="btn btn-ghost" question="VR-Profil endgültig löschen? Das lässt sich nicht rückgängig machen.">Löschen</ConfirmButton></form>
             </div>
           </div>
         ) : (

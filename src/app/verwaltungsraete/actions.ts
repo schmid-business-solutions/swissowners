@@ -50,6 +50,18 @@ export async function profileVisibleAction(fd: FormData) {
   redirect("/konto?tab=vr");
 }
 
+/** Eigenes VR-Profil endgültig löschen (inkl. Anfragen dazu) */
+export async function deleteProfileAction() {
+  const user = await requireUser("/konto?tab=vr");
+  const p = await myProfile(user.id);
+  if (p) {
+    await db.delete(schema.inquiries).where(and(eq(schema.inquiries.kind, "profile"), eq(schema.inquiries.targetId, p.id)));
+    await db.delete(schema.boardProfiles).where(and(eq(schema.boardProfiles.id, p.id), eq(schema.boardProfiles.userId, user.id)));
+  }
+  revalidatePath("/verwaltungsraete");
+  redirect("/konto?tab=vr&ok=profil-geloescht");
+}
+
 export async function saveMandate(mandateId: number | null, _: FormState, fd: FormData): Promise<FormState> {
   const user = await getUser();
   if (!user) return { error: "Bitte melden Sie sich erneut an." };
