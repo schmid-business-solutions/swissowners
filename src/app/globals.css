@@ -760,3 +760,9 @@ html[data-app] .xcard{border:0;border-radius:16px;box-shadow:0 1px 2px rgba(20,2
 html[data-app] .org-box{border:0;background:#F7F6F3;border-radius:14px}
 html[data-app] .filter-inline{grid-template-columns:1fr 1fr}
 html[data-app] .filter-inline .btn{grid-column:1/-1}
+
+/* Website- bzw. App-Teile: html[data-app] wird im Browser-Tab der Android-App gesetzt */
+.app-only{display:none!important}
+html[data-app] .app-only{display:revert!important}
+html[data-app] span.app-only{display:inline!important}
+html[data-app] .web-only{display:none!important}

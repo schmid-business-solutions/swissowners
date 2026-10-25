@@ -12,7 +12,7 @@ import Footer from "@/components/Footer";
 import { getUser } from "@/lib/auth";
 import { db, schema } from "@/lib/db";
 import { appUrl } from "@/lib/format";
-import { cookies } from "next/headers";
+import { APP_MODE_SCRIPT } from "@/lib/app-mode";
 import { Suspense } from "react";
 import Link from "next/link";
 import AppTabBar from "@/components/AppTabBar";
@@ -38,20 +38,22 @@ async function unreadRequests(userId: number) {
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const user = await getUser().catch(() => null);
   const unread = user ? await unreadRequests(user.id).catch(() => 0) : 0;
-  /* App-Modus: in der Android-App (Cookie vom Proxy) feste App-Leisten statt Website-Header/-Footer */
-  const app = (await cookies()).get("swo_app")?.value === "1";
+  /* Website und App teilen dasselbe Markup. Ob die Android-App läuft, erkennt APP_MODE_SCRIPT im Browser-Tab
+     und setzt html[data-app]; das CSS blendet dann Website-Teile aus und App-Leisten ein. */
   return (
-    <html lang="de-CH" data-header="rot" data-app={app ? "1" : undefined}>
+    <html lang="de-CH" data-header="rot" data-auth={user ? "1" : undefined} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: APP_MODE_SCRIPT }} />
+      </head>
       <body>
         <div className="site-top">
-          <Header userName={user ? `${user.firstName} ${user.lastName}` : null} account={user ? { firstName: user.firstName, lastName: user.lastName, avatarVersion: user.avatarUpdatedAt ? user.avatarUpdatedAt.getTime() : null } : null} isAdmin={user?.role === "admin"} newRequests={unread} appMode={app} />
-          {!app && <BetaBar />}
+          <Header userName={user ? `${user.firstName} ${user.lastName}` : null} account={user ? { firstName: user.firstName, lastName: user.lastName, avatarVersion: user.avatarUpdatedAt ? user.avatarUpdatedAt.getTime() : null } : null} isAdmin={user?.role === "admin"} newRequests={unread} />
+          <div className="web-only"><BetaBar /></div>
         </div>
         <main className="app">{children}</main>
-        {app ? (
-          <p className="app-legal-bar small"><Link href="/agb">AGB</Link> · <Link href="/datenschutz">Datenschutz</Link> · <Link href="/impressum">Impressum</Link></p>
-        ) : <Footer />}
-        {app && user && <Suspense fallback={null}><AppTabBar newRequests={unread} /></Suspense>}
+        <p className="app-legal-bar small app-only"><Link href="/agb">AGB</Link> · <Link href="/datenschutz">Datenschutz</Link> · <Link href="/impressum">Impressum</Link></p>
+        <div className="web-only"><Footer /></div>
+        {user && <div className="app-only"><Suspense fallback={null}><AppTabBar newRequests={unread} /></Suspense></div>}
       </body>
     </html>
   );
