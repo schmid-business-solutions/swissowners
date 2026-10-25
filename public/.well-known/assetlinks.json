@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "ch.swissowners.app",
+      "sha256_cert_fingerprints": [
+        "A2:46:2B:00:46:6B:24:FC:E0:87:59:FE:59:B8:C5:50:39:87:A3:CB:56:5E:4A:E1:74:FB:F4:6D:9A:C6:7A:31"
+      ]
+    }
+  }
+]
