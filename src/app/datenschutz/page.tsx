@@ -3,7 +3,7 @@ export const metadata = { title: "Datenschutzerklärung" };
 export default function PrivacyPage() {
   return (
     <section><div className="wrap"><article className="legal">
-      <p className="eyebrow">Stand: Entwurf Oktober 2026</p>
+      <p className="eyebrow">Stand: 25. Oktober 2026</p>
       <h1 className="h2">Datenschutzerklärung</h1>
       <p>Diese Erklärung beschreibt, wie SCHMID Business Solutions, Steffisburg (UID CHE-199.237.91), als Verantwortliche Personendaten im Zusammenhang mit SwissOwners bearbeitet – auf der Website swissowners.ch und in der SwissOwners-App. Es gilt das Schweizer Datenschutzgesetz (DSG).</p>
 
@@ -33,7 +33,7 @@ export default function PrivacyPage() {
       <ul>
         <li><b>Bei Anfragen:</b> Wenn Sie eine Anfrage senden, geben wir Name, E-Mail-Adresse, Telefonnummer (falls angegeben) und Nachricht an die Empfängerin bzw. den Empfänger weiter: bei Angeboten und VR-Mandaten an die inserierende Person bzw. den inserierenden Partner, bei VR-Profilen an die Person des Profils, bei Partnerprofilen an die hinterlegte E-Mail-Adresse und die Administratoren des Profils. Haben Sie ein freigeschaltetes VR-Profil, fügen wir bei Anfragen einen Link darauf bei.</li>
         <li><b>An Interessierte:</b> Firmenname und UID eines Angebots oder VR-Mandats werden erst nach der Vertraulichkeitserklärung bzw. -bestätigung angezeigt. Ihre persönlichen Kontaktdaten als Inserentin oder Inserent werden nicht angezeigt.</li>
-        <li><b>Dienstleister:</b> Hosting (Hostinger International Ltd., Rechenzentrum in [Region ergänzen]), E-Mail-Versand (Google, Gmail; Datenbearbeitung auch ausserhalb der Schweiz, z. B. in den USA), Zahlungsabwicklung (Payrexx AG, Schweiz). Sie bearbeiten Daten nur in unserem Auftrag.</li>
+        <li><b>Dienstleister:</b> Hosting (Hostinger International Ltd., Rechenzentrum in Frankfurt, Deutschland), E-Mail-Versand (Google, Gmail; Datenbearbeitung auch ausserhalb der Schweiz, z. B. in den USA), Zahlungsabwicklung (Payrexx AG, Schweiz). Sie bearbeiten Daten nur in unserem Auftrag.</li>
         <li><b>App:</b> Die Android-App zeigt swissowners.ch über den auf Ihrem Gerät installierten Browser Google Chrome an. Für Chrome und – wenn Sie die App dort beziehen – den Google Play Store gelten die Datenschutzbestimmungen von Google. Die App selbst erhebt keine zusätzlichen Daten.</li>
       </ul>
 

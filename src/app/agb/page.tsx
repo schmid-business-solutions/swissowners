@@ -3,7 +3,7 @@ export const metadata = { title: "Allgemeine Geschäftsbedingungen" };
 export default function AgbPage() {
   return (
     <section><div className="wrap"><article className="legal">
-      <p className="eyebrow">Stand: Entwurf Oktober 2026</p>
+      <p className="eyebrow">Stand: 25. Oktober 2026</p>
       <h1 className="h2">Allgemeine Geschäftsbedingungen (AGB)</h1>
 
       <h2>1. Anbieterin und Geltungsbereich</h2>

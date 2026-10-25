@@ -13,7 +13,7 @@ Der ursprüngliche Klick-Prototyp (Arbeitsname anteo) ist nicht Teil dieses Repo
 - **Kontaktanfragen**: digitale Vertraulichkeitserklärung (Name, Zeitpunkt, IP werden protokolliert), danach wird der Firmenname sichtbar; Nachricht geht per E-Mail an den Inserenten (Reply-To = Interessent)
 - **Merkliste**
 - **Pakete und Zahlung (Payrexx)**: Startangebot (gratis, 60 Tage, Plätze und Enddatum konfigurierbar), Basis/Plus/Premium mit 60 Tagen Erstlaufzeit und automatischer Verlängerung um 30 Tage über hinterlegtes Zahlungsmittel (Tokenisierung), Erinnerungen, Kündigen, Pausieren (max. 90 Tage), als verkauft markieren, Nachzahlung bei fehlgeschlagener Belastung
-- AGB, Datenschutz, Impressum (Entwürfe), Sitemap, robots.txt
+- AGB, Datenschutz, Impressum, Sitemap, robots.txt
 
 Preise ändern: `src/lib/plans.ts`. Branchen, Kantone, Regionen: `src/lib/taxonomy.ts`.
 
