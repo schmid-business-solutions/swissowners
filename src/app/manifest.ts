@@ -4,9 +4,9 @@ import type { MetadataRoute } from "next";
 export default function manifest(): MetadataRoute.Manifest {
   return {
     id: "/",
-    name: "SwissOwners – Schweizer Firmenanteile",
+    name: "SwissOwners – Firmenanteile, Kapital und Verwaltungsräte",
     short_name: "SwissOwners",
-    description: "Der Marktplatz für nicht kotierte Firmenanteile in der Schweiz.",
+    description: "Wo Schweizer Firmen neue Eigentümer, Kapital und Verwaltungsräte finden.",
     lang: "de-CH",
     start_url: "/",
     scope: "/",
