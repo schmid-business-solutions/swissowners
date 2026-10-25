@@ -1,6 +1,6 @@
 /* Layout: Swiss marketplace — white ground, one red accent, centered 1180px column, cards for listings only */
 :root{
-  --bg:#FFFFFF; --page:#F5F3EF; --bg-soft:#EEEBE5; --ink:#33363A; --ink-2:#47453F; --muted:#66625A; --line:#E1DDD5;
+  --bg:#FFFFFF; --page:#FAF9F7; --bg-soft:#EEEBE5; --ink:#33363A; --ink-2:#47453F; --muted:#66625A; --line:#E1DDD5;
   --red:#AF001E; --red-dark:#8A0017; --red-soft:#F6E5E7; --ok:#1D5E3A; --ok-soft:#E6F2EB;
   --font:'Hanken Grotesk', 'Helvetica Neue', Arial, sans-serif;
   color-scheme: light;
