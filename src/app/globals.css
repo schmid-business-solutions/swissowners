@@ -821,3 +821,11 @@ a.btn-accent:hover,.btn-accent:hover{background:linear-gradient(135deg,#128A80,#
 .xcard-title,.lc-title{transition:color .15s}
 .xcard:hover .xcard-title,.lcard:hover .lc-title{color:var(--accent-dark)}
 .mono-org{background:var(--accent-grad)}
+
+/* Suche: Reiter nur so breit wie die vier Tabs, darunter die Box */
+.search.sbox{border:0;background:transparent;box-shadow:none;border-radius:0;overflow:visible;padding:0;gap:0}
+.sbox .stabs{display:inline-flex;align-self:flex-start;max-width:100%;border:1px solid var(--line);border-bottom:0;border-radius:8px 8px 0 0;overflow:hidden;background:var(--bg-soft);position:relative;z-index:1;margin-bottom:-1px}
+.sbox .stab{margin-bottom:0}
+.sbox .sbody{border:1px solid var(--line);border-radius:0 8px 8px 8px;background:var(--bg);box-shadow:0 10px 30px rgba(0,0,0,0.08)}
+@media (max-width:820px){.sbox .stabs{overflow-x:auto}}
+html[data-app] .sbox .sbody{box-shadow:none}
