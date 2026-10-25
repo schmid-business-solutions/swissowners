@@ -12,9 +12,9 @@ export default function Footer() {
               <span className="ft-brand-text">Swiss<i>Owners</i></span>
               <span className="beta-tag beta-tag-inv">Beta</span>
             </div>
-            <p className="ft-lead">Der Marktplatz für Firmenanteile, Kapital und Verwaltungsräte in der Schweiz.</p>
-            <p>Auf SwissOwners inserieren Aktionärinnen, Gesellschafter und Firmen ihre Anteile an KMU und Startups oder suchen Eigenkapital. Firmen finden Verwaltungsrätinnen und Verwaltungsräte, erfahrene Persönlichkeiten stellen sich für neue Mandate vor. M&amp;A-Berater, Treuhänder, Startup-Förderer und Investoren präsentieren sich als Partner und inserieren im Auftrag ihrer Kunden.</p>
-            <p>Jeder Eintrag wird vor der Freischaltung geprüft. Firmennamen sehen Interessierte erst nach einer digitalen Vertraulichkeitserklärung. Preis, Vertrag und Mandat vereinbaren die Beteiligten direkt miteinander – zu fixen Preisen und ohne Provision.</p>
+            <p className="ft-lead">Der Schweizer Marktplatz für Firmenanteile, Kapital und Verwaltungsräte.</p>
+            <p>Anteile kaufen und verkaufen, Eigenkapital suchen, Verwaltungsräte und Partner finden – für KMU und Startups.</p>
+            <p>Jeder Eintrag wird geprüft. Sie verhandeln direkt, ohne Provision.</p>
           </div>
           <nav className="ft-col" aria-label="Anbieten">
             <b>Anbieten</b>
