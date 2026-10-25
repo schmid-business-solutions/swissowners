@@ -39,3 +39,16 @@ export function startOffer() {
 export function vatPart(totalChf: number): number {
   return Math.round((totalChf / (1 + VAT_RATE)) * VAT_RATE * 20) / 20;
 }
+
+/* Preise für Verwaltungsräte und Partner (gemäss Konzept). Während der Beta kostenlos; Abrechnung folgt später.
+   Rhythmus wie bei den Angeboten: erste Laufzeit 60 Tage, danach monatlich (jeweils 30 Tage). */
+export const BETA_FREE_EXT = true;
+export const EXT_PRODUCTS = {
+  vrBasis: { name: "VR-Profil Basis", first: 0, renewal: 0, text: "Profil, Bewerbung auf Mandate, passende Mandate im Profil" },
+  vrPremium: { name: "VR-Profil Premium", first: 29, renewal: 15, text: "Zusätzlich hervorgehoben in der Suche, Badge «Mandate geprüft» und Statistik" },
+  vrMandat: { name: "VR-Mandat", first: 149, renewal: 49, text: "Mandat online, Firma anonym bis zur Vertraulichkeitsbestätigung, passende Verwaltungsräte" },
+  partnerProfil: { name: "Partnerprofil", first: 0, renewal: 0, text: "Profil und Eintrag im Partnerverzeichnis; Inserate einzeln zum Normalpreis" },
+  partnerStarter: { name: "Partner Starter", first: 249, renewal: 99, text: "Bis 3 aktive Inserate im Auftrag, Teamkonto, Übersicht aller Mandate, Sammelrechnung" },
+  partnerPro: { name: "Partner Pro", first: 590, renewal: 249, text: "Bis 10 aktive Inserate im Auftrag, hervorgehoben im Verzeichnis, 2 Plus-Upgrades" },
+  foerderung: { name: "Öffentliche Startup-Förderung", first: 0, renewal: 0, text: "Für Fachstellen von Gemeinden, Städten und Kantonen: Leistungen wie Partner Pro" },
+} as const;
