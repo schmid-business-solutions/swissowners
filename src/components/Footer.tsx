@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Cross } from "./Icons";
+import Logo from "./Logo";
 
 export default function Footer() {
   return (
@@ -8,8 +8,7 @@ export default function Footer() {
         <div className="ft-grid">
           <div className="ft-about">
             <div className="ft-brand">
-              <span className="logo-mark"><Cross size={17} /></span>
-              <span className="ft-brand-text">Swiss<i>Owners</i></span>
+              <Logo variant="onDark" height={30} className="ft-logo" />
               <span className="beta-tag beta-tag-inv">Beta</span>
             </div>
             <p className="ft-lead">Der Schweizer Marktplatz für Firmenanteile, Kapital und Verwaltungsräte.</p>

@@ -3,8 +3,8 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { LoginForm, RegisterForm } from "@/components/AuthForms";
 import SocialLogin, { OAuthError } from "@/components/SocialLogin";
-import { Cross } from "@/components/Icons";
 import AppIntro from "./AppIntro";
+import Logo from "@/components/Logo";
 import { getUser } from "@/lib/auth";
 
 export const metadata = { title: "Willkommen", robots: { index: false } };
@@ -26,10 +26,7 @@ export default async function AppEntry({ searchParams }: { searchParams: Promise
   return (
     <div className="app-screen">
       <div className="app-auth">
-        <div className="app-brand">
-          <span className="app-mark"><Cross size={30} /></span>
-          <span className="logo-text">Swiss<i>Owners</i></span>
-        </div>
+        <div className="app-brand"><Logo variant="onLight" height={48} /></div>
         {mode === "login" ? (
           <>
             <div>

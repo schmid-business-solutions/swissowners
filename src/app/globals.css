@@ -769,3 +769,9 @@ html[data-app] .web-only{display:none!important}
 
 /* Startseiten-Suche mit vier Reitern: auf dem Handy waagrecht scrollbar */
 @media (max-width:820px){.stabs{overflow-x:auto;scrollbar-width:none}.stabs::-webkit-scrollbar{display:none}.stab{flex:0 0 auto;padding:12px 16px}}
+
+/* Vektor-Logo */
+.logo-svg{display:block;height:42px;width:auto;flex:none}
+@media (max-width:820px){.logo-svg{height:36px}}
+html[data-app] header.top .logo-svg{height:34px}
+.ft-logo{display:block;height:30px;width:auto}

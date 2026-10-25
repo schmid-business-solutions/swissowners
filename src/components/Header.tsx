@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Cross, Menu, User } from "./Icons";
+import { Menu, User } from "./Icons";
+import Logo from "./Logo";
 
 const NAV: [string, string, string][] = [
   ["/inserate", "Anteile finden", "Alle Angebote durchsuchen"],
@@ -33,8 +34,7 @@ export default function Header({ userName, account, isAdmin, newRequests }: { us
       <header className="top">
         <div className="wrap">
           <Link className="logo" href="/" aria-label="SwissOwners Startseite">
-            <span className="logo-mark"><Cross size={21} /></span>
-            <span className="logo-text">Swiss<i>Owners</i></span>
+            <Logo variant="onRed" height={42} className="logo-svg" title={false} />
             <span className="beta-tag" aria-label="Beta-Version">Beta</span>
           </Link>
           <nav className="main" aria-label="Hauptnavigation">
