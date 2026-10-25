@@ -766,3 +766,6 @@ html[data-app] .filter-inline .btn{grid-column:1/-1}
 html[data-app] .app-only{display:revert!important}
 html[data-app] span.app-only{display:inline!important}
 html[data-app] .web-only{display:none!important}
+
+/* Startseiten-Suche mit vier Reitern: auf dem Handy waagrecht scrollbar */
+@media (max-width:820px){.stabs{overflow-x:auto;scrollbar-width:none}.stabs::-webkit-scrollbar{display:none}.stab{flex:0 0 auto;padding:12px 16px}}
