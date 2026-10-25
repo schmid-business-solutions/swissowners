@@ -3,36 +3,51 @@ import type { Listing } from "@/lib/db/schema";
 import { ago, chf, listingNo } from "@/lib/format";
 import { Arrow, Check, Star } from "./Icons";
 
-/* Branchenbilder: gezeichnete Illustrationen pro Hauptbranche (keine Fotos) */
+/* Branchenbilder: gezeichnete Illustrationen pro Hauptbranche (keine Fotos), mit schrägem Farbverlauf [dunkel, hell, Symbol] */
 const ART: Record<string, [string, string, string]> = {
-  "Software und IT": ["#1F3A5F", "#2B4D78", "M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"],
-  "Gesundheit und Life Sciences": ["#2E6F6A", "#3A857F", "M3 12h4l2-5 4 10 2-5h6M12 2a10 10 0 1 0 0 20a10 10 0 1 0 0-20"],
-  "Industrie und Produktion": ["#3F444C", "#555B65", "M12 9a3 3 0 1 0 0 6a3 3 0 1 0 0-6M12 5a7 7 0 1 0 0 14a7 7 0 1 0 0-14M12 2v3M12 19v3M2 12h3M19 12h3"],
-  "Bau und Immobilien": ["#8A5A3C", "#A06D4B", "M3 21h18M5 21V10l7-5 7 5v11M9 21v-6h6v6"],
-  "Handwerk und Gewerbe": ["#6E4A2E", "#86603F", "M14 4l6 6-3 3-6-6zM11 7l-8 8 3 3 8-8"],
-  "Gastronomie und Lebensmittel": ["#9A3B2B", "#B04C3A", "M4 8h12v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5zM16 10h2a2 2 0 0 1 0 4h-2M8 3v2M12 3v2"],
-  "Tourismus und Freizeit": ["#2F5D8A", "#3D72A6", "M2 20l7-12 4 6 3-4 6 10zM18 3a2 2 0 1 0 0 4a2 2 0 1 0 0-4"],
-  Handel: ["#5E4570", "#755A88", "M5 8h14l-1 12H6zM9 8V6a3 3 0 0 1 6 0v2"],
-  Unternehmensdienstleistungen: ["#33503F", "#43664F", "M3 8h18v11H3zM9 8V5h6v3M3 13h18"],
-  "Energie und Umwelt": ["#3B6E35", "#4B8644", "M12 8a4 4 0 1 0 0 8a4 4 0 1 0 0-8M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6L7 7M17 17l1.4 1.4M5.6 18.4L7 17M17 7l1.4-1.4"],
-  "Transport und Logistik": ["#4E5864", "#626E7C", "M2 7h11v9H2zM13 10h5l3 3v3h-8zM6 16a2 2 0 1 0 0 4a2 2 0 1 0 0-4M17 16a2 2 0 1 0 0 4a2 2 0 1 0 0-4"],
-  "Bildung und Medien": ["#7C6020", "#957530", "M4 19V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zM8 7h7M8 11h5"],
-  "Landwirtschaft und Weinbau": ["#556E2A", "#6A8636", "M12 21V9M12 9c0-4 3-6 7-6 0 4-3 6-7 6zM12 14c0-3-2-5-6-5 0 3 2 5 6 5z"],
-  "Andere Branche": ["#555A60", "#6A7076", "M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"],
+  "Software und IT": ["#163E78", "#3A7BD5", "M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"],
+  "Gesundheit und Life Sciences": ["#0B5F59", "#26B0A0", "M3 12h4l2-5 4 10 2-5h6M12 2a10 10 0 1 0 0 20a10 10 0 1 0 0-20"],
+  "Industrie und Produktion": ["#2E3B57", "#6B80AD", "M12 9a3 3 0 1 0 0 6a3 3 0 1 0 0-6M12 5a7 7 0 1 0 0 14a7 7 0 1 0 0-14M12 2v3M12 19v3M2 12h3M19 12h3"],
+  "Bau und Immobilien": ["#8A3F14", "#E08A2E", "M3 21h18M5 21V10l7-5 7 5v11M9 21v-6h6v6"],
+  "Handwerk und Gewerbe": ["#6A3A16", "#C27A3A", "M14 4l6 6-3 3-6-6zM11 7l-8 8 3 3 8-8"],
+  "Gastronomie und Lebensmittel": ["#8E1F18", "#E5583A", "M4 8h12v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5zM16 10h2a2 2 0 0 1 0 4h-2M8 3v2M12 3v2"],
+  "Tourismus und Freizeit": ["#164F96", "#43A2E3", "M2 20l7-12 4 6 3-4 6 10zM18 3a2 2 0 1 0 0 4a2 2 0 1 0 0-4"],
+  Handel: ["#4A2A80", "#9A68D6", "M5 8h14l-1 12H6zM9 8V6a3 3 0 0 1 6 0v2"],
+  Unternehmensdienstleistungen: ["#164A37", "#3A9C70", "M3 8h18v11H3zM9 8V5h6v3M3 13h18"],
+  "Energie und Umwelt": ["#22661F", "#7DC243", "M12 8a4 4 0 1 0 0 8a4 4 0 1 0 0-8M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6L7 7M17 17l1.4 1.4M5.6 18.4L7 17M17 7l1.4-1.4"],
+  "Transport und Logistik": ["#2C3A4E", "#6A8BB0", "M2 7h11v9H2zM13 10h5l3 3v3h-8zM6 16a2 2 0 1 0 0 4a2 2 0 1 0 0-4M17 16a2 2 0 1 0 0 4a2 2 0 1 0 0-4"],
+  "Bildung und Medien": ["#7A5608", "#DDAA36", "M4 19V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zM8 7h7M8 11h5"],
+  "Landwirtschaft und Weinbau": ["#3F5E16", "#97BC44", "M12 21V9M12 9c0-4 3-6 7-6 0 4-3 6-7 6zM12 14c0-3-2-5-6-5 0 3 2 5 6 5z"],
+  "Andere Branche": ["#3D4552", "#8A94A6", "M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"],
 };
 
+const artId = (b: string) => "art-" + b.toLowerCase().replace(/[^a-z]+/g, "-");
+
 export function Art({ branche }: { branche: string }) {
-  const a = ART[branche] ?? ART["Andere Branche"];
+  const key = ART[branche] ? branche : "Andere Branche";
+  const a = ART[key];
+  const id = artId(key);
   return (
     <>
       <svg className="art" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-        <rect width="320" height="200" fill={a[0]} />
-        <circle cx="250" cy="40" r="120" fill={a[1]} />
-        <circle cx="250" cy="40" r="70" fill={a[0]} opacity="0.35" />
-        <path d="M0 170 L320 110 L320 200 L0 200 Z" fill="#000" opacity="0.12" />
+        <defs>
+          <linearGradient id={id} x1="0" y1="1" x2="1" y2="0">
+            <stop offset="0" stopColor={a[0]} />
+            <stop offset="1" stopColor={a[1]} />
+          </linearGradient>
+          <radialGradient id={id + "-glow"} cx="0.78" cy="0.2" r="0.6">
+            <stop offset="0" stopColor="#FFFFFF" stopOpacity="0.28" />
+            <stop offset="1" stopColor="#FFFFFF" stopOpacity="0" />
+          </radialGradient>
+        </defs>
+        <rect width="320" height="200" fill={`url(#${id})`} />
+        <rect width="320" height="200" fill={`url(#${id}-glow)`} />
+        <circle cx="250" cy="40" r="120" fill="#FFFFFF" opacity="0.08" />
+        <circle cx="250" cy="40" r="70" fill="#FFFFFF" opacity="0.08" />
+        <path d="M0 170 L320 110 L320 200 L0 200 Z" fill="#000" opacity="0.14" />
       </svg>
       <svg className="art-ico" viewBox="-1 -1 26 26" aria-hidden="true">
-        <g fill="none" stroke="#FFFFFF" strokeWidth="1.15" strokeLinecap="round" strokeLinejoin="round" opacity="0.92"><path d={a[2]} /></g>
+        <g fill="none" stroke="#FFFFFF" strokeWidth="1.15" strokeLinecap="round" strokeLinejoin="round" opacity="0.95"><path d={a[2]} /></g>
       </svg>
     </>
   );

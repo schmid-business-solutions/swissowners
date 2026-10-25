@@ -528,7 +528,7 @@ html[data-header] header.top .beta-tag{border-color:rgba(255,255,255,.75);color:
 /* ===== Musterangebote ===== */
 .chip.sample{background:#FFF4D6;color:#6B4A00;border:1px dashed #C79A2B;font-weight:700}
 .lc-sample{position:absolute;right:12px;top:12px;background:#FFF4D6;color:#6B4A00;border:1px dashed #C79A2B;font-size:12px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:3px 8px;border-radius:4px}
-.lcard.is-sample .lc-art .art{filter:saturate(.55)}
+.lcard.is-sample .lc-art .art{filter:none}
 .sample-note{background:#FFF8E6;border:1px dashed #C79A2B;border-radius:6px;padding:16px 18px;display:flex;gap:12px;align-items:flex-start;color:#4A3600}
 .sample-note b{color:#3A2A00}
 
