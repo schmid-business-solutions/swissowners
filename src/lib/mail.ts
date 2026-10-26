@@ -40,12 +40,12 @@ function factsTable(facts: Fact[]) {
 function layout(heading: string, paragraphs: string[], cta?: { label: string; url: string }, facts?: Fact[], after?: string[]) {
   const para = (p: string) => `<p style="margin:0 0 14px;line-height:1.5">${esc(p).replace(/\n/g, "<br>")}</p>`;
   const button = cta
-    ? `<p style="margin:22px 0"><a href="${esc(cta.url)}" style="background:#AF001E;color:#fff;text-decoration:none;font-weight:700;padding:12px 20px;border-radius:4px;display:inline-block">${esc(cta.label)}</a></p>`
+    ? `<p style="margin:22px 0"><a href="${esc(cta.url)}" style="background:#D9102B;color:#fff;text-decoration:none;font-weight:700;padding:12px 20px;border-radius:4px;display:inline-block">${esc(cta.label)}</a></p>`
     : "";
   const body = paragraphs.map(para).join("") + (facts?.length ? button + factsTable(facts) : "") + (after ?? []).map(para).join("");
   return `<!doctype html><html><body style="margin:0;background:#F5F3EF;font-family:Helvetica,Arial,sans-serif;color:#33363A">
-<div style="max-width:560px;margin:0 auto;background:#fff;border-top:4px solid #AF001E">
-<div style="padding:20px 26px;border-bottom:1px solid #E1DDD5;font-weight:800;font-size:22px;color:#AF001E;letter-spacing:-0.5px">Swiss<span style="font-weight:600">Owners</span></div>
+<div style="max-width:560px;margin:0 auto;background:#fff;border-top:4px solid #D9102B">
+<div style="padding:20px 26px;border-bottom:1px solid #E1DDD5;font-weight:800;font-size:22px;color:#D9102B;letter-spacing:-0.5px">Swiss<span style="font-weight:600">Owners</span></div>
 <div style="padding:26px"><h1 style="font-size:20px;margin:0 0 16px">${esc(heading)}</h1>${body}${button}</div>
 <div style="padding:16px 26px;background:#33363A;color:#B8B8B3;font-size:12px">SCHMID Business Solutions<br><a href="${appUrl()}" style="color:#fff">${appUrl().replace(/^https?:\/\//, "")}</a></div>
 </div></body></html>`;

@@ -7,7 +7,7 @@ const OWNERS = "M2760 14Q2662 14 2588 -31Q2514 -76 2472.5 -158Q2431 -240 2431 -3
 type Variant = "onRed" | "onLight" | "onDark";
 const COLORS: Record<Variant, { mark: string; cross: string; text: string }> = {
   onRed: { mark: "#FFFFFF", cross: "grad", text: "#FFFFFF" },
-  onLight: { mark: "grad", cross: "#FFFFFF", text: "#AF001E" },
+  onLight: { mark: "grad", cross: "#FFFFFF", text: "#D9102B" },
   onDark: { mark: "grad", cross: "#FFFFFF", text: "#FFFFFF" },
 };
 
@@ -19,11 +19,11 @@ export default function Logo({ variant = "onRed", height = 42, className, title 
   return (
     <svg className={className} viewBox={`0 0 ${W} ${H}`} height={height} width={(height * W) / H} role={title ? "img" : undefined} aria-label={title ? "SwissOwners" : undefined} aria-hidden={title ? undefined : true} focusable="false">
       <defs>
-        <linearGradient id={gid} x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="#E11A3C" style={{ stopColor: "var(--g1,#E11A3C)" }} /><stop offset=".52" stopColor="#AF001E" style={{ stopColor: "var(--g2,#AF001E)" }} /><stop offset="1" stopColor="#7A0016" style={{ stopColor: "var(--g3,#7A0016)" }} /></linearGradient>
+        <linearGradient id={gid} x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="#FF4D5E" /><stop offset=".52" stopColor="#E8132F" /><stop offset="1" stopColor="#BE0A26" /></linearGradient>
       </defs>
       <circle cx={807.5} cy={807.5} r={807.5} fill={fill(c.mark)} />
       <path transform="translate(346.1 346.1) scale(46.143)" d="M7.5 3h5v4.5H17v5h-4.5V17h-5v-4.5H3v-5h4.5z" fill={fill(c.cross)} />
-      <g transform="translate(1885 1156)" fill={c.text} style={c.text === "#AF001E" ? { fill: "var(--red,#AF001E)" } : undefined}><path d={SWISS} /><path d={OWNERS} /></g>
+      <g transform="translate(1885 1156)" fill={c.text}><path d={SWISS} /><path d={OWNERS} /></g>
     </svg>
   );
 }

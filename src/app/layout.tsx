@@ -13,8 +13,6 @@ import { getUser } from "@/lib/auth";
 import { db, schema } from "@/lib/db";
 import { appUrl } from "@/lib/format";
 import { APP_MODE_SCRIPT } from "@/lib/app-mode";
-import { PALETTE_SCRIPT } from "@/lib/palette";
-import PaletteSwitcher from "@/components/PaletteSwitcher";
 import { Suspense } from "react";
 import Link from "next/link";
 import AppTabBar from "@/components/AppTabBar";
@@ -26,7 +24,7 @@ export const metadata: Metadata = {
   openGraph: { siteName: "SwissOwners", locale: "de_CH", type: "website" },
 };
 
-export const viewport: Viewport = { width: "device-width", initialScale: 1, viewportFit: "cover", themeColor: "#AF001E" };
+export const viewport: Viewport = { width: "device-width", initialScale: 1, viewportFit: "cover", themeColor: "#E0112D" };
 
 async function unreadRequests(userId: number) {
   const [row] = await db
@@ -46,7 +44,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang="de-CH" data-header="rot" data-auth={user ? "1" : undefined} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: APP_MODE_SCRIPT }} />
-        <script dangerouslySetInnerHTML={{ __html: PALETTE_SCRIPT }} />
       </head>
       <body>
         <div className="site-top">
@@ -57,7 +54,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <p className="app-legal-bar small app-only"><Link href="/agb">AGB</Link> · <Link href="/datenschutz">Datenschutz</Link> · <Link href="/impressum">Impressum</Link></p>
         <div className="web-only"><Footer /></div>
         {user && <div className="app-only"><Suspense fallback={null}><AppTabBar newRequests={unread} /></Suspense></div>}
-        <PaletteSwitcher />
       </body>
     </html>
   );
