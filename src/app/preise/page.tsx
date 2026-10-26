@@ -34,7 +34,8 @@ function Category({ eyebrow, title, lead, items, beta, cta }: { eyebrow: string;
         <h2 className="h3">{title}</h2>
         <p className="muted" style={{ maxWidth: "70ch" }}>{lead}</p>
       </div>
-      <div className="choice-grid">{items.map((p) => <PriceCard key={p.name} p={p} beta={beta} />)}</div>
+      {/* Kostenlose Angebote immer zuerst (links), sonst Reihenfolge wie übergeben */}
+      <div className="choice-grid">{[...items].sort((a, b) => Number(a.first > 0) - Number(b.first > 0)).map((p) => <PriceCard key={p.name} p={p} beta={beta} />)}</div>
       <div className="row" style={{ gap: 8 }}>
         {cta.map(([label, href], i) => <Link key={href} className={i === 0 ? "btn btn-red" : "btn btn-line"} href={href}>{label}</Link>)}
       </div>
