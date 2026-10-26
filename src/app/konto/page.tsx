@@ -301,7 +301,7 @@ export default async function AccountPage({ searchParams }: { searchParams: Prom
         {blocks.length === 0 && (
           <div className="empty">
             <h2 className="h3">Noch kein Partnerprofil</h2>
-            <p className="muted">Für Berater, M&amp;A-Firmen, Treuhänder, Startup-Förderer und Investoren: Profil im Partnerverzeichnis und Inserate im Auftrag Ihrer Kunden. Während der Beta kostenlos.</p>
+            <p className="muted">Für Berater, M&amp;A-Firmen, Treuhänder, Gründungspartner, Startup-Förderer und Investoren: Profil im Partnerverzeichnis und Inserate im Auftrag Ihrer Kunden. Während der Beta kostenlos.</p>
             <Link className="btn btn-red" href="/partner/neu">Partnerprofil erstellen</Link>
           </div>
         )}

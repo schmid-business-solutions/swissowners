@@ -52,3 +52,18 @@ export async function createExtSamples(): Promise<number> {
   }
   return n;
 }
+
+/** Ergänzt fehlende Musterpartner einer Art (z. B. neue Kategorie), ohne bestehende Einträge zu berühren. */
+export async function addMissingSampleOrgs(kind: string): Promise<number> {
+  const wanted = SAMPLE_ORGS.filter((o) => o.kind === kind);
+  if (!wanted.length) return 0;
+  const existing = await db.select({ slug: schema.orgs.slug }).from(schema.orgs).where(inArray(schema.orgs.slug, wanted.map((o) => o.slug)));
+  const owner = await sampleOwnerId();
+  const now = Date.now();
+  const rows = wanted.filter((o) => !existing.some((e) => e.slug === o.slug)).map((o, i) => ({
+    ...o, region: KANTON_REGION[o.kanton], email: SAMPLE_OWNER_EMAIL, status: "online" as const, isSample: true, createdBy: owner,
+    publishedAt: new Date(now - (3 + i * 4) * DAY),
+  }));
+  if (rows.length) await db.insert(schema.orgs).values(rows);
+  return rows.length;
+}

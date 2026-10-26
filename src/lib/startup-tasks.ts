@@ -10,6 +10,11 @@ export async function runStartupTasks() {
       const n = await createExtSamples();
       console.log(`[SwissOwners] ${n} Mustereinträge für Partner und Verwaltungsräte angelegt`);
     }
+    if (f.key === "gruendung_samples") {
+      const { addMissingSampleOrgs } = await import("./samples-ext-admin");
+      const n = await addMissingSampleOrgs("gruendung");
+      console.log(`[SwissOwners] ${n} Muster-Gründungspartner angelegt`);
+    }
     await db.delete(schema.appFlags).where(eq(schema.appFlags.key, f.key));
   }
 }

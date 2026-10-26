@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useActionState, useState } from "react";
 import type { Org } from "@/lib/db/schema";
-import { BRANCHEN, KANTONE, ORG_GROUPS, ORG_KIND_LABEL, ORG_SERVICES, SPRACHEN, orgGroupOf, splitList } from "@/lib/taxonomy";
+import { BRANCHEN, KANTONE, ORG_GROUP_IDS, ORG_GROUPS, ORG_KIND_LABEL, ORG_SERVICES, SPRACHEN, orgGroupOf, splitList } from "@/lib/taxonomy";
 import { saveOrg } from "@/app/partner/actions";
 
 export function Checks({ name, options, selected, max }: { name: string; options: string[]; selected: string[]; max?: number }) {
@@ -27,24 +27,26 @@ export default function OrgForm({ org }: { org?: Org }) {
   const [state, action, pending] = useActionState(saveOrg.bind(null, org?.id ?? null), undefined);
   const [kind, setKind] = useState<string>(org?.kind ?? "");
   const startup = kind ? orgGroupOf(kind) === "startup" : false;
+  const gruendung = kind ? orgGroupOf(kind) === "gruendung" : false;
   return (
     <form action={action} className="wizard">
       <div className="stack" style={{ gap: 8 }}>
         <h1 className="h2">{org ? "Partnerprofil bearbeiten" : "Partnerprofil erstellen"}</h1>
-        <p className="muted">Für Berater, M&amp;A-Firmen, Treuhänder, Startup-Förderer und Investoren. Mit einem geprüften Profil inserieren Sie Angebote und VR-Mandate im Auftrag Ihrer Kunden. Während der Beta kostenlos.</p>
+        <p className="muted">Für Berater, M&amp;A-Firmen, Treuhänder, Gründungspartner, Startup-Förderer und Investoren. Mit einem geprüften Profil inserieren Sie Angebote und VR-Mandate im Auftrag Ihrer Kunden. Während der Beta kostenlos.</p>
       </div>
       <div className="fgrid">
         <label className="field">Art der Organisation
           <select name="kind" value={kind} onChange={(e) => setKind(e.target.value)} required>
             <option value="">Bitte wählen</option>
-            <optgroup label={ORG_GROUPS.berater.label}>{ORG_GROUPS.berater.kinds.map((k) => <option key={k} value={k}>{ORG_KIND_LABEL[k]}</option>)}</optgroup>
-            <optgroup label={ORG_GROUPS.startup.label}>{ORG_GROUPS.startup.kinds.map((k) => <option key={k} value={k}>{ORG_KIND_LABEL[k]}</option>)}</optgroup>
+            {ORG_GROUP_IDS.map((g) => (
+              <optgroup key={g} label={ORG_GROUPS[g].label}>{ORG_GROUPS[g].kinds.map((k) => <option key={k} value={k}>{ORG_KIND_LABEL[k]}</option>)}</optgroup>
+            ))}
           </select>
         </label>
         <label className="field">Name<input name="name" defaultValue={org?.name} maxLength={160} required autoComplete="organization" /></label>
-        <label className="field" style={{ gridColumn: "1/-1" }}>Kurzbeschreibung<input name="tagline" defaultValue={org?.tagline} maxLength={160} required placeholder={startup ? "z. B. Wir begleiten Startups aus der Region vom ersten Businessplan bis zur Seed-Runde" : "z. B. Unternehmensverkauf und Nachfolge für KMU in der Ostschweiz"} /><span className="hint">Ein Satz, max. 160 Zeichen</span></label>
+        <label className="field" style={{ gridColumn: "1/-1" }}>Kurzbeschreibung<input name="tagline" defaultValue={org?.tagline} maxLength={160} required placeholder={startup ? "z. B. Wir begleiten Startups aus der Region vom ersten Businessplan bis zur Seed-Runde" : gruendung ? "z. B. AG und GmbH gründen – und danach Buchhaltung, Lohn und Steuern aus einer Hand" : "z. B. Unternehmensverkauf und Nachfolge für KMU in der Ostschweiz"} /><span className="hint">Ein Satz, max. 160 Zeichen</span></label>
         <label className="field" style={{ gridColumn: "1/-1" }}>Beschreibung<textarea name="description" defaultValue={org?.description} maxLength={4000} required style={{ minHeight: 150 }} placeholder="Wer Sie sind, für wen Sie arbeiten, wie Sie vorgehen – mindestens 80 Zeichen" /></label>
-        <label className="field">{startup ? "Fokus (Phase, Ticketgrösse)" : "Schwerpunkt (z. B. Dealgrösse)"}<input name="focus" defaultValue={org?.focus ?? ""} maxLength={200} placeholder={startup ? "z. B. Pre-Seed bis Series A, Tickets CHF 100'000–1 Mio." : "z. B. Firmenwert CHF 1–30 Mio."} /></label>
+        <label className="field">{startup ? "Fokus (Phase, Ticketgrösse)" : gruendung ? "Schwerpunkt (Rechtsformen, Kunden)" : "Schwerpunkt (z. B. Dealgrösse)"}<input name="focus" defaultValue={org?.focus ?? ""} maxLength={200} placeholder={startup ? "z. B. Pre-Seed bis Series A, Tickets CHF 100'000–1 Mio." : gruendung ? "z. B. AG und GmbH für Startups und KMU, Gründung in 5 Tagen" : "z. B. Firmenwert CHF 1–30 Mio."} /></label>
         <label className="field">UID (optional)<input name="uid" defaultValue={org?.uid ?? ""} placeholder="CHE-123.456.789" /><span className="hint">Für das Badge «Verifizierter Partner». Öffentliche Stellen ohne UID lassen das Feld leer.</span></label>
         <label className="field">Kanton
           <select name="kanton" defaultValue={org?.kanton ?? ""} required><option value="">Bitte wählen</option>{KANTONE.map((k) => <option key={k}>{k}</option>)}</select>

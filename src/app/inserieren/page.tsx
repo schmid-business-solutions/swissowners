@@ -8,7 +8,7 @@ const ITEMS: { href: string; pill: [string, string]; title: string; text: string
   { href: "/inserat-aufgeben?typ=cap", pill: ["cap", "Kapital gesucht"], title: "Meine Firma sucht Eigenkapital", text: "Kapitalerhöhung bei Startup oder KMU" },
   { href: "/verwaltungsraete/mandat-inserieren", pill: ["vr", "VR-Mandat"], title: "Wir suchen eine Verwaltungsrätin oder einen Verwaltungsrat", text: "Auch Beirat oder Präsidium – Firma bleibt anonym" },
   { href: "/verwaltungsraete/mein-profil", pill: ["vr", "VR-Profil"], title: "Ich suche ein Verwaltungsratsmandat", text: "Profil erstellen, auf Wunsch anonym" },
-  { href: "/partner/neu", pill: ["seg-kmu", "Partnerprofil"], title: "Wir sind Berater, Förderer oder Investoren", text: "Profil im Verzeichnis, Inserate im Auftrag von Kunden" },
+  { href: "/partner/neu", pill: ["seg-kmu", "Partnerprofil"], title: "Wir sind Berater, Gründungspartner, Förderer oder Investoren", text: "Profil im Verzeichnis, Inserate im Auftrag von Kunden" },
 ];
 
 export default function ChoosePage() {

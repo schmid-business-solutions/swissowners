@@ -57,8 +57,8 @@ export const LISTING_STATUS = ["draft", "pending_payment", "in_review", "online"
 export type ListingStatus = (typeof LISTING_STATUS)[number];
 export const PLAN_ENUM = ["start", "basis", "plus", "premium"] as const;
 
-/* ---------- Partner (Berater, M&A, Startup-Förderer, Investoren) ---------- */
-export const ORG_KINDS = ["ma", "nachfolge", "treuhand", "bewertung", "recht", "bank", "foerderung", "park", "inkubator", "vc", "angels"] as const;
+/* ---------- Partner (Berater, M&A, Gründungspartner, Startup-Förderer, Investoren) ---------- */
+export const ORG_KINDS = ["ma", "nachfolge", "treuhand", "bewertung", "recht", "bank", "foerderung", "park", "inkubator", "vc", "angels", "gruendung"] as const;
 export type OrgKind = (typeof ORG_KINDS)[number];
 /* Status für Profile und Mandate: Prüfung wie bei Angeboten */
 export const REVIEW_STATUS = ["in_review", "online", "paused", "expired", "rejected"] as const;

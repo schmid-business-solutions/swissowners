@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { BoardMandate, BoardProfile, Org } from "@/lib/db/schema";
 import { ago } from "@/lib/format";
-import { BOARD_ROLE_LABEL, ORG_KIND_LABEL, orgGroupOf, splitList } from "@/lib/taxonomy";
+import { BOARD_ROLE_LABEL, ORG_GROUP_PILL, ORG_KIND_LABEL, orgGroupOf, splitList } from "@/lib/taxonomy";
 import { Arrow, Check, Lock } from "./Icons";
 
 const initials = (name: string) =>
@@ -50,7 +50,7 @@ export function OrgCard({ o, active }: { o: Org; active: number }) {
       <span className="xcard-foot">
         <span className="row" style={{ gap: 6 }}>
           {o.isSample ? <span className="chip sample">Musterpartner</span> : o.verified ? <span className="chip ok"><Check />Verifiziert</span> : null}
-          <span className={"pill " + (orgGroupOf(o.kind) === "startup" ? "seg-st" : "seg-kmu")}>{orgGroupOf(o.kind) === "startup" ? "Startup-Förderung" : "Beratung"}</span>
+          <span className={"pill " + ORG_GROUP_PILL[orgGroupOf(o.kind)][1]}>{ORG_GROUP_PILL[orgGroupOf(o.kind)][0]}</span>
         </span>
         <span className="small muted">{active > 0 ? `${active} aktive ${active === 1 ? "Inserat" : "Inserate"}` : ""}</span>
       </span>

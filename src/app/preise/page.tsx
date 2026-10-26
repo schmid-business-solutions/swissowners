@@ -73,7 +73,7 @@ export default async function PricingPage() {
         />
 
         <Category
-          eyebrow="Partner" title="Für Berater, M&A, Startup-Förderer und Investoren"
+          eyebrow="Partner" title="Für Berater, M&A, Gründungspartner, Startup-Förderer und Investoren"
           lead="Profil im Partnerverzeichnis und Inserate im Auftrag Ihrer Kunden mit dem Hinweis «Vertreten durch». Mit einem Partner-Paket inserieren Sie günstiger als einzeln."
           items={[E.partnerProfil, { ...E.partnerStarter, tag: "Für Berater" }, E.partnerPro, E.foerderung]} beta={BETA_FREE_EXT}
           cta={[["Partnerprofil erstellen", "/partner/neu"], ["Partner ansehen", "/partner"]]}

@@ -75,7 +75,7 @@ export const CONTACT_TOPICS: Topic[] = [
       { name: "website", label: "Website", type: "text", placeholder: "www.beispiel.ch" },
       { name: "kind", label: "Art der Zusammenarbeit", type: "select", options: ["Verband oder Netzwerk", "Plattform oder Software", "Event oder Veranstaltung", "Hochschule oder Förderprogramm", "Andere"] },
     ] },
-  { id: "partner", group: "zusammenarbeit", label: "Partner werden", text: "M&A, Treuhand, Förderer, Investoren", icon: "handshake", companyRequired: true,
+  { id: "partner", group: "zusammenarbeit", label: "Partner werden", text: "M&A, Treuhand, Gründung, Förderer, Investoren", icon: "handshake", companyRequired: true,
     placeholder: "Erzählen Sie uns kurz von Ihrer Firma und Ihren Kunden.",
     note: { text: "Ein Partnerprofil können Sie auch direkt selbst erstellen – kostenlos während der Beta.", href: "/partner/neu", link: "Partnerprofil erstellen" },
     extra: [{ name: "website", label: "Website", type: "text", placeholder: "www.beispiel.ch" }] },

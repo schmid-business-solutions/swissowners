@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { BETRAG, BRANCHEN, ORG_GROUPS, REGIONEN, VR_SKILLS } from "@/lib/taxonomy";
+import { BETRAG, BRANCHEN, ORG_GROUP_IDS, ORG_GROUPS, REGIONEN, VR_SKILLS } from "@/lib/taxonomy";
 import { Search } from "./Icons";
 
 type Tab = "sell" | "cap" | "vr" | "partner";
@@ -108,8 +108,7 @@ export default function HomeSearch() {
               <label className="field">Art
                 <select value={group} onChange={(e) => setGroup(e.target.value)}>
                   <option value="all">Alle Partner</option>
-                  <option value="berater">{ORG_GROUPS.berater.label}</option>
-                  <option value="startup">{ORG_GROUPS.startup.label}</option>
+                  {ORG_GROUP_IDS.map((g) => <option key={g} value={g}>{ORG_GROUPS[g].label}</option>)}
                 </select>
               </label>
               {regionField}

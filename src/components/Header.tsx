@@ -10,7 +10,7 @@ const NAV: [string, string, string][] = [
   ["/inserate", "Anteile finden", "Alle Angebote durchsuchen"],
   ["/finanzieren", "Finanzieren", "Eigenkapital für Ihre Firma finden"],
   ["/verwaltungsraete", "Verwaltungsräte", "VR-Mandate und VR-Profile"],
-  ["/partner", "Partner", "M&A-Berater, Startup-Förderer, Investoren"],
+  ["/partner", "Partner", "M&A-Berater, Gründungspartner, Startup-Förderer, Investoren"],
 ];
 
 type Account = { firstName: string; lastName: string; avatarVersion: number | null };

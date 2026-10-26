@@ -4,7 +4,7 @@ import { z } from "zod";
 import { db, schema } from "./db";
 import type { Org } from "./db/schema";
 import { ORG_KINDS, type OrgKind } from "./db/schema";
-import { BRANCHEN, KANTON_REGION, ORG_GROUPS, ORG_SERVICES, REGIONEN, SPRACHEN, joinList, type OrgGroup } from "./taxonomy";
+import { BRANCHEN, KANTON_REGION, ORG_GROUP_IDS, ORG_GROUPS, ORG_SERVICES, REGIONEN, SPRACHEN, joinList, type OrgGroup } from "./taxonomy";
 
 const O = schema.orgs;
 
@@ -13,7 +13,7 @@ export type OrgFilters = { group: "all" | OrgGroup; kind: "all" | OrgKind; regio
 
 export function parseOrgFilters(sp: Record<string, string | string[] | undefined>): OrgFilters {
   const g = (k: string) => (Array.isArray(sp[k]) ? sp[k]![0] : sp[k]) as string | undefined;
-  const group = g("gruppe") === "berater" || g("gruppe") === "startup" ? (g("gruppe") as OrgGroup) : "all";
+  const group = ORG_GROUP_IDS.includes(g("gruppe") as OrgGroup) ? (g("gruppe") as OrgGroup) : "all";
   const kind = (ORG_KINDS as readonly string[]).includes(g("typ") ?? "") ? (g("typ") as OrgKind) : "all";
   return { group, kind, region: REGIONEN.includes(g("region") ?? "") ? g("region")! : "all", q: (g("q") ?? "").trim().slice(0, 60) };
 }

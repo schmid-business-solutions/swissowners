@@ -132,7 +132,7 @@ export default async function HomePage() {
             </div>
             <div className="entry" style={{ borderTop: "4px solid var(--ink)" }}>
               <h3 className="h3">Partner finden</h3>
-              <p className="muted" style={{ flex: 1 }}>M&amp;A-Berater, Nachfolgeberater, Treuhänder, Startup-Förderer und Investoren – viele inserieren auch im Auftrag ihrer Kunden.</p>
+              <p className="muted" style={{ flex: 1 }}>M&amp;A-Berater, Nachfolgeberater, Treuhänder, Gründungspartner, Startup-Förderer und Investoren – viele inserieren auch im Auftrag ihrer Kunden.</p>
               <p className="small" style={{ fontWeight: 600 }}>Für Partner während der Beta kostenlos</p>
               <Link className="btn btn-line" href="/partner" style={{ alignSelf: "flex-start" }}>Zum Partnerverzeichnis</Link>
             </div>
