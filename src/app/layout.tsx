@@ -13,6 +13,8 @@ import { getUser } from "@/lib/auth";
 import { db, schema } from "@/lib/db";
 import { appUrl } from "@/lib/format";
 import { APP_MODE_SCRIPT } from "@/lib/app-mode";
+import { PALETTE_SCRIPT } from "@/lib/palette";
+import PaletteSwitcher from "@/components/PaletteSwitcher";
 import { Suspense } from "react";
 import Link from "next/link";
 import AppTabBar from "@/components/AppTabBar";
@@ -44,6 +46,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang="de-CH" data-header="rot" data-auth={user ? "1" : undefined} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: APP_MODE_SCRIPT }} />
+        <script dangerouslySetInnerHTML={{ __html: PALETTE_SCRIPT }} />
       </head>
       <body>
         <div className="site-top">
@@ -54,6 +57,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <p className="app-legal-bar small app-only"><Link href="/agb">AGB</Link> · <Link href="/datenschutz">Datenschutz</Link> · <Link href="/impressum">Impressum</Link></p>
         <div className="web-only"><Footer /></div>
         {user && <div className="app-only"><Suspense fallback={null}><AppTabBar newRequests={unread} /></Suspense></div>}
+        <PaletteSwitcher />
       </body>
     </html>
   );
