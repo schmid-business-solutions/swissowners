@@ -62,7 +62,7 @@ export const SEG_LABEL = { kmu: "KMU", startup: "Startup" } as const;
 /* ---------- Partner ---------- */
 export const ORG_KIND_LABEL = {
   ma: "M&A-Beratung", nachfolge: "Nachfolgeberatung", treuhand: "Treuhand", bewertung: "Unternehmensbewertung", recht: "Anwaltskanzlei", bank: "Bank",
-  gruendung: "Gründungspartner (AG, GmbH)",
+  gruendung: "Gründungspartner",
   foerderung: "Öffentliche Startup-Förderung", park: "Innovationspark oder Gründerzentrum", inkubator: "Inkubator oder Accelerator", vc: "Venture Capital", angels: "Business-Angel-Netzwerk",
 } as const;
 export const ORG_GROUPS = {
@@ -81,7 +81,7 @@ export const ORG_GROUP_PILL: Record<OrgGroup, [string, string]> = {
 export const ORG_SERVICES = [
   "Unternehmensverkauf", "Unternehmenskauf", "Nachfolgeregelung", "Unternehmensbewertung", "Kapitalsuche und Finanzierung", "Due Diligence",
   "Recht und Verträge", "Steuern", "Coaching und Programme", "Investitionen", "Netzwerk und Events", "Büros und Infrastruktur",
-  "Firmengründung (AG, GmbH)", "Statuten und Gründungsurkunden", "Handelsregister und Notariat", "Kapitaleinzahlung und Bankkonto",
+  "Firmengründung", "Statuten und Gründungsurkunden", "Handelsregister und Notariat", "Kapitaleinzahlung und Bankkonto",
   "Domizil und Geschäftsadresse", "Buchhaltung und Lohn", "Mehrwertsteuer und Sozialversicherungen", "Versicherungen und Vorsorge",
 ];
 
