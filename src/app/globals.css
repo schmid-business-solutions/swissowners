@@ -893,3 +893,12 @@ html[data-app] .topic-status{bottom:calc(76px + env(safe-area-inset-bottom))}
 
 /* Verlaufsstopps (auch für das Logo) */
 :root{--g1:#FF4D5E;--g2:#E8132F;--g3:#BE0A26}
+/* Preise: Sprungnavigation und grössere Bereichstitel */
+html{scroll-behavior:smooth}
+.price-nav{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.price-nav a{display:inline-flex;align-items:center;min-height:42px;padding:0 18px;border:1.5px solid var(--line);border-radius:999px;background:var(--bg);color:var(--ink);font-weight:700;font-size:15px;text-decoration:none;transition:border-color .2s ease,background .2s ease,color .2s ease,transform .2s ease}
+.price-nav a:hover{border-color:var(--red);color:var(--red);background:var(--red-soft);transform:translateY(-1px)}
+.price-cat{scroll-margin-top:150px}
+.price-title{font-size:clamp(26px,2.6vw,34px);font-weight:800;letter-spacing:-0.01em;line-height:1.15}
+.price-cat .eyebrow{font-size:14px}
+@media (max-width:640px){.price-nav{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-inline:-16px;padding-inline:16px}.price-nav::-webkit-scrollbar{display:none}.price-nav a{flex:none}.price-cat{scroll-margin-top:120px}}

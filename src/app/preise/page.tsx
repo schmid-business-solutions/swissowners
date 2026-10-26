@@ -26,12 +26,12 @@ function PriceCard({ p, beta }: { p: Item; beta?: boolean }) {
   );
 }
 
-function Category({ eyebrow, title, lead, items, beta, cta }: { eyebrow: string; title: string; lead: string; items: Item[]; beta?: boolean; cta: [string, string][] }) {
+function Category({ id, eyebrow, title, lead, items, beta, cta }: { id: string; eyebrow: string; title: string; lead: string; items: Item[]; beta?: boolean; cta: [string, string][] }) {
   return (
-    <div className="price-cat">
+    <div className="price-cat" id={id}>
       <div className="stack" style={{ gap: 6 }}>
         <p className="eyebrow">{eyebrow}</p>
-        <h2 className="h3">{title}</h2>
+        <h2 className="price-title">{title}</h2>
         <p className="muted" style={{ maxWidth: "70ch" }}>{lead}</p>
       </div>
       {/* Kostenlose Angebote immer zuerst (links), sonst Reihenfolge wie übergeben */}
@@ -54,10 +54,15 @@ export default async function PricingPage() {
           <p className="eyebrow">Preise und Pakete</p>
           <h1 className="h2">Fixe Gebühren. Keine Provision.</h1>
           <p className="lead" style={{ maxWidth: "62ch" }}>Erste Laufzeit 60 Tage ab Freischaltung, danach monatlich. Jederzeit kündbar oder pausierbar. Suchen, merken und anfragen ist kostenlos.</p>
+          <nav className="price-nav" aria-label="Bereiche">
+            {[["angebote", "Angebote"], ["verwaltungsraete", "Verwaltungsräte"], ["partner", "Partner"], ["interessierte", "Interessierte und Investoren"]].map(([id, l]) => (
+              <a key={id} href={`#${id}`}>{l}</a>
+            ))}
+          </nav>
         </div>
 
         <Category
-          eyebrow="Angebote" title="Anteile verkaufen und Kapital suchen"
+          id="angebote" eyebrow="Angebote" title="Anteile verkaufen und Kapital suchen"
           lead="Für Aktionärinnen, Gesellschafter und Firmen. Der Firmenname bleibt verborgen, bis Interessierte eine Vertraulichkeitserklärung unterzeichnen."
           items={[
             ...(left > 0 ? [{ name: "Startangebot", first: 0, renewal: 0, text: `Die ersten ${slots} Angebote: 60 Tage mit allen Leistungen von Plus, kein Zahlungsmittel nötig. Noch ${left} Plätze, längstens bis ${date(until)}.`, tag: `Noch ${left} Plätze`, highlight: true }] : []),
@@ -67,23 +72,23 @@ export default async function PricingPage() {
         />
 
         <Category
-          eyebrow="Verwaltungsräte" title="VR-Mandate und VR-Profile"
+          id="verwaltungsraete" eyebrow="Verwaltungsräte" title="VR-Mandate und VR-Profile"
           lead="Firmen inserieren ein Mandat für Verwaltungsrat oder Beirat; Persönlichkeiten stellen sich mit einem Profil vor – öffentlich, nur für Angemeldete oder anonym."
           items={[E.vrMandat, E.vrBasis, E.vrPremium]} beta={BETA_FREE_EXT}
           cta={[["VR-Mandat inserieren", "/verwaltungsraete/mandat-inserieren"], ["VR-Profil erstellen", "/verwaltungsraete/mein-profil"]]}
         />
 
         <Category
-          eyebrow="Partner" title="Für Berater, M&A, Gründungspartner, Startup-Förderer und Investoren"
+          id="partner" eyebrow="Partner" title="Für Berater, M&A, Gründungspartner, Startup-Förderer und Investoren"
           lead="Profil im Partnerverzeichnis und Inserate im Auftrag Ihrer Kunden mit dem Hinweis «Vertreten durch». Mit einem Partner-Paket inserieren Sie günstiger als einzeln."
           items={[E.partnerProfil, { ...E.partnerStarter, tag: "Für Berater" }, E.partnerPro, E.foerderung]} beta={BETA_FREE_EXT}
           cta={[["Partnerprofil erstellen", "/partner/neu"], ["Partner ansehen", "/partner"]]}
         />
 
-        <div className="price-cat">
+        <div className="price-cat" id="interessierte">
           <div className="stack" style={{ gap: 6 }}>
             <p className="eyebrow">Interessierte und Investoren</p>
-            <h2 className="h3">Suchen, merken, anfragen: kostenlos</h2>
+            <h2 className="price-title">Suchen, merken, anfragen: kostenlos</h2>
             <p className="muted">Alle Angebote, VR-Mandate, VR-Profile und Partner durchsuchen, Favoriten merken und Kontakt aufnehmen – ohne Gebühren und ohne Provision.</p>
           </div>
           <Link className="btn btn-line" href="/inserate" style={{ alignSelf: "flex-start" }}>Angebote durchsuchen</Link>
